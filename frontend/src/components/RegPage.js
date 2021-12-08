@@ -2,6 +2,6 @@ import React from "react";
 
 export default ()=>{
     return(
-        <div>HI Reg</div>
+        <div className = "container">HI Reg</div>
     )
 }
