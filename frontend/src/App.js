@@ -4,10 +4,18 @@ import './App.css';
 import {Route, BrowserRouter as Router, Switch} from "react-router-dom";
 import LoginPage from "./components/LoginPage";
 import RegPage from "./components/RegPage";
+import UserProfile from './components/UserProfile/UserProfile';
 
 function App() {
   return (
-    <Navbar />
+    <Router>
+  <div>
+    <Navbar/>
+    <Switch>
+      <UserProfile />
+    </Switch>
+  </div>
+</Router>
   );
 }
 

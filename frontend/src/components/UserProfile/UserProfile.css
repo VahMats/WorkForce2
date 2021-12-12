@@ -1,0 +1,51 @@
+.user {
+  height: calc(100vh - 70px);
+  background-color: #fafafa;
+  width: 247px;
+  border-color: #fafafa;
+  display: flex;
+  flex-direction: column;
+}
+
+.user-profile {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+}
+
+.user-profile img {
+  width: 200px;
+  height: 200px;
+}
+
+.user-profile ul {
+  font-family: "Georgia", Serif;
+  color: #000000;
+  list-style: none;
+}
+.user-links ul {
+  font-family: "Georgia", Serif;
+  color: #000000;
+}
+
+.user-links ul li {
+  list-style: none;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+@media (max-width: 1490px) {
+  .side-navbar {
+    display: none;
+  }
+}
+
+Link,
+a {
+  text-decoration: none;
+  color: #000000;
+}
+
+.active-link {
+  color: #008594;
+}
