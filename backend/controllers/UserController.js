@@ -1,0 +1,53 @@
+const mongoose = require('mongoose');
+const UserSchema = require('../Schema/UserSchema');
+const ValidationChecker = require('../ValidationChecker');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken')
+const {secret} = require('../Configs/tokenConfig')
+
+const generateToken = (id) => {
+    const payload = {
+        id
+    };
+    return jwt.sign(payload, secret, {"expiresIn": "24h"})
+}
+
+exports.authentication = async (req,res) => {
+    const authData = {
+        isValid: false,
+        userIsValid: false,
+        passwordIsCorrect: false,
+        token: '',
+        data: [],
+    }
+    const validLogin = ValidationChecker(req.body, 'login');
+    if (validLogin.isValid) {
+        authData.isValid = true;
+        const {username, password} = req.body;
+        const user = await UserSchema.find({username});
+        if (user.length){
+            authData.userIsValid = true;
+            if (password === user[0].password){
+                authData.passwordIsCorrect = true;
+                authData.data = user[0];
+                authData.token = generateToken(user[0].id);
+                res.status(200).send(authData).end();
+            }
+            else {
+                res.send(authData).end()
+            }
+        }else{
+            res.send(authData).end()}
+    }else res.send(authData).end()
+}
+
+exports.register = async (req,res) => {
+    const validReg = ValidationChecker(req.body, 'register')
+    if (validReg.isValid) {
+        const {firstName, lastName, email, dateOfBirth, gender, username, password, confirmPassword} = req.body;
+        const hashedPassword = bcrypt.hashSync(password, 5);
+        const newUser = new UserSchema({firstName, lastName, email, dateOfBirth, gender, username, password})
+        newUser.save();
+        res.status(200).send({message:"User added"})
+    }
+}
