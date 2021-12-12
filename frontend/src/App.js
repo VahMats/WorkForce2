@@ -2,7 +2,8 @@ import './App.css';
 import {Route, BrowserRouter as Router, Switch, Redirect} from "react-router-dom";
 import LoginPage from "./components/LoginPage";
 import RegPage from "./components/RegPage";
-import MainPage from "./components/MainPage";
+import UserProfile from "./components/UserProfile/UserProfile";
+import Navbar from "./components/Navbar/Navbar";
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
               <RegPage />
             </Route>
             <Route path='/'>
-              {localStorage.token ? <MainPage /> : <Redirect to='/auth' />}
+              {localStorage.token ? <UserProfile /> : <Redirect to='/auth' />}
             </Route>
           </Switch>
         </Router>
