@@ -32,10 +32,10 @@ const Navbar = () => {
           <div className="navbar">
         <div className="logo">
                   <img src={Logo} alt="CompanyLogo" />
-                  <h1>Internal tool</h1>
+                  <h1 className="text">Internal tool</h1>
               </div>
               <div className="usericon">
-                  <p>Lilith Mnatsakanian</p>
+                  <p className="text">Lilith Mnatsakanian</p>
                 <img alt ="person"
                     src={WomanIcon}
                   />

@@ -24,7 +24,7 @@
   padding: 10px;
 }
 
-.logo h1 {
+.text {
   font-family: "Georgia", Serif;
 }
 
@@ -36,7 +36,6 @@
 
 .usericon p {
   margin-right: 20px;
-  font-family: "Georgia", Serif;
   font-size: 25px;
   font-style: bold;
 }
@@ -44,4 +43,18 @@
 .usericon img {
   width: 70px;
   height: 70px;
+}
+@media screen and (min-width: 320px) {
+  .text {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .navbar {
+    width: 100%;
+  }
+  .text {
+    display: block;
+  }
 }
