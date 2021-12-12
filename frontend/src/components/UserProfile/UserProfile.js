@@ -18,15 +18,14 @@ function UserProfile() {
                  WomanIcon
                 }
           />
+        <div className="user-info">
           <ul>
             <li>  Lilith Mnatsakanian </li> 
             <li>  Mamble </li> 
             {/* {userData.isAdmin ? "Dashboard" : userData.teamName} */}
             <li>  21.12.1995 </li> 
           </ul>
-          </div>
-<div className="user-links">
-        <ul>
+          <ul>
           <NavLink activeClassName="active-link" to="/userslist">
             <li>User List</li>
           </NavLink>
@@ -34,6 +33,7 @@ function UserProfile() {
             <li>Team List</li>
           </NavLink>
           </ul>
+          </div>
           </div>
       </nav>
     </>
