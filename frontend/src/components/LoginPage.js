@@ -13,8 +13,11 @@ export default ()=>{
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(authPocket)
             }).then(res => res.json()).then(data => {
-                localStorage.setItem("token", data.token);
-                window.location.reload();
+                console.log(data)
+                if (data.data.length !== 0){
+                    localStorage.setItem("token", data.token);
+                    window.location.reload();
+                }
             })
         }else return;
     }

@@ -42,12 +42,25 @@ exports.authentication = async (req,res) => {
 }
 
 exports.register = async (req,res) => {
+    const RegData = {
+        isValid: false,
+        usernameisUnique: false,
+        emailIsUnique: false,
+    }
     const validReg = ValidationChecker(req.body, 'register')
     if (validReg.isValid) {
+        RegData.isValid = true;
         const {firstName, lastName, email, dateOfBirth, gender, username, password, confirmPassword} = req.body;
-        const hashedPassword = bcrypt.hashSync(password, 5);
-        const newUser = new UserSchema({firstName, lastName, email, dateOfBirth, gender, username, password})
-        newUser.save();
-        res.status(200).send({message:"User added"})
+        const oldUserUsername = await UserSchema.find({username});
+        if (oldUserUsername.length === 0){
+            RegData.usernameisUnique = true;
+            const oldUserEmail = await UserSchema.find({email});
+            if (oldUserEmail.length === 0){
+                RegData.emailIsUnique = true;
+                const newUser = new UserSchema({firstName, lastName, email, dateOfBirth, gender, username, password})
+                // newUser.save();
+            }
+        }
+        res.status(200).send(RegData);
     }
 }

@@ -21,14 +21,16 @@ export default ()=>{
                 method: "POST",
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(regPocket)
-            }).then(res => res.json()).then(data => console.log(data))
-            return (<Redirect to='/auth' />)
+            }).then(res => res.json()).then(data => {
+                console.log(data)
+
+            })
         }
     }
 
     return(
         <div className = "container">
-            <form onSubmit={e=>{e.preventDefault(); Registration()}}>
+            <form onSubmit={e=>{e.preventDefault(); Registration();}}>
                 <input type="text" onChange={e=>{setRegPocket(prevState => ({...prevState, firstName: e.target.value}))}}/>
                 <input type="text" onChange={e=>{setRegPocket(prevState => ({...prevState, lastName: e.target.value}))}}/>
                 <input type="text" onChange={e=>{setRegPocket(prevState => ({...prevState, email: e.target.value}))}}/>

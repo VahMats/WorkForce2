@@ -4,6 +4,7 @@ import LoginPage from "./components/LoginPage";
 import RegPage from "./components/RegPage";
 import UserProfile from "./components/UserProfile/UserProfile";
 import Navbar from "./components/Navbar/Navbar";
+import Login from "./components/Login/Login"
 
 function App() {
   return (
@@ -11,11 +12,11 @@ function App() {
         <Router>
           <Switch>
             <Route path="/auth">
-              {localStorage.token ? <Redirect to='/' /> : <LoginPage  />}
+              {localStorage.token ? <Redirect to='/' /> :  <Login />}
             </Route>
-            <Route path="/reg">
-              <RegPage />
-            </Route>
+            {/*<Route path="/reg">*/}
+            {/*  <RegPage />*/}
+            {/*</Route>*/}
             <Route path='/'>
               {localStorage.token ? <UserProfile /> : <Redirect to='/auth' />}
             </Route>
