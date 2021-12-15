@@ -5,6 +5,6 @@ const router = new Route();
 
 router.post('/auth', authentication);
 
-router.post('/reg', register)
+router.post('/reg', register);
 
 module.exports = router;
