@@ -23,6 +23,7 @@ function UserProfile() {
                             <li>  Lilith Mnatsakanian </li>
                             <li>  Mamble </li>
                             {/* {userData.isAdmin ? "Dashboard" : userData.teamName} */}
+                            <li>Lilith@mamble.co</li>
                             <li>  21.12.1995 </li>
                         </ul>
                         <ul>

@@ -24,11 +24,12 @@
   align-self: flex-start;
   padding-left: 10%;
 }
-.user-main-info ul {
+.user-main-info ul li {
   font-family: "Georgia", Serif;
   color: #000000;
   list-style: none;
   font-size: 15px;
+  padding-bottom: 25px;
 }
 
 Link,
