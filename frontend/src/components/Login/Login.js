@@ -20,8 +20,8 @@ const Login = () => {
     confirmPassword: "",
   });
   const [mainClass, setMainClass] = useState("bounceRight");
-  const [signupEmail, setSignupEmail] = useState("");
-  const [signupPassword, setSignupPassword] = useState("");
+  // const [signupEmail, setSignupEmail] = useState("");
+  // const [signupPassword, setSignupPassword] = useState("");
   const [accessToken, setAccessToken] = useState("");
   const [refreshToken, setRefreshToken] = useState("");
 
@@ -121,7 +121,6 @@ const Login = () => {
                     type="password"
                     placeholder="Password"
                     className="forms_field-input"
-                    o
                     onChange={(e) => {
                       setAuthPocket((prev) => ({
                         ...prev,
@@ -196,11 +195,38 @@ const Login = () => {
                     type="email"
                     placeholder="Email"
                     className="forms_field-input"
-                    value={signupEmail}
                     onChange={(e) =>
                       setRegPocket((prev) => ({
                         ...prev,
                         email: e.target.value,
+                      }))
+                    }
+                    required
+                  />
+                </div>
+                <div className="forms_field">
+                  <input
+                    type="password"
+                    placeholder="Password"
+                    className="forms_field-input"
+                    onChange={(e) =>
+                      setRegPocket((prev) => ({
+                        ...prev,
+                        password: e.target.value,
+                      }))
+                    }
+                    required
+                  />
+                </div>
+                <div className="forms_field">
+                  <input
+                    type="password"
+                    placeholder="Confirm Password"
+                    className="forms_field-input"
+                    onChange={(e) =>
+                      setRegPocket((prev) => ({
+                        ...prev,
+                        confirmPassword: e.target.value,
                       }))
                     }
                     required
@@ -235,35 +261,6 @@ const Login = () => {
                       }))
                     }
                     required/> <p>Female</p>
-                </div>
-                <div className="forms_field">
-                  <input
-                    type="password"
-                    placeholder="Password"
-                    className="forms_field-input"
-                    onChange={(e) =>
-                      setRegPocket((prev) => ({
-                        ...prev,
-                        password: e.target.value,
-                      }))
-                    }
-                    required
-                  />
-                </div>
-                <div className="forms_field">
-                  <input
-                    type="password"
-                    placeholder="Confirm Password"
-                    className="forms_field-input"
-                    value={signupPassword}
-                    onChange={(e) =>
-                      setRegPocket((prev) => ({
-                        ...prev,
-                        confirmPassword: e.target.value,
-                      }))
-                    }
-                    required
-                  />
                 </div>
               </fieldset>
               <div className="forms_buttons">
