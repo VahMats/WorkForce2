@@ -13,9 +13,6 @@ function App() {
             <Route path="/auth">
               {localStorage.token ? <Redirect to='/' /> :  <Login />}
             </Route>
-            {/*<Route path="/reg">*/}
-            {/*  <RegPage />*/}
-            {/*</Route>*/}
             <Route path='/'>
               {localStorage.token ? <Home /> : <Redirect to='/auth' />}
             </Route>
