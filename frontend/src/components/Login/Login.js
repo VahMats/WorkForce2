@@ -14,7 +14,7 @@ const Login = () => {
     lastName: "",
     email: "",
     dateOfBirth: "",
-    gender: "male",
+    gender: "",
     username: "",
     password: "",
     confirmPassword: "",
@@ -179,6 +179,20 @@ const Login = () => {
                 </div>
                 <div className="forms_field">
                   <input
+                    type="text"
+                    placeholder="Username"
+                    className="forms_field-input"
+                    onChange={(e) =>
+                      setRegPocket((prev) => ({
+                        ...prev,
+                        userName: e.target.value,
+                      }))
+                    }
+                    required
+                  />
+                </div>
+                <div className="forms_field">
+                  <input
                     type="email"
                     placeholder="Email"
                     className="forms_field-input"
@@ -191,9 +205,9 @@ const Login = () => {
                     }
                     required
                   />
-                              </div>
-                              <div className="form-date">
-                                  <p>Date of birth</p>
+                </div>
+                <div className="form-date">
+                  <p>Date of birth</p>
                   <input
                     type="date"
                     onChange={(e) =>
@@ -203,32 +217,25 @@ const Login = () => {
                       }))
                     }
                     required
-                                  />
-                                  </div>
-                <FormControl component="fieldset">
-                  <FormLabel component="legend">Gender</FormLabel>
-                  <RadioGroup
-                    row
-                    aria-label="gender"
-                    name="row-radio-buttons-group"
-                    onChange={(e) =>
+                  />
+                </div>
+                <div className="radio-buttons"> 
+                  <p>Gender</p>
+                   <input type="radio" value="MALE" name="gender" id ="radio" onChange={(e) =>
                       setRegPocket((prev) => ({
                         ...prev,
                         gender: e.target.value,
                       }))
-                    }>
-                    <FormControlLabel
-                      value="female"
-                      control={<Radio />}
-                      label="Female"
-                    />
-                    <FormControlLabel
-                      value="male"
-                      control={<Radio />}
-                      label="Male"
-                    />
-                  </RadioGroup>
-                </FormControl>
+                    }
+                    required/> <p>Male</p>
+                   <input type="radio" value="FEMALE" name="gender" id ="radio"  onChange={(e) =>
+                      setRegPocket((prev) => ({
+                        ...prev,
+                        gender: e.target.value,
+                      }))
+                    }
+                    required/> <p>Female</p>
+                </div>
                 <div className="forms_field">
                   <input
                     type="password"
