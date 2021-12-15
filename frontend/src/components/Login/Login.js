@@ -191,11 +191,11 @@ const Login = () => {
                     }
                     required
                   />
-                </div>
-                <div className="forms_field">
+                              </div>
+                              <div className="form-date">
+                                  <p>Date of birth</p>
                   <input
                     type="date"
-                    placeholder="Date of birth"
                     onChange={(e) =>
                       setRegPocket((prev) => ({
                         ...prev,
@@ -203,8 +203,8 @@ const Login = () => {
                       }))
                     }
                     required
-                  />
-                </div>
+                                  />
+                                  </div>
                 <FormControl component="fieldset">
                   <FormLabel component="legend">Gender</FormLabel>
                   <RadioGroup

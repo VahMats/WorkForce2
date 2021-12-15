@@ -184,7 +184,7 @@ input::placeholder {
 }
 
 .user_options-forms .forms_field:not(:last-of-type) {
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 .user_options-forms .forms_field-input {
   width: 100%;
@@ -196,6 +196,21 @@ input::placeholder {
   color: rgb(0, 0, 0);
   letter-spacing: 0.1rem;
   transition: border-color 0.2s ease-in-out;
+}
+
+.form-date {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.1rem;
+  color: rgb(24, 21, 21);
+  margin-left: 5px;
+}
+.user_options-forms .forms-date {
+  align-items: flex-start;
 }
 .user_options-forms .forms_field-input:focus {
   border-color: rgb(82, 72, 110);
