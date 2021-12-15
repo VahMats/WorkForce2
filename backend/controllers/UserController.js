@@ -58,7 +58,6 @@ exports.register = async (req, res) => {
       gender,
       username,
       password,
-      confirmPassword,
     } = req.body;
     const oldUserUsername = await UserSchema.find({ username });
     if (oldUserUsername.length === 0) {
