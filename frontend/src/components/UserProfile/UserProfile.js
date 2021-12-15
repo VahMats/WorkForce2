@@ -3,14 +3,13 @@ import "./UserProfile.css";
 import { Link, NavLink } from "react-router-dom";
 import ManIcon from "../../images/manicon.png";
 import WomanIcon from "../../images/womanicon.png";
-import Navbar from "../Navbar/Navbar";
+
 
 
 function UserProfile() {
 
     return (
         <>
-            <Navbar />
             <nav className="user-main">
                 <div className="user-main-profile">
                     <img alt = "person"

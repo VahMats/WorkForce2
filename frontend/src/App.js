@@ -1,6 +1,6 @@
 import './App.css';
 import {Route, BrowserRouter as Router, Switch, Redirect} from "react-router-dom";
-import UserProfile from "./components/UserProfile/UserProfile";
+import Home from "./components/Home/Home";
 import Navbar from "./components/Navbar/Navbar";
 import Login from "./components/Login/Login"
 
@@ -17,7 +17,7 @@ function App() {
             {/*  <RegPage />*/}
             {/*</Route>*/}
             <Route path='/'>
-              {localStorage.token ? <UserProfile /> : <Redirect to='/auth' />}
+              {localStorage.token ? <Home /> : <Redirect to='/auth' />}
             </Route>
           </Switch>
         </Router>
