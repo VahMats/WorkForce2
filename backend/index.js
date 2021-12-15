@@ -5,6 +5,7 @@ const app = express();
 const jwt = require('jsonwebtoken');
 const {secret} = require('./Configs/tokenConfig');
 const UserSchema = require('./Schema/UserSchema')
+const TeamSchema = require('./Schema/TeamSchema')
 
 require("dotenv").config();
 
@@ -20,12 +21,21 @@ mongoose
     .catch((error)=>console.log(error))
 
 app.get('/token', async (req,res)=>{
-
+    const tokenData = {
+        userInfo: {},
+        usersInfo: {},
+        teamsInfo:{},
+    }
     const token = req.headers["x-access-token"];
     const decodedId = jwt.verify(token,secret);
-    // const user = await UserSchema.findById(decodedId.id);
+    const id = decodedId.id
+    const user = await UserSchema.findById({id}, {firstName:1, lastName:1, email:1, username:1, dateOfBirth:1, gender:1, team:1, teamId:1, isAdmin:1});
+    tokenData.userInfo = user
+    if (user.isAdmin){
+        const users = await UserSchema.find({}, {firstName:1, lastName:1, email:1, username:1, dateOfBirth:1, gender:1, team:1, teamId:1});
+        tokenData.usersInfo = users;
+    }
 
-    const users = await UserSchema.find({}, {firstName:1,lastName:1,email:1,username:1, dateOfBirth:1, gender:1, team:1, teamId:1});
 
 })
 
