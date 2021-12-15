@@ -1,13 +1,12 @@
 import './App.css';
 import {Route, BrowserRouter as Router, Switch, Redirect} from "react-router-dom";
-import LoginPage from "./components/LoginPage";
-import RegPage from "./components/RegPage";
 import UserProfile from "./components/UserProfile/UserProfile";
 import Navbar from "./components/Navbar/Navbar";
 import Login from "./components/Login/Login"
 
 function App() {
   return (
+
     <div className="App">
         <Router>
           <Switch>

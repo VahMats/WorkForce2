@@ -1,27 +1,24 @@
 import React, { useContext, useState } from "react";
 import "./UserProfile.css";
-// import { HomeContext } from "../App";
 import { Link, NavLink } from "react-router-dom";
-
 import ManIcon from "../../images/manicon.png";
 import WomanIcon from "../../images/womanicon.png";
 import Navbar from "../Navbar/Navbar";
 
 
 function UserProfile() {
-    // const { handleSetToken, setUserData } = useContext(HomeContext);
 
     return (
         <>
             <Navbar />
-            <nav className="user">
-                <div className="user-profile">
+            <nav className="user-main">
+                <div className="user-main-profile">
                     <img alt = "person"
                          src={
                              WomanIcon
                          }
                     />
-                    <div className="user-info">
+                    <div className="user-main-info">
                         <ul>
                             <li>  Lilith Mnatsakanian </li>
                             <li>  Mamble </li>

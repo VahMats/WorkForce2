@@ -2,7 +2,7 @@ import './Login.css'
 import {useState} from "react";
 import ValidationChecker from "../../ValidationChecker";
 
-export default () => {
+const Login = () => {
     const [authPocket, setAuthPocket] = useState({username:"", password:""})
     const [regPocket, setRegPocket] = useState({
         firstName:"",
@@ -46,7 +46,6 @@ export default () => {
                 body: JSON.stringify(regPocket)
             }).then(res => res.json()).then(data => {
                 console.log(data)
-
             })
         }
     }
@@ -58,8 +57,7 @@ export default () => {
                     <div className="user_options-unregistered">
                         <h2 className="user_unregistered-title">Don't have an account?</h2>
                         <p className="user_unregistered-text">
-                            With your personal account, you can track your favorite properties
-                            and receive custom alerts about new listings that come to market.
+                            Sign up and become a valuable part of our big team!
                         </p>
                         <button
                             className="user_unregistered-signup"
@@ -71,8 +69,7 @@ export default () => {
                     <div className="user_options-registered">
                         <h2 className="user_registered-title">Have an account?</h2>
                         <p className="user_registered-text">
-                            Don’t miss out on the right home for you — browse up-to-date
-                            listings, refine your search and more.
+                            Don’t miss out on the right home for you!
                         </p>
                         <button
                             className="user_registered-login"
@@ -86,7 +83,8 @@ export default () => {
                     className={`user_options-forms ${mainClass}`}
                     id="user_options-forms">
                     <div className="user_forms-login">
-                        <h2 className="forms_title">Welcome</h2>
+                        <h2 className="forms_title">Welcome buddy! Get a bird's-eye view or dive deep into every feature of InternalTool</h2>
+                        <h3 className="forms_title">Isn't it time all that imformation you've been collecting started working for you?</h3>
                         <form className="forms_form">
                             <fieldset className="forms_fieldset">
                                 <div className="forms_field">
@@ -122,7 +120,7 @@ export default () => {
                         </form>
                     </div>
                     <div className="user_forms-signup">
-                        <h2 className="forms_title">Sign Up</h2>
+                        <h2 className="forms_title">Sign up, the rest will follow!</h2>
                         <form className="forms_form">
                             <fieldset className="forms_fieldset">
                                 <div className="forms_field">
@@ -206,3 +204,5 @@ export default () => {
         </section>
     );
 };
+
+export default Login;
