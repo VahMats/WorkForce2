@@ -89,7 +89,7 @@ function emailValidation(email) {
 }
 
 function usernameValidation(username) {
-    if (username.length > 3) {
+    if (username.length > 2) {
         return {
             valid: true,
             error: ''

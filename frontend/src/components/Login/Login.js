@@ -46,6 +46,7 @@ const Login = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(authPocket),
       })
+
         .then((res) => res.json())
         .then((data) => {
           console.log(data);
@@ -201,7 +202,7 @@ const Login = () => {
                     onChange={(e) =>
                       setRegPocket((prev) => ({
                         ...prev,
-                        userName: e.target.value,
+                        username: e.target.value,
                       }))
                     }
                     required
