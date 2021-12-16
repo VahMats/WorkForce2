@@ -10,7 +10,7 @@ export default (data, validationType) => {
     const resultData = {
         fields: {},
         isValid: false,
-        error: ''
+        error: '',
     }
 
     if(!data) {
@@ -33,11 +33,11 @@ export default (data, validationType) => {
 
     const falseCurrent = Object.keys(resultData.fields).filter(e=>!resultData.fields[e].valid)
     console.log(falseCurrent);
-    resultData.isValid = falseCurrent.length ? false : true
-    let lastmassege = []
-    falseCurrent.forEach(elem=>{lastmassege.push(`Please fill ${elem} field `) })
-    resultData.error =  lastmassege
-    return resultData
+    resultData.isValid = falseCurrent.length ? false : true;
+    let lastmessege = [];
+    falseCurrent.forEach(elem=>{lastmessege.push(elem) });
+    resultData.error =  lastmessege;
+    return resultData;
 
 }
 

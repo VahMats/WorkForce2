@@ -8,7 +8,10 @@ import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 
 const Login = () => {
-  const [authPocket, setAuthPocket] = useState({ username: "", password: "" });
+  const [authPocket, setAuthPocket] = useState({
+      username: "",
+      password: ""
+  });
   const [regPocket, setRegPocket] = useState({
     firstName: "",
     lastName: "",
@@ -20,13 +23,23 @@ const Login = () => {
     confirmPassword: "",
   });
   const [mainClass, setMainClass] = useState("bounceRight");
-  // const [signupEmail, setSignupEmail] = useState("");
-  // const [signupPassword, setSignupPassword] = useState("");
-  const [accessToken, setAccessToken] = useState("");
-  const [refreshToken, setRefreshToken] = useState("");
+    const [errorFields, setErrorFields] = useState([]);
+
+    const errorsSetting = (type) => {
+        switch (type) {
+            case "email":
+                console.log("false email");
+            case "firstName":
+                console.log("false firstName");
+        }
+    }
 
   const Signin = async () => {
     const validAuth = ValidationChecker(authPocket, "login");
+    console.log(validAuth.error)
+    validAuth.error.forEach(el=>{
+        errorsSetting(el);
+    })
     if (validAuth.isValid) {
       await fetch("/api/user/auth", {
         method: "POST",
@@ -46,7 +59,11 @@ const Login = () => {
 
   const Signup = async () => {
     const validReg = ValidationChecker(regPocket);
-    if (validReg.isValid) {
+      console.log(validReg.error)
+      validReg.error.forEach(el=>{
+          errorsSetting(el);
+      })
+      if (validReg.isValid) {
       await fetch("/api/user/reg", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -274,8 +291,6 @@ const Login = () => {
             </form>
           </div>
         </div>
-        <div className="column">{accessToken}</div>
-        <div className="column">{refreshToken}</div>
       </div>
     </section>
   );

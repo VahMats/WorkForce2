@@ -34,7 +34,8 @@ useEffect(async () => {
                     <table>
                         <thead>
                             <tr className="users-list-info">
-                                <th>User Name</th>
+                                <th>id</th>
+                                <th>Username</th>
                                 <th>Email</th>
                                 <th>First Name</th>
                                 <th>Last Name</th>

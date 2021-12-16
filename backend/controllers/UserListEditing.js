@@ -53,10 +53,14 @@ exports.userEdit = async (req,res) => {
 }
 
 exports.userDelete = async (req,res) => {
-    const data = {
+    const deletingUserData = {
         Userexist: false,
     }
     const {id} = req.body
     const deletingUser = await UserSchema.findById(id);
-    console.log(deletingUser);
+    if (Object.values(deletingUser).length !== 0){
+        deletingUserData.Userexist = true;
+        await UserSchema.findByIdAndUpdate(id,{deleted:1});
+    };
+    res.send(deletingUserData);
 }
