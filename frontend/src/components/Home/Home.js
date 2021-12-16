@@ -2,12 +2,15 @@ import React, {useContext, useEffect, useState} from "react";
 import "./Home.css";
 import UserProfile from "../UserProfile/UserProfile";
 import Navbar from "../Navbar/Navbar";
-// import { HomeContext } from "../App";
+import UserList from "../UsersList/UserList";
+
+export const AllData = React.createContext({});
 
 function Home() {
 
     const [data, setData] = useState();
     const [loading,setLoading] = useState(true);
+    const [whichDashboard, setWhichDashboard] = useState("on one")
 
     const getDataWithToken = async () => {
         await fetch('/token', {
@@ -18,11 +21,14 @@ function Home() {
             }
         }).then(res=>res.json()).then(data=>{
             setData(data);
+            console.log(data)
             setLoading(false)
         })
     }
 
     useEffect(getDataWithToken, [])
+
+
 
     if (loading){
         return (
@@ -33,17 +39,21 @@ function Home() {
         return (
             <main>
                 <div>
-                    <Navbar/>
+                    <Navbar data={data.userInfo}/>
                     <section className="container">
-                        {/* <h1>Welcome Home, {userData.username}</h1> */}
-                        <UserProfile/>
+                        <AllData.Provider value={data} >
+                            <UserProfile/>
+
                         <div className="home-main">
-                            <h1>Welcome home, Lilith.</h1>
+                            <h1>Welcome home, {data.userInfo.firstName}.</h1>
                             <div className="home-news">
                                 <h3>What's happening at the company</h3>
                                 <div className="home-news-table"> You don't have any news at this moment...</div>
                             </div>
                         </div>
+                            <UserList />
+                            {/*<TeamList />*/}
+                        </AllData.Provider>
                     </section>
                 </div>
             </main>
