@@ -24,10 +24,12 @@ exports.authentication = async (req, res) => {
   if (validLogin.isValid) {
     authData.isValid = true;
     const { username, password } = req.body;
-    const user = await UserSchema.find({ username });
+    const user = await UserSchema.find({username});
+    console.log(user);
     if (user.length) {
       authData.userIsValid = true;
-      if (password === user[0].password) {
+      const validPassword = await bcrypt.compare(password, user[0].password);
+      if (validPassword) {
         authData.passwordIsCorrect = true;
         authData.data = user[0];
         authData.token = generateToken(user[0].id);
@@ -79,7 +81,7 @@ exports.register = async (req, res) => {
 
         newUser.password = await bcrypt.hash(password, salt);
 
-        await newUser.save();
+        await newUser.save()
       }
     }
     res.status(200).send(RegData);
