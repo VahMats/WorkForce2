@@ -265,14 +265,14 @@ const Login = () => {
                 </div>
                 <div className="radio-buttons"> 
                   <p>Gender</p>
-                   <input type="radio" value="MALE" name="gender" id ="radio" onChange={(e) =>
+                   <input type="radio" value="male" name="gender" id ="radio" onChange={(e) =>
                       setRegPocket((prev) => ({
                         ...prev,
                         gender: e.target.value,
                       }))
                     }
                     required/> <p>Male</p>
-                   <input type="radio" value="FEMALE" name="gender" id ="radio"  onChange={(e) =>
+                   <input type="radio" value="female" name="gender" id ="radio"  onChange={(e) =>
                       setRegPocket((prev) => ({
                         ...prev,
                         gender: e.target.value,

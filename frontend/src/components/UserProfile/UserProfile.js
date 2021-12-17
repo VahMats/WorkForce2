@@ -1,12 +1,12 @@
-import React, { useContext, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import React, {useContext, useState} from "react";
+import {Link, NavLink} from "react-router-dom";
 import ManIcon from "../../images/manicon.png";
 import WomanIcon from "../../images/womanicon.png";
 import {AllData} from '../Home/Home'
 import "./UserProfile.css";
 
 
-function UserProfile() {
+function UserProfile({setWhichDashboard}) {
 
     const data = useContext(AllData)
 
@@ -14,23 +14,22 @@ function UserProfile() {
         <>
             <nav className="user-main">
                 <div className="user-main-profile">
-                    <img alt = "person"
+                    <img alt="person"
                          src={data.userInfo.gender === "male" ? ManIcon : WomanIcon}
+
                     />
                     <div className="user-main-info">
                         <ul>
-                            <li> {data.userInfo.firstName + " " + data.userInfo.lastName} </li>
+                            <li onClick={e=>{setWhichDashboard("welcome")}}> {data.userInfo.firstName + " " + data.userInfo.lastName} </li>
                             <li>{data.userInfo.email}</li>
                             <li>{data.userInfo.dateOfBirth}</li>
                         </ul>
-                            </div>
-                            <NavLink activeClassName="active-link" to="/userslist">
-                                <li>{data.userInfo.isAdmin ? "User List" : data.userInfo.team}</li>
-                            </NavLink>
-                            {data.userInfo.isAdmin ? <NavLink activeClassName="active-link" to="/teamlist">
-                                <li>Team List</li>
-                            </NavLink> : null}
                     </div>
+                    <li onClick={e=>{setWhichDashboard("user")}}>{data.userInfo.isAdmin ? "User List" : data.userInfo.team}</li>
+                    {data.userInfo.isAdmin ?
+                        <li onClick={e=>{setWhichDashboard("team")}}>Team List</li>
+                        : null}
+                </div>
             </nav>
         </>
     );
