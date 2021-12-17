@@ -25,9 +25,12 @@ function UserProfile({setWhichDashboard}) {
                             <li>{data.userInfo.dateOfBirth}</li>
                         </ul>
                     </div>
-                    <li onClick={e=>{setWhichDashboard("user")}}>{data.userInfo.isAdmin ? "User List" : data.userInfo.team}</li>
-                    {data.userInfo.isAdmin ?
+                    <NavLink to='/userlist' >
+                        <li onClick={e=>{setWhichDashboard("user")}}>{data.userInfo.isAdmin ? "User List" : data.userInfo.team}</li>
+                    </NavLink>
+                    {data.userInfo.isAdmin ?<NavLink to='/teamlist' >
                         <li onClick={e=>{setWhichDashboard("team")}}>Team List</li>
+                        </NavLink>
                         : null}
                 </div>
             </nav>

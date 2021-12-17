@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const Routes = require('./Routes/router');
+const morgan = require("morgan");
 const app = express();
 const jwt = require('jsonwebtoken');
 const {secret} = require('./Configs/tokenConfig');
@@ -10,6 +11,8 @@ const TeamSchema = require('./Schema/TeamSchema')
 require("dotenv").config();
 
 app.use(express.json());
+
+app.use(morgan('tiny'));
 
 app.get('/', (req,res)=>{
     res.send("Hello, i am your backend")
@@ -34,6 +37,8 @@ app.get('/token', async (req,res)=>{
     if (user.isAdmin){
         const users = await UserSchema.find({}, {firstName:1, lastName:1, email:1, username:1, dateOfBirth:1, gender:1, team:1, teamId:1});
         tokenData.usersInfo = users;
+        const teams = await TeamSchema.find();
+        tokenData.teamsInfo = teams;
     }
     res.status(200).send(tokenData)
 

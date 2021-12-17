@@ -32,7 +32,6 @@ module.exports = (data, validationType) => {
     })
 
     const falseCurrent = Object.keys(resultData.fields).filter(e=>!resultData.fields[e].valid)
-    console.log(falseCurrent);
     resultData.isValid = falseCurrent.length ? false : true
     let lastmassege = []
     falseCurrent.forEach(elem=>{lastmassege.push(`Please fill ${elem} field `) })
@@ -45,14 +44,42 @@ function contentValidation(data, type) {
     let isValid = false;
     const requiredRegister = ['email', 'username', 'password', 'firstName', 'lastName'];
     const requiredLogin = ['username', 'password'];
+    const requiredEdit = ['email', 'username', 'firstName', 'lastName'];
 
-    const fieldData = type === 'login' ? requiredLogin : requiredRegister
+    let fieldData = ''
+
+    switch (type) {
+        case 'login':
+            fieldData = requiredLogin;
+            break
+        case 'register':
+            fieldData = requiredRegister;
+            break
+        case 'edit':
+            fieldData = requiredEdit;
+            break
+    }
+    // const fieldData = type === 'login' ? requiredLogin : requiredRegister
 
     const fields = Object.keys(data)
 
     const filtered = fieldData.filter(elem => fields.includes(elem))
 
-    isValid = type === "login" ? filtered.length === requiredLogin.length : filtered.length === requiredRegister.length
+    console.log(filtered)
+
+    switch (type) {
+        case 'login':
+            isValid = filtered.length === requiredLogin.length;
+            break;
+        case 'register':
+            isValid = filtered.length === requiredRegister.length;
+            break;
+        case 'edit':
+            isValid = filtered.length === requiredEdit.length;
+            break;
+    }
+
+    // isValid = type === "login" ? filtered.length === requiredLogin.length : filtered.length === requiredRegister.length
 
 
     return {

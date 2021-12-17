@@ -150,9 +150,6 @@ const Login = () => {
                 </div>
               </fieldset>
               <div className="forms_buttons">
-                <button type="button" className="forms_buttons-forgot">
-                  Forgot password?
-                </button>
                 <input
                   type="button"
                   defaultValue="Log In"

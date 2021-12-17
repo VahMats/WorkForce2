@@ -29,10 +29,6 @@ function Home() {
 
     useEffect(getDataWithToken, [])
 
-
-    console.log(whichDashboard)
-
-
     if (loading){
         return (
             <div>Loading ...</div>

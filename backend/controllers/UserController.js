@@ -25,7 +25,6 @@ exports.authentication = async (req, res) => {
     authData.isValid = true;
     const { username, password } = req.body;
     const user = await UserSchema.find({username});
-    console.log(user);
     if (user.length) {
       authData.userIsValid = true;
       const validPassword = await bcrypt.compare(password, user[0].password);
