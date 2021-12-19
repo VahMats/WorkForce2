@@ -8,7 +8,7 @@ import Edit from "../../images/edit.png";
 import Delete from "../../images/delete.png";
 import {AllData} from "../Home/Home";
 
-// import "./UserList.css";
+import "./UserList.css";
 
 
 const UserList = ({visible}) => {
@@ -20,16 +20,16 @@ const UserList = ({visible}) => {
             {console.log(data.userInfo)}
             <div>
                 {data.userInfo.isAdmin ? (
-                    <div className="add">
-                        <section className="add-team-section">
-                            <button>Add +</button>
+                    <div className="new_user">
+                        <section className="new_user_field">
+                            <button>Add new user</button>
                         </section>
                     </div>
                 ) : null}
-                {data.usersInfo.length ? (<section className="users-list">
+                {data.usersInfo.length ? (<section className="users_list">
                     <table>
                         <thead>
-                        <tr className="users-list-info">
+                        <tr className="users_list_info">
                             {data.userInfo.isAdmin ? <th>id</th> : null}
                             <th>First Name</th>
                             <th>Last Name</th>
