@@ -46,10 +46,10 @@ a {
 a:hover {
   color: #008594;
 }
-
-.active-link {
-  color: #ffcd04;
+.used-link{
+   color: #ffcd04;
 }
+
 @media screen and (max-width: 600px) {
   .user-main {
     width: 100%;
