@@ -1,11 +1,7 @@
-import "./Login.css";
 import { useState } from "react";
 import ValidationChecker from "../../ValidationChecker";
-import Radio from "@mui/material/Radio";
-import RadioGroup from "@mui/material/RadioGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import FormControl from "@mui/material/FormControl";
-import FormLabel from "@mui/material/FormLabel";
+
+import "./Login.css";
 
 const Login = () => {
   const [authPocket, setAuthPocket] = useState({
@@ -74,7 +70,7 @@ const Login = () => {
         .then((data) => {
           console.log(data);
         });
-    }
+      }
   };
 
   return (

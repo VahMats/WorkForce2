@@ -1,9 +1,10 @@
 import React, {useContext, useEffect, useState} from "react";
-import "./Home.css";
 import UserProfile from "../UserProfile/UserProfile";
 import Navbar from "../Navbar/Navbar";
 import UserList from "../UsersList/UserList";
 import TeamList from "../TeamList/TeamList";
+
+import "./Home.css";
 
 export const AllData = React.createContext({});
 
