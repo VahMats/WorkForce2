@@ -6,6 +6,7 @@ import Menu from '@mui/material/Menu';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import "./Navbar.css";
 import { MenuItem } from "@mui/material";
+import User from "../../../../backend/Schema/UserSchema";
 // import { HomeContext } from "../App"
 
 
@@ -39,7 +40,7 @@ const Navbar = () => {
                 <div className="usericon">
                     <p className="text">Lilith Mnatsakanian</p>
                     <img alt ="person"
-                         src={WomanIcon}
+                         src={userData.gender == "male" ? ManIcon userData.gender == "female" ? WomanIcon}
                     />
                     <div>
                         <ArrowDropDownIcon onClick={handleMenu}></ArrowDropDownIcon>
