@@ -11,8 +11,7 @@ import User from "../../../../backend/Schema/UserSchema";
 
 
 
-const Navbar = () => {
-    //   const { userData } = useContext(HomeContext);
+const Navbar = ({data}) => {
     const [anchorEl, setAnchorEl] = React.useState(null);
 
     const handleMenu = (event) => {
@@ -26,8 +25,6 @@ const Navbar = () => {
     const logOut = () => {
         localStorage.token = "";
         window.location.reload();
-        // handleSetToken("");
-        // setUserData({});
     };
 
     return (
@@ -38,9 +35,13 @@ const Navbar = () => {
                     <h1 className="text">Internal tool</h1>
                 </div>
                 <div className="usericon">
-                    <p className="text">Lilith Mnatsakanian</p>
+                    <p className="text">{data.username}</p>
                     <img alt ="person"
+<<<<<<< HEAD
                          src={userData.gender == "male" ? ManIcon userData.gender == "female" ? WomanIcon}
+=======
+                         src={data.gender === "male" ? ManIcon : WomanIcon}
+>>>>>>> 9584d3fb18f66eebd6891ad62947eac658773674
                     />
                     <div>
                         <ArrowDropDownIcon onClick={handleMenu}></ArrowDropDownIcon>

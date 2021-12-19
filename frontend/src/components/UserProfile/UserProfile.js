@@ -1,38 +1,38 @@
-import React, { useContext, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import React, {useContext, useState} from "react";
+import {Link, NavLink} from "react-router-dom";
 import ManIcon from "../../images/manicon.png";
 import WomanIcon from "../../images/womanicon.png";
-
+import {AllData} from '../Home/Home'
 import "./UserProfile.css";
 
 
-function UserProfile() {
+function UserProfile({setWhichDashboard}) {
+
+    const data = useContext(AllData)
 
     return (
         <>
             <nav className="user-main">
                 <div className="user-main-profile">
-                    <img alt = "person"
-                         src={
-                             WomanIcon
-                         }
+                    <img alt="person"
+                         src={data.userInfo.gender === "male" ? ManIcon : WomanIcon}
+
                     />
                     <div className="user-main-info">
                         <ul>
-                            <li>  Lilith Mnatsakanian </li>
-                            <li>  Mamble </li>
-                            {/* {userData.isAdmin ? "Dashboard" : userData.teamName} */}
-                            <li>Lilith@mamble.co</li>
-                            <li>  21.12.1995 </li>
+                            <li onClick={e=>{setWhichDashboard("welcome")}}> {data.userInfo.firstName + " " + data.userInfo.lastName} </li>
+                            <li>{data.userInfo.email}</li>
+                            <li>{data.userInfo.dateOfBirth}</li>
                         </ul>
-                            </div>
-                            <NavLink activeClassName="active-link" to="/userslist">
-                                <li>User List</li>
-                            </NavLink>
-                            <NavLink activeClassName="active-link" to="/teamlist">
-                                <li>Team List</li>
-                            </NavLink>
                     </div>
+                    <NavLink to='/userlist' >
+                        <li onClick={e=>{setWhichDashboard("user")}}>{data.userInfo.isAdmin ? "User List" : data.userInfo.team}</li>
+                    </NavLink>
+                    {data.userInfo.isAdmin ?<NavLink to='/teamlist' >
+                        <li onClick={e=>{setWhichDashboard("team")}}>Team List</li>
+                        </NavLink>
+                        : null}
+                </div>
             </nav>
         </>
     );

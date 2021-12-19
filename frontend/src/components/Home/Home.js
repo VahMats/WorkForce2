@@ -2,12 +2,16 @@ import React, {useContext, useEffect, useState} from "react";
 import "./Home.css";
 import UserProfile from "../UserProfile/UserProfile";
 import Navbar from "../Navbar/Navbar";
-// import { HomeContext } from "../App";
+import UserList from "../UsersList/UserList";
+import TeamList from "../TeamList/TeamList";
+
+export const AllData = React.createContext({});
 
 function Home() {
 
     const [data, setData] = useState();
     const [loading,setLoading] = useState(true);
+    const [whichDashboard, setWhichDashboard] = useState("welcome")
 
     const getDataWithToken = async () => {
         await fetch('/token', {
@@ -18,6 +22,7 @@ function Home() {
             }
         }).then(res=>res.json()).then(data=>{
             setData(data);
+            console.log(data)
             setLoading(false)
         })
     }
@@ -33,17 +38,21 @@ function Home() {
         return (
             <main>
                 <div>
-                    <Navbar/>
+                    <Navbar data={data.userInfo} />
                     <section className="container">
-                        {/* <h1>Welcome Home, {userData.username}</h1> */}
-                        <UserProfile/>
-                        <div className="home-main">
-                            <h1>Welcome home, Lilith.</h1>
+                        <AllData.Provider value={data} >
+                            <UserProfile setWhichDashboard={setWhichDashboard}/>
+
+                        <div className="home-main" style={{display: whichDashboard === "welcome" ? "" : "none"}}>
+                            <h1>Welcome home, {data.userInfo.firstName}.</h1>
                             <div className="home-news">
                                 <h3>What's happening at the company</h3>
                                 <div className="home-news-table"> You don't have any news at this moment...</div>
                             </div>
                         </div>
+                            <UserList visible={whichDashboard === "user" ? "" : "none"}/>
+                            <TeamList visible={whichDashboard === "team" ? "" : "none"}/>
+                        </AllData.Provider>
                     </section>
                 </div>
             </main>

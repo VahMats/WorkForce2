@@ -5,7 +5,7 @@ const bcrypt = require("bcrypt");
 exports.userAdd = async (req,res) => {
     const userAddData = {
         isValid: false,
-        usernameisUnique: false,
+        usernameIsUnique: false,
         emailIsUnique: false,
     };
     const validReg = ValidationChecker(req.body, "register");
@@ -23,10 +23,10 @@ exports.userAdd = async (req,res) => {
         } = req.body;
         const oldUserUsername = await UserSchema.find({ username });
         if (oldUserUsername.length === 0) {
-            RegData.usernameisUnique = true;
+            userAddData.usernameIsUnique = true;
             const oldUserEmail = await UserSchema.find({ email });
             if (oldUserEmail.length === 0) {
-                RegData.emailIsUnique = true;
+                userAddData.emailIsUnique = true;
                 const newUser = new UserSchema({
                     firstName,
                     lastName,
@@ -44,22 +44,44 @@ exports.userAdd = async (req,res) => {
                 await newUser.save();
             }
         }
-        res.status(200).send(RegData);
+        res.status(200).send(userAddData);
     }
 }
 
 exports.userEdit = async (req,res) => {
+    const userEditingData = {
+        isValid: false,
+        newUsernameIsUnique: false,
+        newEmailIsUnique: false,
+    }
+
+    const {
+        id,
+        firstName,
+        lastName,
+        email,
+        dateOfBirth,
+        gender,
+        username,
+        teamId
+    } = req.body;
+
+
+
+    const oldUser = UserSchema.findById(id, {firstName:1, lastName:1, email:1, username:1, dateOfBirth:1, gender:1, teamId:1})
+
+
 
 }
 
 exports.userDelete = async (req,res) => {
     const deletingUserData = {
-        Userexist: false,
+        UserExist: false,
     }
     const {id} = req.body
     const deletingUser = await UserSchema.findById(id);
     if (Object.values(deletingUser).length !== 0){
-        deletingUserData.Userexist = true;
+        deletingUserData.UserExist = true;
         await UserSchema.findByIdAndUpdate(id,{deleted:1});
     };
     res.send(deletingUserData);
