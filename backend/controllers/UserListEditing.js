@@ -1,4 +1,5 @@
 const UserSchema = require('../Schema/UserSchema')
+const TeamSchema = require('../Schema/TeamSchema')
 const ValidationChecker = require("../ValidationChecker");
 const bcrypt = require("bcrypt");
 
@@ -53,6 +54,8 @@ exports.userEdit = async (req,res) => {
         isValid: false,
         newUsernameIsUnique: false,
         newEmailIsUnique: false,
+        teamIsChanged: false,
+        teamIsFull: true,
     }
 
     const {
@@ -69,7 +72,31 @@ exports.userEdit = async (req,res) => {
 
 
     const oldUser = UserSchema.findById(id, {firstName:1, lastName:1, email:1, username:1, dateOfBirth:1, gender:1, teamId:1})
+    const anotherEmail = UserSchema.find({email});
+    const anotherUsername = UserSchema.find({username});
+    if (anotherEmail.length === 0 || anotherEmail[0]._id === id){
+        userEditingData.newEmailIsUnique = true;
+        if (anotherUsername.length === 0 || anotherUsername[0]._id === id) {
+            userEditingData.newUsernameIsUnique = true;
+            const validEdit = ValidationChecker(req.body, "edit");
+            if (teamId){
+                if (teamId !== oldUser[0].teamId){
+                    userEditingData.teamIsChanged = true;
+                    const newTeam = await TeamSchema.findById(teamId);
+                    const newCount = newTeam[0].count + 1;
+                    if (newCount <= newTeam[0].maxCount){
+                        userEditingData.teamIsFull = false;
+                        await TeamSchema.findByIdAndUpdate(teamId, {count:newCount});
+                        const oldTeam = await TeamSchema.findById(oldUser[0].teamId);
+                        const oldTeamsNewCount = oldTeam[0].count - 1;
+                        await TeamSchema.findByIdAndUpdate(oldTeam[0]._id, {count:oldTeamsNewCount})
+                    }
+                }
+            }
 
+
+        }
+    }
 
 
 }

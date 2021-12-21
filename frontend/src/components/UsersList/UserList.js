@@ -24,17 +24,18 @@ const UserList = ({ visible }) => {
      };
     
     const showDelete = (id) => async () => {
-    const options = {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        "x-access-token": localStorage.token,
-      },
-      body: JSON.stringify({
-        id: id,
-      }),
-    };
-    const res = await fetch("/api/admin/delete", options).then(res=>res.json()).then(data=>console.log(data))
+    await fetch("/api/admin/delete", {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+            "x-access-token": localStorage.token,
+        },
+        body: JSON.stringify({
+            id: id,
+        }),
+    })
+        .then(res=>res.json())
+        .then(data=>console.log(data))
 
   };
 

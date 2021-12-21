@@ -86,16 +86,3 @@ exports.register = async (req, res) => {
     res.status(200).send(RegData);
   }
 };
-
-exports.currentUser = async (req, res) => {
-  const {
-    id,
-  } = req.body;
-
-  const user = await UserSchema.findById(id)
-    .then(user=> {
-      if (!id) { return res.status(404).end(); }
-      return res.status(200).json(user);
-    })
-    .catch(err => next(err));
-};
