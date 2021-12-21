@@ -15,45 +15,33 @@ const UserList = ({ visible }) => {
     
     const data = useContext(AllData);
 
-    const [userId, setUserId] = useState(null);
-
      const [show, setShow] = useState(false);
+     const [viewingUserData, setViewingUserData] = useState({})
 
-     const showModal = (id, item) => () => {
+     const showModal = (userData) => () => {
          setShow(!show)
-         setUserId(id);
-
+         setViewingUserData(userData)
      };
     
-    const showDelete = (_id) => async () => {
+    const showDelete = (id) => async () => {
     const options = {
-      method: "DELETE",
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        "x-access-token": localStorage["Token"],
+        "x-access-token": localStorage.token,
       },
       body: JSON.stringify({
-        _id: _id,
+        id: id,
       }),
     };
+    const res = await fetch("/api/admin/delete", options).then(res=>res.json()).then(data=>console.log(data))
 
-    try {
-      const res = await fetch("/api/admin/delete", options);
-      const data = await res.json();
-
-      if (data.isOk) {
-        setUsersInfo(data.data);
-      }
-    } catch (e) {
-      console.error({ message: e.message });
-    }
   };
 
-  const [usersInfo, setUsersInfo] = useState({});
+
 
         return (
             <main style={{ display: visible }}>
-                {console.log(data.userInfo)}
                 <div>
                     {data.userInfo.isAdmin ? (
                         <div className="new_user">
@@ -89,13 +77,13 @@ const UserList = ({ visible }) => {
                                         <td>{item.gender}</td>
                                         {data.userInfo.isAdmin ? <td>{item.team}</td> : ""}
                                         <td className="image-td">
+                                            <img
+                                                src={View}
+                                                alt="show"
+                                                onClick={showModal(data.usersInfo[index])}
+                                            />
                                             {data.userInfo.isAdmin ? (
                                                 <>
-                                                    <img
-                                                        src={View}
-                                                        alt="show"
-                                                        onClick={showModal(item.id)}
-                                                    />
                                                     <img
                                                         src={Edit}
                                                         alt="edit"
@@ -104,16 +92,10 @@ const UserList = ({ visible }) => {
                                                     <img
                                                         src={Delete}
                                                         alt="delete"
-                                                    onClick={showDelete(item.id)}
+                                                    onClick={showDelete(item._id)}
                                                     />
                                                 </>
-                                            ) : (
-                                                <img
-                                                    src={View}
-                                                    alt="show"
-                                                    onClick={showModal(item.id)}
-                                                />
-                                            )}
+                                            ) : null }
                                         </td>
                                     </tr>
                                 ))}
@@ -123,7 +105,7 @@ const UserList = ({ visible }) => {
                         <h1 className={"no-users"}>{data.userInfo.isAdmin ? "No users yet ..." : "You are not in team yet"}</h1>}
                 </div>
                 {show && (
-                    <ViewUser show={show} setShow={setShow} />
+                    <ViewUser show={show} setShow={setShow} data={viewingUserData}/>
                 )}
             </main>
         );

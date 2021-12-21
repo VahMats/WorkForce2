@@ -6,37 +6,7 @@ import Manicon from "../../images/manicon.png";
 
 import './ViewUser.css';
 
-const ViewUser = ({ show, setShow, currentId}) => {
-
-  const [data, setData] = useState({});
-
-  useEffect(async () => {
-    const getData = async () => {
-      const options = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          id: currentId,
-        }),
-      };
-
-      try {
-        const res = await fetch("/api/user/id", options);
-        const data = await res.json();
-
-        setTimeout(() => {
-          if (data) {
-            setData(data[0]);
-          }
-        }, 1000);
-      } catch (e) {
-        console.error({ message: e.message });
-      }
-    };
-    await getData();
-  }, []);
+const ViewUser = ({ show, setShow, data}) => {
 
   return (
     <section className={show ? "modal" : "modal-close"}>
