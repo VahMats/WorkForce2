@@ -49,7 +49,6 @@ exports.register = async (req, res) => {
     emailIsUnique: false,
   };
   const validReg = ValidationChecker(req.body, "register");
-  console.log(req.body)
   if (validReg.isValid) {
     RegData.isValid = true;
     const {

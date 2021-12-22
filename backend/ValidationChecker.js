@@ -65,8 +65,6 @@ function contentValidation(data, type) {
 
     const filtered = fieldData.filter(elem => fields.includes(elem))
 
-    console.log(filtered)
-
     switch (type) {
         case 'login':
             isValid = filtered.length === requiredLogin.length;

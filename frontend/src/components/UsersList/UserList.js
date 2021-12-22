@@ -1,7 +1,7 @@
 import React, {useContext, useState} from "react";
 // import EditUser from "./EditUser";
 // import Loading from "./Loading";
-import ViewUser from "../ViewUser/ViewUser";
+import ViewUser from "../modals/ViewUser/ViewUser";
 // import AddUser from "./AddUser";
 import View from "../../images/view.png";
 import Edit from "../../images/edit.png";
@@ -9,6 +9,7 @@ import Delete from "../../images/delete.png";
 import {AllData} from "../Home/Home";
 
 import "./UserList.css";
+import MainModal from "../modals/MainModal/MainModal";
 
 
 const UserList = ({ visible }) => {
@@ -106,7 +107,9 @@ const UserList = ({ visible }) => {
                         <h1 className={"no-users"}>{data.userInfo.isAdmin ? "No users yet ..." : "You are not in team yet"}</h1>}
                 </div>
                 {show && (
-                    <ViewUser show={show} setShow={setShow} data={viewingUserData}/>
+                    <MainModal show={show} setShow={setShow} viewingUserData={viewingUserData}>
+                        <ViewUser show={show} setShow={setShow} data={viewingUserData}/>
+                    </MainModal>
                 )}
             </main>
         );

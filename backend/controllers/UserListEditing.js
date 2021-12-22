@@ -1,17 +1,19 @@
-const UserSchema = require('../Schema/UserSchema')
-const TeamSchema = require('../Schema/TeamSchema')
+const UserSchema = require('../Schema/UserSchema');
+const TeamSchema = require('../Schema/TeamSchema');
 const ValidationChecker = require("../ValidationChecker");
 const bcrypt = require("bcrypt");
+const {UsersDataFind} = require('../responseGenerator');
 
 exports.userAdd = async (req,res) => {
     const userAddData = {
         isValid: false,
         usernameIsUnique: false,
         emailIsUnique: false,
+        usersData: [],
     };
     const validReg = ValidationChecker(req.body, "register");
     if (validReg.isValid) {
-        RegData.isValid = true;
+        userAddData.isValid = true;
         const {
             firstName,
             lastName,
@@ -28,6 +30,14 @@ exports.userAdd = async (req,res) => {
             const oldUserEmail = await UserSchema.find({ email });
             if (oldUserEmail.length === 0) {
                 userAddData.emailIsUnique = true;
+
+                if (teamId){
+                    const addedTeam = await TeamSchema.findById(teamId);
+                    const addedCount = addedTeam.count + 1;
+                    await TeamSchema.findOneAndUpdate(teamId, {count:addedCount})
+                    team = addedTeam.name;
+                }
+
                 const newUser = new UserSchema({
                     firstName,
                     lastName,
@@ -36,13 +46,21 @@ exports.userAdd = async (req,res) => {
                     gender,
                     username,
                     password,
-                    teamId
+                    team,
+                    teamId,
                 });
                 const salt = await bcrypt.genSalt(10);
+
+
+
 
                 newUser.password = await bcrypt.hash(password, salt);
 
                 await newUser.save();
+
+
+
+                userAddData.usersData = await UsersDataFind();
             }
         }
     }
@@ -56,6 +74,7 @@ exports.userEdit = async (req,res) => {
         newUsernameIsUnique: false,
         teamIsChanged: false,
         teamIsFull: true,
+        usersData: [],
     }
 
     const {
@@ -93,6 +112,8 @@ exports.userEdit = async (req,res) => {
                             const oldTeamsNewCount = oldTeam[0].count - 1;
                             await TeamSchema.findByIdAndUpdate(oldTeam[0]._id, {count: oldTeamsNewCount})
                             await UserSchema.findByIdAndUpdate(id,{firstName, lastName, email, dateOfBirth, gender, username, teamId})
+                            userEditingData.usersData = await UsersDataFind();
+
                         }
                     }
                 }
@@ -105,14 +126,16 @@ exports.userEdit = async (req,res) => {
 }
 
 exports.userDelete = async (req,res) => {
-    const deletingUserData = {
+    const userDeletingData = {
         UserExist: false,
+        usersData: [],
     }
     const {id} = req.body
     const deletingUser = await UserSchema.findById(id);
     if (Object.values(deletingUser).length !== 0){
-        deletingUserData.UserExist = true;
+        userDeletingData.UserExist = true;
         await UserSchema.findByIdAndUpdate(id,{deleted:1});
+        userDeletingData.usersData = await UsersDataFind();
     };
-    res.send(deletingUserData);
+    res.send(userDeletingData);
 }

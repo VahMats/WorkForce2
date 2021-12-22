@@ -5,8 +5,9 @@ const morgan = require("morgan");
 const app = express();
 const jwt = require('jsonwebtoken');
 const {secret} = require('./Configs/tokenConfig');
-const UserSchema = require('./Schema/UserSchema')
-const TeamSchema = require('./Schema/TeamSchema')
+const UserSchema = require('./Schema/UserSchema');
+const TeamSchema = require('./Schema/TeamSchema');
+const {UsersDataFind, TeamsDataFind} = require('./responseGenerator')
 
 require("dotenv").config();
 
@@ -35,12 +36,15 @@ app.get('/token', async (req,res)=>{
     const user = await UserSchema.findById(id, {firstName:1, lastName:1, email:1, username:1, dateOfBirth:1, gender:1, team:1, teamId:1, isAdmin:1});
     tokenData.userInfo = user
     if (user.isAdmin){
-        const users = await UserSchema.find({}, {firstName:1, lastName:1, email:1, username:1, dateOfBirth:1, gender:1, team:1, teamId:1, deleted:1});
-        const availableUsers = users.filter(el => !el.deleted)
-        tokenData.usersInfo = availableUsers;
-        const teams = await TeamSchema.find();
-        const availableTeams = teams.filter(el => !el.deleted)
-        tokenData.teamsInfo = teams;
+        // const users = await UserSchema.find({}, {firstName:1, lastName:1, email:1, username:1, dateOfBirth:1, gender:1, team:1, teamId:1, deleted:1});
+        // const availableUsers = users.filter(el => !el.deleted)
+        // tokenData.usersInfo = availableUsers;
+        const allUsersData = await UsersDataFind();
+        tokenData.usersInfo = allUsersData.filter(el => el.id !== id);
+        // const teams = await TeamSchema.find();
+        // const availableTeams = teams.filter(el => !el.deleted)
+        // tokenData.teamsInfo = teams;
+        tokenData.teamsInfo = await TeamsDataFind();
     }
     res.status(200).send(tokenData)
 
