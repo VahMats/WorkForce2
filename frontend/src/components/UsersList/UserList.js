@@ -109,6 +109,7 @@ const UserList = ({ visible }) => {
             </div>
             {show && (
                 <MainModal show={show} setShow={setShow}>
+                    <ViewUser show={show} setShow={setShow} data={viewingUserData} />
                 </MainModal>
             )}
         </main>

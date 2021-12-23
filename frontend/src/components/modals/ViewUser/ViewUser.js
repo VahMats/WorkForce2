@@ -6,8 +6,8 @@ import './ViewUser.css';
 
 const ViewUser = ({ data }) => {
   return (
-    <div className="modal-wrapper">
-      <div className="view-admin">
+    <div className="viewuser">
+      <div className="viewuser-icon">
         <img
           src={data.gender === "male" ? ManIcon : WomanIcon}
           alt="Icon"
