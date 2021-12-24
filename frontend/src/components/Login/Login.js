@@ -32,7 +32,7 @@ const Login = () => {
       case "email":
         alert("Email does not match to our requirmenets");
         break;
-      case "Password":
+      case "password":
         alert("Password does not match to our requirmenets");
         break;
       case "confirmpassword":
