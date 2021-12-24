@@ -302,6 +302,12 @@ input::placeholder {
   -webkit-animation: bounceRight 1s forwards;
   animation: bounceRight 1s forwards;
 }
+
+.error {
+  color: red;
+  text-align: center;
+  margin-bottom: 0;
+}
 @media screen and (max-width: 990px) {
   .user_options-forms {
     min-height: 350px;

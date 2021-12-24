@@ -19,27 +19,27 @@ const Login = () => {
     confirmPassword: "",
   });
   const [mainClass, setMainClass] = useState("bounceRight");
-  const [errorFields, setErrorFields] = useState([]);
+  const [errorFields, setErrorFields] = useState("");
 
   const errorsSetting = (type) => {
     switch (type) {
       case "firstName":
-        alert("First name does not match to our requirmenets");
+        setErrorFields("First name does not match to our requirmenets");
         break;
       case "username":
-        alert("Username does not match to our requirmenets");
+        setErrorFields("Username does not match to our requirmenets");
         break;
       case "email":
-        alert("Email does not match to our requirmenets");
+        setErrorFields("Email does not match to our requirmenets");
         break;
       case "password":
-        alert("Password does not match to our requirmenets");
+        setErrorFields("Password does not match to our requirmenets");
         break;
       case "confirmpassword":
-        alert("Passwords are not the same");
+        setErrorFields("Passwords are not the same");
         break;
       default:
-        alert("Something is wrong!! contact admin")
+        setErrorFields("Something is wrong!! contact admin")
     }
   }
 
@@ -171,13 +171,16 @@ const Login = () => {
           </div>
           <div className="user_forms-signup">
             <h2 className="forms_title">Sign up, the rest will follow!</h2>
-            <form className="forms_form">
+            <form className="forms_form" onSubmit={errorFields}>
+              <p className="error"> {errorFields} </p>
               <fieldset className="forms_fieldset">
                 <div className="forms_field">
                   <input
                     type="text"
                     placeholder="First Name"
                     className="forms_field-input"
+                    pattern={"[A-Za-z]+"}
+                    minLength={2}
                     onChange={(e) =>
                       setRegPocket((prev) => ({
                         ...prev,
@@ -192,6 +195,8 @@ const Login = () => {
                     type="text"
                     placeholder="Last Name"
                     className="forms_field-input"
+                    pattern={"[A-Za-z]+"}
+                    minLength={2}
                     onChange={(e) =>
                       setRegPocket((prev) => ({
                         ...prev,
@@ -205,6 +210,8 @@ const Login = () => {
                   <input
                     type="text"
                     placeholder="Username should contain more than 3 characters"
+                    pattern={"[A-Za-z]+"}
+                    minLength={2}
                     className="forms_field-input"
                     onChange={(e) =>
                       setRegPocket((prev) => ({
@@ -220,6 +227,7 @@ const Login = () => {
                     type="email"
                     placeholder="Email should be a valid email"
                     className="forms_field-input"
+                    pattern={/\S+@\S+\.\S+/}
                     onChange={(e) =>
                       setRegPocket((prev) => ({
                         ...prev,
@@ -234,6 +242,8 @@ const Login = () => {
                     type="password"
                     placeholder="Password should consist of at least 6 alphanumerical"
                     className="forms_field-input"
+                    minLength={6}
+                    maxLength={20}
                     onChange={(e) =>
                       setRegPocket((prev) => ({
                         ...prev,
@@ -248,6 +258,8 @@ const Login = () => {
                     type="password"
                     placeholder="Confirm Password"
                     className="forms_field-input"
+                    minLength={6}
+                    maxLength={20}
                     onChange={(e) =>
                       setRegPocket((prev) => ({
                         ...prev,
