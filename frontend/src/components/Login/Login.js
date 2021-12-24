@@ -5,8 +5,8 @@ import "./Login.css";
 
 const Login = () => {
   const [authPocket, setAuthPocket] = useState({
-      username: "",
-      password: ""
+    username: "",
+    password: ""
   });
   const [regPocket, setRegPocket] = useState({
     firstName: "",
@@ -19,22 +19,35 @@ const Login = () => {
     confirmPassword: "",
   });
   const [mainClass, setMainClass] = useState("bounceRight");
-    const [errorFields, setErrorFields] = useState([]);
+  const [errorFields, setErrorFields] = useState([]);
 
-    const errorsSetting = (type) => {
-        switch (type) {
-            case "email":
-                console.log("false email");
-            case "firstName":
-                console.log("false firstName");
-        }
+  const errorsSetting = (type) => {
+    switch (type) {
+      case "firstName":
+        alert("First name does not match to our requirmenets");
+        break;
+      case "username":
+        alert("Username does not match to our requirmenets");
+        break;
+      case "email":
+        alert("Email does not match to our requirmenets");
+        break;
+      case "Password":
+        alert("Password does not match to our requirmenets");
+        break;
+      case "confirmpassword":
+        alert("Passwords are not the same");
+        break;
+      default:
+        alert("Something is wrong!! contact admin")
     }
+  }
 
   const Signin = async () => {
     const validAuth = ValidationChecker(authPocket, "login");
     console.log(validAuth.error)
-    validAuth.error.forEach(el=>{
-        errorsSetting(el);
+    validAuth.error.forEach(el => {
+      errorsSetting(el);
     })
     if (validAuth.isValid) {
       await fetch("/api/user/auth", {
@@ -56,11 +69,11 @@ const Login = () => {
 
   const Signup = async () => {
     const validReg = ValidationChecker(regPocket);
-      console.log(validReg.error)
-      validReg.error.forEach(el=>{
-          errorsSetting(el);
-      })
-      if (validReg.isValid) {
+    console.log(validReg.error)
+    validReg.error.forEach(el => {
+      errorsSetting(el);
+    })
+    if (validReg.isValid) {
       await fetch("/api/user/reg", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -70,8 +83,8 @@ const Login = () => {
         .then((data) => {
           console.log(data);
         });
-          setMainClass("bounceRight")
-      }
+      setMainClass("bounceRight")
+    }
   };
 
   return (
@@ -191,7 +204,7 @@ const Login = () => {
                 <div className="forms_field">
                   <input
                     type="text"
-                    placeholder="Username"
+                    placeholder="Username should contain more than 3 characters"
                     className="forms_field-input"
                     onChange={(e) =>
                       setRegPocket((prev) => ({
@@ -205,7 +218,7 @@ const Login = () => {
                 <div className="forms_field">
                   <input
                     type="email"
-                    placeholder="Email"
+                    placeholder="Email should be a valid email"
                     className="forms_field-input"
                     onChange={(e) =>
                       setRegPocket((prev) => ({
@@ -219,7 +232,7 @@ const Login = () => {
                 <div className="forms_field">
                   <input
                     type="password"
-                    placeholder="Password"
+                    placeholder="Password should consist of at least 6 alphanumerical"
                     className="forms_field-input"
                     onChange={(e) =>
                       setRegPocket((prev) => ({
@@ -257,22 +270,22 @@ const Login = () => {
                     required
                   />
                 </div>
-                <div className="radio-buttons"> 
+                <div className="radio-buttons">
                   <p>Gender</p>
-                   <input type="radio" value="male" name="gender" id ="radio" onChange={(e) =>
-                      setRegPocket((prev) => ({
-                        ...prev,
-                        gender: e.target.value,
-                      }))
-                    }
-                    required/> <p>Male</p>
-                   <input type="radio" value="female" name="gender" id ="radio"  onChange={(e) =>
-                      setRegPocket((prev) => ({
-                        ...prev,
-                        gender: e.target.value,
-                      }))
-                    }
-                    required/> <p>Female</p>
+                  <input type="radio" value="male" name="gender" id="radio" onChange={(e) =>
+                    setRegPocket((prev) => ({
+                      ...prev,
+                      gender: e.target.value,
+                    }))
+                  }
+                    required /> <p>Male</p>
+                  <input type="radio" value="female" name="gender" id="radio" onChange={(e) =>
+                    setRegPocket((prev) => ({
+                      ...prev,
+                      gender: e.target.value,
+                    }))
+                  }
+                    required /> <p>Female</p>
                 </div>
               </fieldset>
               <div className="forms_buttons">

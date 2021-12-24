@@ -1,9 +1,9 @@
 const validationFunctions = {
-    email: ({email})=> emailValidation(email),
-    username: ({username}) => usernameValidation(username),
-    password: ({password, confirmPassword}) => passwordValidation(password, confirmPassword),
-    firstName: ({firstName}) => nameValidation(firstName),
-    lastName: ({lastName}) => nameValidation(lastName),
+    email: ({ email }) => emailValidation(email),
+    username: ({ username }) => usernameValidation(username),
+    password: ({ password, confirmPassword }) => passwordValidation(password, confirmPassword),
+    firstName: ({ firstName }) => nameValidation(firstName),
+    lastName: ({ lastName }) => nameValidation(lastName),
 }
 
 export default (data, validationType) => {
@@ -13,14 +13,14 @@ export default (data, validationType) => {
         error: '',
     }
 
-    if(!data) {
+    if (!data) {
         resultData.error = 'Invalid Data.'
         return resultData
     }
 
     const isFieldsValid = contentValidation(data, validationType);
 
-    if(!isFieldsValid.valid) {
+    if (!isFieldsValid.valid) {
         resultData.error = 'Please fill all required fields.'
         resultData.valid = isFieldsValid.valid
         return resultData
@@ -31,12 +31,12 @@ export default (data, validationType) => {
         resultData.fields[type] = validationFunction(data)
     })
 
-    const falseCurrent = Object.keys(resultData.fields).filter(e=>!resultData.fields[e].valid)
+    const falseCurrent = Object.keys(resultData.fields).filter(e => !resultData.fields[e].valid)
     console.log(falseCurrent);
     resultData.isValid = falseCurrent.length ? false : true;
     let lastmessege = [];
-    falseCurrent.forEach(elem=>{lastmessege.push(elem) });
-    resultData.error =  lastmessege;
+    falseCurrent.forEach(elem => { lastmessege.push(elem) });
+    resultData.error = lastmessege;
     return resultData;
 
 }
@@ -89,7 +89,7 @@ function emailValidation(email) {
 }
 
 function usernameValidation(username) {
-    if (username.length > 2) {
+    if (username.length > 3) {
         return {
             valid: true,
             error: ''
@@ -117,7 +117,7 @@ function passwordValidation(password, confirmPassword) {
         }
     }
 
-    if (sampleForPassword.test(password))  {
+    if (sampleForPassword.test(password)) {
         return {
             valid: true,
             error: ''
