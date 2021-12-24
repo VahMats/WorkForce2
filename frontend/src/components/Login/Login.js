@@ -39,7 +39,7 @@ const Login = () => {
         setErrorFields("Passwords are not the same");
         break;
       default:
-        setErrorFields("Something is wrong!! contact admin")
+        setErrorFields("Please fill in all the fields")
     }
   }
 
