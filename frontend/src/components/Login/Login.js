@@ -19,25 +19,28 @@ const Login = () => {
     confirmPassword: "",
   });
   const [mainClass, setMainClass] = useState("bounceRight");
-  const [errorFields, setErrorFields] = useState("");
+  const [errorFields, setErrorFields] = useState([]);
 
   const errorsSetting = (type) => {
     switch (type) {
-      case "firstName":
-        setErrorFields("First name does not match to our requirmenets");
+      case "text":
+        setErrorFields("Invalid name");
         break;
       case "username":
         setErrorFields("Username does not match to our requirmenets");
         break;
       case "email":
-        setErrorFields("Email does not match to our requirmenets");
+        setErrorFields("Invalid Email");
         break;
       case "password":
-        setErrorFields("Password does not match to our requirmenets");
+        setErrorFields("Invalid password");
         break;
       case "confirmpassword":
         setErrorFields("Passwords are not the same");
         break;
+      case " ":
+        setErrorFields("Please fill in all the fields");
+        break
       default:
         setErrorFields("Please fill in all the fields")
     }
@@ -128,12 +131,13 @@ const Login = () => {
               Isn't it time all that imformation you've been collecting started
               working for you?
             </h3>
-            <form className="forms_form">
+            <form className="forms_form" onSubmit={errorsSetting}>
+              <p className="error"> {errorFields} </p>
               <fieldset className="forms_fieldset">
                 <div className="forms_field">
                   <input
-                    type="text"
-                    placeholder="Username"
+                    type="username"
+                    placeholder="Your username"
                     className="forms_field-input"
                     onChange={(e) => {
                       setAuthPocket((prev) => ({
@@ -171,12 +175,12 @@ const Login = () => {
           </div>
           <div className="user_forms-signup">
             <h2 className="forms_title">Sign up, the rest will follow!</h2>
-            <form className="forms_form" onSubmit={errorFields}>
+            <form className="forms_form" onSubmit={errorsSetting}>
               <p className="error"> {errorFields} </p>
               <fieldset className="forms_fieldset">
                 <div className="forms_field">
                   <input
-                    type="text"
+                    type="firstName"
                     placeholder="First Name"
                     className="forms_field-input"
                     pattern={"[A-Za-z]+"}
@@ -208,7 +212,7 @@ const Login = () => {
                 </div>
                 <div className="forms_field">
                   <input
-                    type="text"
+                    type="username"
                     placeholder="Username should contain more than 3 characters"
                     pattern={"[A-Za-z]+"}
                     minLength={2}
