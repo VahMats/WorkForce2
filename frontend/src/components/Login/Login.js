@@ -273,7 +273,7 @@ const Login = () => {
                     required
                   />
                 </div>
-                <div className="form_date">
+                <div className="form-date">
                   <p>Date of birth</p>
                   <input
                     type="date"
@@ -286,7 +286,7 @@ const Login = () => {
                     required
                   />
                 </div>
-                <div className="radio_buttons">
+                <div className="radio-buttons">
                   <p>Gender</p>
                   <input type="radio" value="male" name="gender" id="radio" onChange={(e) =>
                     setRegPocket((prev) => ({

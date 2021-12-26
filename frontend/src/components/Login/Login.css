@@ -198,7 +198,7 @@ input::placeholder {
   transition: border-color 0.2s ease-in-out;
 }
 
-.form_date {
+.form-date {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -210,7 +210,7 @@ input::placeholder {
   margin-left: 5px;
 }
 
-.radio_buttons {
+.radio-buttons {
   display: flex;
   flex-direction: row;
   font-size: 0.85rem;

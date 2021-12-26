@@ -53,8 +53,8 @@ const AddUser = () => {
       await fetch("/api/admin/add", {
         method: "POST",
         headers: {
-            "Content-Type": "application/json",
-            "x-access-token": localStorage.token,
+          "Content-Type": "application/json",
+          "x-access-token": localStorage.token,
         },
         body: JSON.stringify(addPocket),
       })
@@ -66,16 +66,16 @@ const AddUser = () => {
   };
 
   return (
-    <div className="user_forms-add">
-      <h2 className="forms_title">Add a new user to the team!</h2>
-      <form className="forms_form" onSubmit={errorsSetting}>
+    <div className="new-user">
+      <h2 className="new-user-title">Add a new user to the team!</h2>
+      <form className="new-user-form" onSubmit={errorsSetting}>
         <p className="error"> {errorFields} </p>
-        <fieldset className="forms_fieldset">
-          <div className="forms_field">
+        <fieldset className="new-user-fields">
+          <div className="fields">
             <input
               type="firstName"
               placeholder="First Name"
-              className="forms_field-input"
+              className="fields-input"
               pattern={"[A-Za-z]+"}
               minLength={2}
               onChange={(e) =>
@@ -87,11 +87,11 @@ const AddUser = () => {
               required
             />
           </div>
-          <div className="forms_field">
+          <div className="fields">
             <input
               type="text"
               placeholder="Last Name"
-              className="forms_field-input"
+              className="fields-input"
               pattern={"[A-Za-z]+"}
               minLength={2}
               onChange={(e) =>
@@ -103,13 +103,13 @@ const AddUser = () => {
               required
             />
           </div>
-          <div className="forms_field">
+          <div className="fields">
             <input
               type="username"
               placeholder="Username"
               pattern={"[A-Za-z]+"}
               minLength={2}
-              className="forms_field-input"
+              className="fields-input"
               onChange={(e) =>
                 setAddPocket((prev) => ({
                   ...prev,
@@ -119,11 +119,11 @@ const AddUser = () => {
               required
             />
           </div>
-          <div className="forms_field">
+          <div className="fields">
             <input
               type="email"
               placeholder="Email"
-              className="forms_field-input"
+              className="fields-input"
               pattern={/\S+@\S+\.\S+/}
               onChange={(e) =>
                 setAddPocket((prev) => ({
@@ -134,11 +134,11 @@ const AddUser = () => {
               required
             />
           </div>
-          <div className="forms_field">
+          <div className="fields">
             <input
               type="password"
               placeholder="Password"
-              className="forms_field-input"
+              className="fields-input"
               minLength={6}
               maxLength={20}
               onChange={(e) =>
@@ -150,11 +150,11 @@ const AddUser = () => {
               required
             />
           </div>
-          <div className="forms_field">
+          <div className="fields">
             <input
               type="password"
               placeholder="Confirm Password"
-              className="forms_field-input"
+              className="fields-input"
               minLength={6}
               maxLength={20}
               onChange={(e) =>
@@ -166,7 +166,7 @@ const AddUser = () => {
               required
             />
           </div>
-          <div className="forms_date">
+          <div className="form-date">
             <p>Date of birth</p>
             <input
               type="date"
@@ -196,11 +196,11 @@ const AddUser = () => {
             }
               required /> <p>Female</p>
           </div>
-          <div className="forms_field">
+          <div className="fields">
             <input
               type="text"
               placeholder="Team"
-              className="forms_field-input"
+              className="fields-input"
               pattern={"[A-Za-z]+"}
               minLength={2}
               onChange={(e) =>
