@@ -213,7 +213,7 @@ const AddUser = () => {
         <div className="forms_button">
           <input
             type="button"
-            defaultValue="Sign up"
+            defaultValue="Submit"
             className="forms_button-action"
             onClick={Add}
           />
