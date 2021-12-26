@@ -1,7 +1,7 @@
 import { useState } from "react";
-import ValidationChecker from "../../ValidationChecker";
+import ValidationChecker from "../../../ValidationChecker";
 
-import "./Login.css";
+import "./AddUser.css";
 
 const AddUser = () => {
   const [addPocket, setAddPocket] = useState({
