@@ -14,6 +14,7 @@ exports.userAdd = async (req,res) => {
     const validReg = ValidationChecker(req.body, "register");
     if (validReg.isValid) {
         userAddData.isValid = true;
+        console.log(req.body)
         const {
             firstName,
             lastName,
@@ -30,6 +31,7 @@ exports.userAdd = async (req,res) => {
             const oldUserEmail = await UserSchema.find({ email });
             if (oldUserEmail.length === 0) {
                 userAddData.emailIsUnique = true;
+                let team = "-"
 
                 if (teamId){
                     const addedTeam = await TeamSchema.findById(teamId);
@@ -64,6 +66,7 @@ exports.userAdd = async (req,res) => {
             }
         }
     }
+    console.log(userAddData)
     res.status(200).send(userAddData);
 }
 

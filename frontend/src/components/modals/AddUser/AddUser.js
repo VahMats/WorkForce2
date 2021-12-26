@@ -52,7 +52,10 @@ const AddUser = () => {
     if (validReg.isValid) {
       await fetch("/api/admin/add", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+            "Content-Type": "application/json",
+            "x-access-token": localStorage.token,
+        },
         body: JSON.stringify(addPocket),
       })
         .then((res) => res.json())
