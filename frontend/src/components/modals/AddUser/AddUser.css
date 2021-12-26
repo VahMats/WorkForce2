@@ -8,32 +8,35 @@
 }
 
 .forms_field{
-  margin-bottom: 15px;
+  margin-bottom: 8px;
+  width: 300px;
+}
+
+.forms_date{
+ display: flex;
+ flex-direction: row;
+ justify-content: space-between;
+ font-size: 0.85rem;
+ font-family: "Montserrat",
+ sans-serif;
+ font-weight: 300;
+ letter-spacing: 0.1rem;
+ color: rgb(24, 21, 21);
+ margin-left: 5px;
+
 }
 .forms_field-input {
   width: 100%;
   border-bottom: 1px solid #ccc;
-  padding: 6px 20px 6px 6px;
+  padding: 6px 6px 6px 6px;
   font-family: "Montserrat", sans-serif;
-  font-size: 1rem;
+  font-size: 12px;
   font-weight: 300;
   color: rgb(0, 0, 0);
   letter-spacing: 0.1rem;
   transition: border-color 0.2s ease-in-out;
 }
-.form-date {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  font-size: 0.85rem;
-  font-family: "Montserrat", sans-serif;
-  font-weight: 300;
-  letter-spacing: 0.1rem;
-  color: rgb(24, 21, 21);
-  margin-left: 5px;
-}
-
-.radio-buttons {
+.radio_buttons {
   display: flex;
   flex-direction: row;
   font-size: 0.85rem;
@@ -44,7 +47,7 @@
   margin-left: 5px;
 }
 
-.radio-buttons input {
+.radio_buttons input {
   align-self: center;
   margin-left: 25px;
 }
@@ -76,15 +79,4 @@
 .forms_button-action:hover {
   background-color: #ffcd04;
 }
-@media screen and (max-width: 990px) {
-  .user_options-add {
-    min-height: 350px;
-    margin-top: 30px;
-  }
-  .user_options-add .forms_buttons {
-    flex-direction: column;
-  }
-  .user_options-add {
-    margin-top: 30px;
-  }
-}
+

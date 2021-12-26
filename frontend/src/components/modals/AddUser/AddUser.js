@@ -10,7 +10,7 @@ const AddUser = () => {
     email: "",
     dateOfBirth: "",
     gender: "",
-    teamName: "",
+    teamId: "",
     username: "",
     password: "",
     confirmPassword: "",
@@ -103,7 +103,7 @@ const AddUser = () => {
           <div className="forms_field">
             <input
               type="username"
-              placeholder="Username should contain more than 3 characters"
+              placeholder="Username"
               pattern={"[A-Za-z]+"}
               minLength={2}
               className="forms_field-input"
@@ -119,7 +119,7 @@ const AddUser = () => {
           <div className="forms_field">
             <input
               type="email"
-              placeholder="Email should be a valid email"
+              placeholder="Email"
               className="forms_field-input"
               pattern={/\S+@\S+\.\S+/}
               onChange={(e) =>
@@ -134,7 +134,7 @@ const AddUser = () => {
           <div className="forms_field">
             <input
               type="password"
-              placeholder="Password should consist of at least 6 alphanumerical"
+              placeholder="Password"
               className="forms_field-input"
               minLength={6}
               maxLength={20}
@@ -163,7 +163,7 @@ const AddUser = () => {
               required
             />
           </div>
-          <div className="form-date">
+          <div className="forms_date">
             <p>Date of birth</p>
             <input
               type="date"
@@ -176,7 +176,7 @@ const AddUser = () => {
               required
             />
           </div>
-          <div className="radio-buttons">
+          <div className="radio_buttons">
             <p>Gender</p>
             <input type="radio" value="male" name="gender" id="radio" onChange={(e) =>
               setAddPocket((prev) => ({
@@ -192,6 +192,22 @@ const AddUser = () => {
               }))
             }
               required /> <p>Female</p>
+          </div>
+          <div className="forms_field">
+            <input
+              type="text"
+              placeholder="Team"
+              className="forms_field-input"
+              pattern={"[A-Za-z]+"}
+              minLength={2}
+              onChange={(e) =>
+                setAddPocket((prev) => ({
+                  ...prev,
+                  teamId: e.target.value,
+                }))
+              }
+              required
+            />
           </div>
         </fieldset>
         <div className="forms_button">
