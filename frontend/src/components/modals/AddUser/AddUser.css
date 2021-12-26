@@ -1,7 +1,16 @@
-.user_options-add .forms_field:not(:last-of-type) {
+.user_forms-add {
+  position: relative; 
+}
+
+.forms_title{
+  color: #028594;
+  font-size: large;
+}
+
+.forms_field{
   margin-bottom: 15px;
 }
-.user_options-add .forms_field-input {
+.forms_field-input {
   width: 100%;
   border-bottom: 1px solid #ccc;
   padding: 6px 20px 6px 6px;
@@ -12,7 +21,6 @@
   letter-spacing: 0.1rem;
   transition: border-color 0.2s ease-in-out;
 }
-
 .form-date {
   display: flex;
   flex-direction: row;
@@ -41,64 +49,32 @@
   margin-left: 25px;
 }
 
-.user_options-add .forms-date {
-  align-items: flex-start;
+.error {
+  color: red;
+  font-weight: bolder;
+  font-size: large;
+  text-align: center;
 }
-.user_options-add .forms_field-input:focus {
-  border-color: rgb(82, 72, 110);
+.forms_button {
+   justify-content: space-between;
+   align-items: center;
+   margin-top: 10px;
 }
-.user_options-add .forms_buttons {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 35px;
-}
-.user_options-add .forms_buttons-forgot {
-  font-family: "Montserrat", sans-serif;
-  letter-spacing: 0.1rem;
-  color: rgb(10, 10, 10);
-  text-decoration: underline;
-  transition: color 0.2s ease-in-out;
-}
-.user_options-add .forms_buttons-forgot:hover {
-  color: #ffcd04;
-}
-.user_options-add .forms_buttons-action {
+
+.forms_button-action {
   background-color: #008594;
   border-radius: 3px;
-  padding: 10px 35px;
+  padding: 5px 10px;
   font-size: 1rem;
-  font-family: "Montserrat", sans-serif;
-  font-weight: 300;
+  font-family: "Montserrat", sans-serif;  
   color: #fff;
   text-transform: uppercase;
   letter-spacing: 0.1rem;
   transition: background-color 0.2s ease-in-out;
 }
-.user_options-add .forms_buttons-action:hover {
+
+.forms_button-action:hover {
   background-color: #ffcd04;
-}
-.user_options-add .user_forms-signup,
-.user_options-add .user_forms-login {
-  position: absolute;
-  top: 70px;
-  left: 40px;
-  width: calc(100% - 80px);
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.4s ease-in-out, visibility 0.4s ease-in-out,
-    transform 0.5s ease-in-out;
-}
-.user_options-add {
-  transform: translate3d(120px, 0, 0);
-}
-.user_options-add .forms_buttons {
-  justify-content: flex-end;
-}
-.user_options-add {
-  transform: translate3d(0, 0, 0);
-  opacity: 1;
-  visibility: visible;
 }
 @media screen and (max-width: 990px) {
   .user_options-add {

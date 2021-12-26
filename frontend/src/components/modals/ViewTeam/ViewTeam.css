@@ -1,53 +1,12 @@
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100vh;
-  background-color: RGBA(128, 128, 128, 0.8);
+.view-team {
+  position: relative;
 }
-
-.modal-wrapper {
-  position: fixed;
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  padding: 20px;
-  background-color: #fbfeff;
-  width: 500px;
-  height: 500px;
-  border-radius: 4px;
+.view-team-name {
+  margin-top: 10px;
+  color: #028594;
   font-size: large;
 }
-
-.modal-close {
-  display: none;
-}
-.close-button img {
-  width: 40px;
-  height: 40px;
-  float: right;
-}
-
-.modal-wrapper h1 {
-  color: #028594;
-}
-.user-info h4 {
+.view-team-info {
   margin-top: 10px;
   color: #06393f;
 }
-.view-admin {
-  margin-top: 20px;
-  text-align: center;
-}
-
-.view-admin img {
-  width: 100px;
-  height: 100px;
-}
-
-

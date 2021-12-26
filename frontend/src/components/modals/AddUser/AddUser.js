@@ -194,11 +194,11 @@ const AddUser = () => {
               required /> <p>Female</p>
           </div>
         </fieldset>
-        <div className="forms_buttons">
+        <div className="forms_button">
           <input
             type="button"
             defaultValue="Sign up"
-            className="forms_buttons-action"
+            className="forms_button-action"
             onClick={Add}
           />
         </div>
