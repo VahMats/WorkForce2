@@ -74,7 +74,7 @@ const EditUser = ({ data }) => {
                     <div className="fields">
                         <input
                             type="firstName"
-                            value={data.firstName}
+                            defaultValue={data.firstName}
                             className="fields-input"
                             pattern={"[A-Za-z]+"}
                             minLength={2}
@@ -90,7 +90,7 @@ const EditUser = ({ data }) => {
                     <div className="fields">
                         <input
                             type="text"
-                            value={data.lastName}
+                            defaultValue={data.lastName}
                             className="fields-input"
                             pattern={"[A-Za-z]+"}
                             minLength={2}
@@ -106,7 +106,7 @@ const EditUser = ({ data }) => {
                     <div className="fields">
                         <input
                             type="username"
-                            value={data.username}
+                            defaultValue={data.username}
                             pattern={"[A-Za-z]+"}
                             minLength={2}
                             className="fields-input"
@@ -122,7 +122,7 @@ const EditUser = ({ data }) => {
                     <div className="fields">
                         <input
                             type="email"
-                            value={data.email}
+                            defaultValue={data.email}
                             className="fields-input"
                             pattern={/\S+@\S+\.\S+/}
                             onChange={(e) =>
@@ -137,7 +137,7 @@ const EditUser = ({ data }) => {
                     <div className="fields">
                         <input
                             type="password"
-                            value={data.password}
+                            defaultValue={data.password}
                             className="fields-input"
                             minLength={6}
                             maxLength={20}
@@ -153,7 +153,7 @@ const EditUser = ({ data }) => {
                     <div className="fields">
                         <input
                             type="password"
-                            value={data.password}
+                            defaultValue={data.password}
                             className="fields-input"
                             minLength={6}
                             maxLength={20}
@@ -199,7 +199,7 @@ const EditUser = ({ data }) => {
                     <div className="fields">
                         <input
                             type="text"
-                            value={data.teamId}
+                            defaultValue={data.teamId}
                             className="fields-input"
                             pattern={"[A-Za-z]+"}
                             minLength={2}

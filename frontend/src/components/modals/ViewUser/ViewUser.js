@@ -1,4 +1,4 @@
-import { React, useContext } from "react";
+import { React } from "react";
 import WomanIcon from "../../../images/womanicon.png";
 import ManIcon from "../../../images/manicon.png";
 
@@ -12,15 +12,22 @@ const ViewUser = ({ data }) => {
           src={data.gender === "male" ? ManIcon : WomanIcon}
           alt="Icon"
         />
+        <h1> Username</h1>
+        <p>{data.username}</p>
       </div>
-      <h1>{data.username}</h1>
       <div className="user-info">
-        <h4>{data.firstName}</h4>
-        <h4>{data.lastName}</h4>
-        <h4>{data.email}</h4>
-        <h4>{data.gender}</h4>
-        <h4>{data.dateOfBirth}</h4>
-        <h4>{data.team}</h4>
+        <h4>First name</h4>
+        <p>{data.firstName}</p>
+        <h4>Last Name</h4>
+        <p>{data.lastName}</p>
+        <h4>Email </h4>
+        <p>{data.email}</p>
+        <h4>Gender</h4>
+        <p>{data.gender}</p>
+        <h4> Date of birth</h4>
+        <p>{data.dateOfBirth}</p>
+        <h4>Team </h4>
+        <p>{data.teamId}</p>
       </div>
     </div>
   );

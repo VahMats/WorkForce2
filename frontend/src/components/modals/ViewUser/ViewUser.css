@@ -1,18 +1,30 @@
 .viewuser {
   position: relative;
   font-size: large;
+  display: flex;
+  flex-direction: row;
 }
 
-.user-info h4 {
-  margin-top: 10px;
-  color: #06393f;
-}
 .viewuser-icon {
   margin-top: 20px;
-  text-align: center;
+  padding: 5px 30px 5px 5px;
 }
 
 .viewuser-icon img {
   width: 100px;
   height: 100px;
 }
+
+.viewuser-icon h1 {
+  color: #357880;
+}
+
+.user-info h4 {
+  margin-top: 5px;
+  color: #357880;
+}
+
+.user-info p {
+  color: #06393f;
+}
+
