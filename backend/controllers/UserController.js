@@ -45,7 +45,7 @@ exports.authentication = async (req, res) => {
 exports.register = async (req, res) => {
   const RegData = {
     isValid: false,
-    usernameisUnique: false,
+    usernameIsUnique: false,
     emailIsUnique: false,
   };
   const validReg = ValidationChecker(req.body, "register");
@@ -62,7 +62,7 @@ exports.register = async (req, res) => {
     } = req.body;
     const oldUserUsername = await UserSchema.find({ username });
     if (oldUserUsername.length === 0) {
-      RegData.usernameisUnique = true;
+      RegData.usernameIsUnique = true;
       const oldUserEmail = await UserSchema.find({ email });
       if (oldUserEmail.length === 0) {
         RegData.emailIsUnique = true;

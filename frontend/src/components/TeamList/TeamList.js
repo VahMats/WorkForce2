@@ -1,7 +1,7 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, {useContext, useEffect, useState} from "react";
 import MainModal from "../modals/MainModal/MainModal";
 import ViewTeam from "../modals/ViewTeam/ViewTeam";
-import { AllData } from "../Home/Home";
+import {AllData} from "../Home/Home";
 
 import View from "../../images/view.png";
 import Delete from "../../images/delete.png";
@@ -9,20 +9,20 @@ import Edit from "../../images/edit.png";
 
 import "./TeamList.css";
 
-const TeamList = ({ visible }) => {
+const TeamList = ({visible}) => {
     const data = useContext(AllData);
 
     const [show, setShow] = useState(false);
     const [viewingTeamData, setViewingTeamData] = useState({})
 
-    const showModal = (userData) => () => {
+    const showModal = (teamData) => () => {
         setShow(!show)
-        setViewingTeamData(userData)
+        setViewingTeamData(teamData)
     };
 
 
     const showDelete = (id) => async () => {
-        await fetch("/api/admin/deleteTean", {
+        await fetch("/api/admin/deleteTeam", {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -37,68 +37,62 @@ const TeamList = ({ visible }) => {
 
     };
     return (
-        <main style={{ display: visible }}>
+        <main style={{display: visible}}>
             <div>
-                {data.userInfo.isAdmin ? (
-                    <div className="new_team">
-                        <section className="new_team_field">
-                            <button>Add new team</button>
-                        </section>
-                    </div>
-                ) : null}
+                <div className="new_team">
+                    <section className="new_team_field">
+                        <button>Add new team</button>
+                    </section>
+                </div>
                 <section className="team_list">
                     <table>
                         <thead>
-                            <tr className="team_list_info">
-                                {data.userInfo.isAdmin ? <th>ID</th> : null}
-                                <th>Name</th>
-                                <th>Members</th>
-                                {data.userInfo.isAdmin ? <th>Max Count</th> : null}
-                                <th>Actions</th>
-                            </tr>
+                        <tr className="team_list_info">
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Count of Members</th>
+                            <th>Max Count</th>
+                            <th>Actions</th>
+                        </tr>
                         </thead>
                         <tbody>
-                            {data.teamsInfo.map((item, index) => (
-                                <tr key={index}>
-                                    {data.userInfo.isAdmin ? <td>{item.id}</td> : null}
-                                    <td>{item.teamName}</td>
-                                    <td>{item.membersCount}</td>
-                                    {data.userInfo.isAdmin ? <td>{item.maxMembersCount}</td> : null}
-                                    <td className="image-td">
-                                        {data.userInfo.isAdmin ? (
-                                            <>
-                                                <img
-                                                    src={View}
-                                                    alt="view"
-                                                    onClick={showModal(item.id)}
-                                                />
-                                                <img
-                                                    src={Edit}
-                                                    alt="edit"
+                        {data.teamsInfo.map((item, index) => (
+                            <tr key={index}>
+                                <td>{item._id}</td>
+                                <td>{item.name}</td>
+                                <td>{item.count}</td>
+                                <td>{item.maxCount}</td>
+                                <td className="image-td">
+                                        <>
+                                            <img
+                                                src={View}
+                                                alt="view"
+                                                onClick={showModal(data.teamsInfo[index])}
+                                            />
+                                            <img
+                                                src={Edit}
+                                                alt="edit"
                                                 //   onClick={showEdit(item.id)}
-                                                />
-                                                <img
-                                                    src={Delete}
-                                                    alt="delete"
-                                                    onClick={showDelete(item.id)}
-                                                />
-                                            </>
-                                        ) : (
-                                            <img src={View} alt="view" onClick={showModal(item.id)} />
-                                        )}
-                                    </td>
-                                </tr>
-                            ))}
+                                            />
+                                            <img
+                                                src={Delete}
+                                                alt="delete"
+                                                onClick={showDelete(item._id)}
+                                            />
+                                        </>
+                                </td>
+                            </tr>
+                        ))}
                         </tbody>
                     </table>
                     {viewingTeamData.length === 0 && (
-                        <h1 className="no-users">You are not included in the team</h1>
+                        <h1 className="no-users">There are no teams</h1>
                     )}
                 </section>
             </div>
             {show && (
-                <MainModal show={show} setShow={setShow} viewingUserData={viewingTeamData}>
-                    <ViewTeam show={show} setShow={setShow} data={viewingTeamData} />
+                <MainModal show={show} setShow={setShow}>
+                    <ViewTeam data={viewingTeamData}/>
                 </MainModal>
             )}
         </main>

@@ -1,10 +1,7 @@
 import React, { useContext, useState } from "react";
-// import AddUser from "../modals/AddUser/AddUser"
+import AddUser from "../modals/AddUser/AddUser"
 import MainModal from "../modals/MainModal/MainModal";
-// import EditUser from "./EditUser";
-// import Loading from "./Loading";
 import ViewUser from "../modals/ViewUser/ViewUser";
-// import AddUser from "./AddUser";
 import View from "../../images/view.png";
 import Edit from "../../images/edit.png";
 import Delete from "../../images/delete.png";
@@ -17,11 +14,13 @@ const UserList = ({ visible }) => {
 
     const data = useContext(AllData);
 
-    const [show, setShow] = useState(false);
+    const [viewModalShow, setViewModalShow] = useState(false);
+    const [addModalShow, setAddModalShow] = useState(false)
+
     const [viewingUserData, setViewingUserData] = useState({})
 
-    const showModal = (userData) => () => {
-        setShow(!show)
+    const showViewModal = (userData) => () => {
+        setViewModalShow(!viewModalShow)
         setViewingUserData(userData)
     };
 
@@ -49,7 +48,7 @@ const UserList = ({ visible }) => {
                 {data.userInfo.isAdmin ? (
                     <div className="new_user">
                         <section className="new_user_field">
-                            <button>Add new user</button>
+                            <button onClick={e => {setAddModalShow(true)}}>Add new user</button>
                         </section>
                     </div>
                 ) : null}
@@ -83,7 +82,7 @@ const UserList = ({ visible }) => {
                                         <img
                                             src={View}
                                             alt="show"
-                                            onClick={showModal(data.usersInfo[index])}
+                                            onClick={showViewModal(data.usersInfo[index])}
                                         />
                                         {data.userInfo.isAdmin ? (
                                             <>
@@ -107,9 +106,14 @@ const UserList = ({ visible }) => {
                 </section>) :
                     <h1 className={"no-users"}>{data.userInfo.isAdmin ? "No users yet ..." : "You are not in team yet"}</h1>}
             </div>
-            {show && (
-                <MainModal show={show} setShow={setShow}>
-                    <ViewUser show={show} setShow={setShow} data={viewingUserData} />
+            {viewModalShow && (
+                <MainModal show={viewModalShow} setShow={setViewModalShow}>
+                    <ViewUser data={viewingUserData} />
+                </MainModal>
+            )}
+            {addModalShow && (
+                <MainModal show={addModalShow} setShow={setAddModalShow}>
+                    <AddUser show={addModalShow} setShow={setAddModalShow} data={viewingUserData} />
                 </MainModal>
             )}
         </main>
