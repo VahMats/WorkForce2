@@ -1,0 +1,79 @@
+.edit-user {
+  position: relative;
+}
+
+.edit-user-title {
+  color: #028594;
+  font-size: large;
+}
+
+.edit-user-form {
+  margin-bottom: 8px;
+  width: 300px;
+}
+
+.edit-user-date {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.1rem;
+  color: rgb(24, 21, 21);
+  margin-left: 5px;
+}
+.fields-input {
+  width: 100%;
+  border-bottom: 1px solid #ccc;
+  padding: 6px 6px 6px 6px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 12px;
+  font-weight: 300;
+  color: rgb(0, 0, 0);
+  letter-spacing: 0.1rem;
+  transition: border-color 0.2s ease-in-out;
+}
+.radio_buttons {
+  display: flex;
+  flex-direction: row;
+  font-size: 0.85rem;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.1rem;
+  color: rgb(24, 21, 21);
+  margin-left: 5px;
+}
+
+.radio_buttons input {
+  align-self: center;
+  margin-left: 25px;
+}
+
+.error {
+  color: red;
+  font-weight: bolder;
+  font-size: large;
+  text-align: center;
+}
+.forms_button {
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.forms_button-action {
+  background-color: #008594;
+  border-radius: 3px;
+  padding: 5px 10px;
+  font-size: 1rem;
+  font-family: "Montserrat", sans-serif;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.forms_button-action:hover {
+  background-color: #ffcd04;
+}

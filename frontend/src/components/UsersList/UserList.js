@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import AddUser from "../modals/AddUser/AddUser"
 import MainModal from "../modals/MainModal/MainModal";
 import ViewUser from "../modals/ViewUser/ViewUser";
+import EditUser from "../modals/EditUser/EditUser";
 import View from "../../images/view.png";
 import Edit from "../../images/edit.png";
 import Delete from "../../images/delete.png";
@@ -15,6 +16,7 @@ const UserList = ({ visible }) => {
     const data = useContext(AllData);
 
     const [viewModalShow, setViewModalShow] = useState(false);
+    const [editModalShow, setEditModalShow] = useState(false);
     const [addModalShow, setAddModalShow] = useState(false)
 
     const [viewingUserData, setViewingUserData] = useState({})
@@ -48,7 +50,7 @@ const UserList = ({ visible }) => {
                 {data.userInfo.isAdmin ? (
                     <div className="new_user">
                         <section className="new_user_field">
-                            <button onClick={e => {setAddModalShow(true)}}>Add new user</button>
+                            <button onClick={e => { setAddModalShow(true) }}>Add new user</button>
                         </section>
                     </div>
                 ) : null}
@@ -89,7 +91,7 @@ const UserList = ({ visible }) => {
                                                 <img
                                                     src={Edit}
                                                     alt="edit"
-                                                // onClick={showEdit(item.id, item.teamId)}
+                                                    onClick={e => { setEditModalShow(true) }}
                                                 />
                                                 <img
                                                     src={Delete}
@@ -109,6 +111,11 @@ const UserList = ({ visible }) => {
             {viewModalShow && (
                 <MainModal show={viewModalShow} setShow={setViewModalShow}>
                     <ViewUser data={viewingUserData} />
+                </MainModal>
+            )}
+            {editModalShow && (
+                <MainModal show={editModalShow} setShow={setEditModalShow}>
+                    <EditUser show={editModalShow} setShow={setEditModalShow} data={viewingUserData} />
                 </MainModal>
             )}
             {addModalShow && (
