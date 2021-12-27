@@ -27,7 +27,7 @@ const ViewUser = ({ data }) => {
         <h4> Date of birth</h4>
         <p>{data.dateOfBirth}</p>
         <h4>Team </h4>
-        <p>{data.teamId}</p>
+        <p>{data.team}</p>
       </div>
     </div>
   );

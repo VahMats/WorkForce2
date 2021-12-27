@@ -20,11 +20,17 @@ const UserList = ({ visible }) => {
     const [addModalShow, setAddModalShow] = useState(false)
 
     const [viewingUserData, setViewingUserData] = useState({})
+    const [editingUserData, setEditingUserData] = useState({})
 
     const showViewModal = (userData) => () => {
         setViewModalShow(!viewModalShow)
         setViewingUserData(userData)
     };
+
+    const showEditModal = (edit) => {
+        setEditModalShow(true);
+        setEditingUserData(edit);
+    }
 
     const showDelete = (id) => async () => {
         await fetch("/api/admin/delete", {
@@ -91,7 +97,9 @@ const UserList = ({ visible }) => {
                                                 <img
                                                     src={Edit}
                                                     alt="edit"
-                                                    onClick={e => { setEditModalShow(true) }}
+                                                    onClick={e => {
+                                                        showEditModal(data.usersInfo[index])
+                                                    }}
                                                 />
                                                 <img
                                                     src={Delete}
@@ -115,12 +123,12 @@ const UserList = ({ visible }) => {
             )}
             {editModalShow && (
                 <MainModal show={editModalShow} setShow={setEditModalShow}>
-                    <EditUser show={editModalShow} setShow={setEditModalShow} data={viewingUserData} />
+                    <EditUser show={editModalShow} setShow={setEditModalShow} data={editingUserData} />
                 </MainModal>
             )}
             {addModalShow && (
                 <MainModal show={addModalShow} setShow={setAddModalShow}>
-                    <AddUser show={addModalShow} setShow={setAddModalShow} data={viewingUserData} />
+                    <AddUser show={addModalShow} setShow={setAddModalShow} />
                 </MainModal>
             )}
         </main>

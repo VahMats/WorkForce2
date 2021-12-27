@@ -12,8 +12,6 @@ const EditUser = ({ data }) => {
         gender: "",
         teamId: "",
         username: "",
-        password: "",
-        confirmPassword: "",
     });
     const [errorFields, setErrorFields] = useState([]);
 
@@ -27,12 +25,6 @@ const EditUser = ({ data }) => {
                 break;
             case "email":
                 setErrorFields("Invalid Email");
-                break;
-            case "password":
-                setErrorFields("Invalid password");
-                break;
-            case "confirmpassword":
-                setErrorFields("Passwords are not the same");
                 break;
             case " ":
                 setErrorFields("Please fill in all the fields");
@@ -64,6 +56,8 @@ const EditUser = ({ data }) => {
                 });
         }
     };
+
+    console.log(data)
 
     return (
         <div className="edit-user">
@@ -134,42 +128,11 @@ const EditUser = ({ data }) => {
                             required
                         />
                     </div>
-                    <div className="fields">
-                        <input
-                            type="password"
-                            defaultValue={data.password}
-                            className="fields-input"
-                            minLength={6}
-                            maxLength={20}
-                            onChange={(e) =>
-                                setEditPocket((prev) => ({
-                                    ...prev,
-                                    password: e.target.value,
-                                }))
-                            }
-                            required
-                        />
-                    </div>
-                    <div className="fields">
-                        <input
-                            type="password"
-                            defaultValue={data.password}
-                            className="fields-input"
-                            minLength={6}
-                            maxLength={20}
-                            onChange={(e) =>
-                                setEditPocket((prev) => ({
-                                    ...prev,
-                                    confirmPassword: e.target.value,
-                                }))
-                            }
-                            required
-                        />
-                    </div>
                     <div className="form-date">
                         <p>Date of birth</p>
                         <input
                             type="date"
+                            defaultValue={data.dateOfBirth}
                             onChange={(e) =>
                                 setEditPocket((prev) => ({
                                     ...prev,
@@ -181,14 +144,24 @@ const EditUser = ({ data }) => {
                     </div>
                     <div className="radio_buttons">
                         <p>Gender</p>
-                        <input type="radio" value="male" name="gender" id="radio" onChange={(e) =>
+                        <input type="radio"
+                               value="male"
+                               name="gender"
+                               id="radio"
+                               checked={data.gender === "male"}
+                               onChange={(e) =>
                             setEditPocket((prev) => ({
                                 ...prev,
                                 gender: e.target.value,
                             }))
                         }
                             required /> <p>Male</p>
-                        <input type="radio" value="female" name="gender" id="radio" onChange={(e) =>
+                        <input type="radio"
+                               value="female"
+                               name="gender"
+                               id="radio"
+                               checked={data.gender === "female"}
+                               onChange={(e) =>
                             setEditPocket((prev) => ({
                                 ...prev,
                                 gender: e.target.value,
