@@ -3,6 +3,7 @@ const TeamSchema = require('../Schema/TeamSchema');
 const ValidationChecker = require("../ValidationChecker");
 const bcrypt = require("bcrypt");
 const {UsersDataFind} = require('../responseGenerator');
+const mongoose = require("mongoose")
 
 exports.userAdd = async (req,res) => {
     const userAddData = {
@@ -53,20 +54,14 @@ exports.userAdd = async (req,res) => {
                 });
                 const salt = await bcrypt.genSalt(10);
 
-
-
-
                 newUser.password = await bcrypt.hash(password, salt);
 
                 await newUser.save();
-
-
 
                 userAddData.usersData = await UsersDataFind();
             }
         }
     }
-    console.log(userAddData)
     res.status(200).send(userAddData);
 }
 
@@ -93,33 +88,38 @@ exports.userEdit = async (req,res) => {
 
 
 
-    const oldUser = UserSchema.findById(id, {firstName:1, lastName:1, email:1, username:1, dateOfBirth:1, gender:1, teamId:1})
+    const oldUser = await UserSchema.findById(id, {firstName:1, lastName:1, email:1, username:1, dateOfBirth:1, gender:1, teamId:1})
     const validEdit = ValidationChecker(req.body, "edit");
     if (validEdit.isValid) {
         userEditingData.isValid = true;
-        const anotherEmail = UserSchema.find({email});
-        const anotherUsername = UserSchema.find({username});
-        if (anotherEmail.length === 0 || anotherEmail[0]._id === id){
+        const anotherEmail = await UserSchema.findOne({email}, {id:1});
+        const anotherUsername = await UserSchema.findOne({username}, {id:1});
+        if (!anotherEmail || anotherEmail.id === id){
         userEditingData.newEmailIsUnique = true;
-            if (anotherUsername.length === 0 || anotherUsername[0]._id === id) {
+            if (!anotherUsername || anotherUsername.id === id) {
             userEditingData.newUsernameIsUnique = true;
                 if (teamId) {
-                    if (teamId !== oldUser[0].teamId) {
+                    let team = "-"
+                    if (teamId !== oldUser.teamId) {
                         userEditingData.teamIsChanged = true;
                         const newTeam = await TeamSchema.findById(teamId);
-                        const newCount = newTeam[0].count + 1;
-                        if (newCount <= newTeam[0].maxCount) {
+                        const newCount = newTeam.count + 1;
+                        if (newCount <= newTeam.maxCount) {
+                            team = newTeam.name;
                             userEditingData.teamIsFull = false;
                             await TeamSchema.findByIdAndUpdate(teamId, {count: newCount});
-                            const oldTeam = await TeamSchema.findById(oldUser[0].teamId);
-                            const oldTeamsNewCount = oldTeam[0].count - 1;
-                            await TeamSchema.findByIdAndUpdate(oldTeam[0]._id, {count: oldTeamsNewCount})
-                            await UserSchema.findByIdAndUpdate(id,{firstName, lastName, email, dateOfBirth, gender, username, teamId})
-                            userEditingData.usersData = await UsersDataFind();
-
+                            if (oldUser.teamId){
+                                const oldTeam = await TeamSchema.findById(oldUser.teamId);
+                                const oldTeamsNewCount = oldTeam.count - 1;
+                                await TeamSchema.findByIdAndUpdate(oldTeam._id, {count: oldTeamsNewCount})
+                            }
                         }
                     }
                 }
+
+                await UserSchema.findByIdAndUpdate(id,{firstName, lastName, email, dateOfBirth, gender, username, team, teamId})
+
+                userEditingData.usersData = await UsersDataFind();
             }
 
         }
@@ -135,6 +135,7 @@ exports.userDelete = async (req,res) => {
     }
     const {id} = req.body
     const deletingUser = await UserSchema.findById(id);
+    console.log(deletingUser)
     if (Object.values(deletingUser).length !== 0){
         userDeletingData.UserExist = true;
         await UserSchema.findByIdAndUpdate(id,{deleted:1});

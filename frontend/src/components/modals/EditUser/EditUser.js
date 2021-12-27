@@ -57,8 +57,6 @@ const EditUser = ({ data }) => {
         }
     };
 
-    console.log(data)
-
     return (
         <div className="edit-user">
             <h2 className="edit-user-title">Change users's personal information</h2>
