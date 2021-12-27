@@ -15,13 +15,20 @@ const TeamList = ({ visible }) => {
 
     const [viewModalShow, setViewModalShow] = useState(false);
     const [addModalShow, setAddModalShow] = useState(false);
-    // const [editModalShow, setEditModalShow] = useState(false);
-    const [viewingTeamData, setViewingTeamData] = useState({})
+    const [editModalShow, setEditModalShow] = useState(false);
+
+    const [viewingTeamData, setViewingTeamData] = useState({});
+    const [editingTeamData, setEditingTeamData] = useState({})
 
     const showModal = (teamData) => () => {
         setViewModalShow(!viewModalShow)
         setViewingTeamData(teamData)
     };
+
+    const showEditModal = (edit) => {
+        setEditModalShow(true);
+        setEditingTeamData(edit);
+    }
 
 
     const showDelete = (id) => async () => {
@@ -75,7 +82,7 @@ const TeamList = ({ visible }) => {
                                             <img
                                                 src={Edit}
                                                 alt="edit"
-                                            //   onClick={showEdit(item.id)}
+                                                onClick={showEditModal(data.teamsInfo[index])}
                                             />
                                             <img
                                                 src={Delete}
@@ -101,6 +108,11 @@ const TeamList = ({ visible }) => {
             {addModalShow && (
                 <MainModal show={addModalShow} setShow={setAddModalShow}>
                     <AddTeam show={addModalShow} setShow={setAddModalShow} />
+                </MainModal>
+            )}
+            {editModalShow && (
+                <MainModal show={editModalShow} setShow={setEditModalShow}>
+                    <AddTeam show={editModalShow} setShow={setEditModalShow} data={editingTeamData} />
                 </MainModal>
             )}
 
