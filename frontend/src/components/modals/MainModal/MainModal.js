@@ -19,7 +19,6 @@ export default ({ show, setShow, children }) => {
             <div>
                 {children}
             </div>
-
         </section>
     );
 }

@@ -17,7 +17,7 @@ const UserList = ({ visible }) => {
 
     const [viewModalShow, setViewModalShow] = useState(false);
     const [editModalShow, setEditModalShow] = useState(false);
-    const [addModalShow, setAddModalShow] = useState(false)
+    const [addModalShow, setAddModalShow] = useState(false);
 
     const [viewingUserData, setViewingUserData] = useState({})
     const [editingUserData, setEditingUserData] = useState({})
@@ -56,7 +56,7 @@ const UserList = ({ visible }) => {
                 {data.userInfo.isAdmin ? (
                     <div className="new_user">
                         <section className="new_user_field">
-                            <button onClick={e => { setAddModalShow(true) }}>Add new user</button>
+                            <button onClick={e => { setAddModalShow(true) }}>Add a new user</button>
                         </section>
                     </div>
                 ) : null}
