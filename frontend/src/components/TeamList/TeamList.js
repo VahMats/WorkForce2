@@ -12,8 +12,8 @@ import Edit from "../../images/edit.png";
 import "./TeamList.css";
 
 const TeamList = ({ visible }) => {
-    const data = useContext(AllData);
-
+    const {data} = useContext(AllData);
+    console.log(data)
     const [viewModalShow, setViewModalShow] = useState(false);
     const [addModalShow, setAddModalShow] = useState(false);
     const [editModalShow, setEditModalShow] = useState(false);
@@ -22,8 +22,9 @@ const TeamList = ({ visible }) => {
     const [editingTeamData, setEditingTeamData] = useState({})
 
     const showModal = (teamData) => () => {
-        setViewModalShow(!viewModalShow)
-        setViewingTeamData(teamData)
+        console.log("ban")
+        setViewModalShow(true)
+        setViewingTeamData(teamData);
     };
 
     const showEditModal = (edit) => {
@@ -78,7 +79,8 @@ const TeamList = ({ visible }) => {
                                             <img
                                                 src={View}
                                                 alt="view"
-                                                onClick={showModal(data.teamsInfo[index])}
+                                                onClick={
+                                                    showModal(data.teamsInfo[index])}
                                             />
                                             <img
                                                 src={Edit}
@@ -88,7 +90,7 @@ const TeamList = ({ visible }) => {
                                             <img
                                                 src={Delete}
                                                 alt="delete"
-                                                onClick={showDelete(item._id)}
+                                                onClick={e=>{showDelete(item._id)}}
                                             />
                                         </>
                                     </td>

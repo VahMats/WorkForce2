@@ -13,7 +13,7 @@ import "./UserList.css";
 
 const UserList = ({ visible }) => {
 
-    const data = useContext(AllData);
+    const { data, setData } = useContext(AllData);
 
     const [viewModalShow, setViewModalShow] = useState(false);
     const [editModalShow, setEditModalShow] = useState(false);
@@ -44,7 +44,7 @@ const UserList = ({ visible }) => {
             }),
         })
             .then(res => res.json())
-            .then(data => console.log(data))
+            .then(data => setData(prev=>({...prev, usersInfo: data})))
 
     };
 

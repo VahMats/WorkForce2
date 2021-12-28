@@ -11,7 +11,11 @@ export const AllData = React.createContext({});
 
 function Home() {
 
-    const [data, setData] = useState();
+    const [data, setData] = useState({
+        userInfo:{},
+        usersInfo:[],
+        teamsInfo:[],
+    });
     const [loading, setLoading] = useState(true);
     const [whichDashboard, setWhichDashboard] = useState("welcome")
 
@@ -42,7 +46,7 @@ function Home() {
                 <div>
                     <Navbar data={data.userInfo} />
                     <section className="container">
-                        <AllData.Provider value={data} >
+                        <AllData.Provider value={{data, setData}} >
                             <UserProfile setWhichDashboard={setWhichDashboard} />
 
                             <div className="home-main" style={{ display: whichDashboard === "welcome" ? "" : "none" }}>

@@ -8,7 +8,7 @@ import "./UserProfile.css";
 
 function UserProfile({setWhichDashboard}) {
 
-    const data = useContext(AllData)
+    const { data } = useContext(AllData)
 
     return (
         <>
