@@ -49,7 +49,11 @@
   align-self: center;
   margin-left: 25px;
 }
-
+select{
+    width: 300px;
+    color: #357880;
+    font-size: 15px;
+}
 .error {
   color: red;
   font-weight: bolder;
