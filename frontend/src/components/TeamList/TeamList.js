@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import MainModal from "../modals/MainModal/MainModal";
 import ViewTeam from "../modals/ViewTeam/ViewTeam";
+import EditTeam from "../modals/EditTeam/EditTeam";
 import AddTeam from "../modals/AddTeam/AddTeam";
 import { AllData } from "../Home/Home";
 
@@ -112,7 +113,7 @@ const TeamList = ({ visible }) => {
             )}
             {editModalShow && (
                 <MainModal show={editModalShow} setShow={setEditModalShow}>
-                    <AddTeam show={editModalShow} setShow={setEditModalShow} data={editingTeamData} />
+                    <EditTeam show={editModalShow} setShow={setEditModalShow} data={editingTeamData} />
                 </MainModal>
             )}
 
