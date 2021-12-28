@@ -1,24 +1,29 @@
-import { useState } from "react";
+import {useContext, useState} from "react";
 import ValidationChecker from "../../../ValidationChecker";
+import {AllData} from "../../Home/Home"
 
 import "./EditUser.css";
 
-const EditUser = ({ data, teamData }) => {
+const EditUser = ({ currentUsersData }) => {
+
+    const {data, setData} = useContext(AllData)
 
     const [editPocket, setEditPocket] = useState({
-        id:data._id,
-        firstName: data.firstName,
-        lastName: data.lastName,
-        email: data.email,
-        dateOfBirth: data.dateOfBirth,
-        gender: data.gender,
-        teamId: data.teamId,
-        username: data.username,
+        id:currentUsersData._id,
+        firstName: currentUsersData.firstName,
+        lastName: currentUsersData.lastName,
+        email: currentUsersData.email,
+        dateOfBirth: currentUsersData.dateOfBirth,
+        gender: currentUsersData.gender,
+        teamId: currentUsersData.teamId,
+        username: currentUsersData.username,
     });
 
     const [errorFields, setErrorFields] = useState([]);
 
-    if (data.teamId){
+    let teamData = data.teamsInfo;
+
+    if (currentUsersData.teamId){
         teamData = teamData.filter(el=> el._id !== data.teamId);
 
     }
@@ -59,7 +64,7 @@ const EditUser = ({ data, teamData }) => {
             })
                 .then((res) => res.json())
                 .then((data) => {
-                    console.log(data);
+                    setData(prev=>({...prev, usersInfo:data.usersData}));
                 });
         }
     };
@@ -73,7 +78,7 @@ const EditUser = ({ data, teamData }) => {
                     <div className="fields">
                         <input
                             type="firstName"
-                            defaultValue={data.firstName}
+                            defaultValue={currentUsersData.firstName}
                             className="fields-input"
                             pattern={"[A-Za-z]+"}
                             minLength={2}
@@ -89,7 +94,7 @@ const EditUser = ({ data, teamData }) => {
                     <div className="fields">
                         <input
                             type="text"
-                            defaultValue={data.lastName}
+                            defaultValue={currentUsersData.lastName}
                             className="fields-input"
                             pattern={"[A-Za-z]+"}
                             minLength={2}
@@ -105,7 +110,7 @@ const EditUser = ({ data, teamData }) => {
                     <div className="fields">
                         <input
                             type="username"
-                            defaultValue={data.username}
+                            defaultValue={currentUsersData.username}
                             pattern={"[A-Za-z]+"}
                             minLength={2}
                             className="fields-input"
@@ -121,7 +126,7 @@ const EditUser = ({ data, teamData }) => {
                     <div className="fields">
                         <input
                             type="email"
-                            defaultValue={data.email}
+                            defaultValue={currentUsersData.email}
                             className="fields-input"
                             pattern={/\S+@\S+\.\S+/}
                             onChange={(e) =>
@@ -137,7 +142,7 @@ const EditUser = ({ data, teamData }) => {
                         <p>Date of birth</p>
                         <input
                             type="date"
-                            defaultValue={data.dateOfBirth}
+                            defaultValue={currentUsersData.dateOfBirth}
                             onChange={(e) =>
                                 setEditPocket((prev) => ({
                                     ...prev,
@@ -153,7 +158,7 @@ const EditUser = ({ data, teamData }) => {
                                value="male"
                                name="gender"
                                id="radio"
-                               defaultChecked={data.gender === "male"}
+                               defaultChecked={currentUsersData.gender === "male"}
                                onChange={(e) =>
                             setEditPocket((prev) => ({
                                 ...prev,
@@ -165,7 +170,7 @@ const EditUser = ({ data, teamData }) => {
                                value="female"
                                name="gender"
                                id="radio"
-                               defaultChecked={data.gender === "female"}
+                               defaultChecked={currentUsersData.gender === "female"}
                                onChange={(e) =>
                             setEditPocket((prev) => ({
                                 ...prev,
@@ -178,7 +183,7 @@ const EditUser = ({ data, teamData }) => {
                         ...prev,
                         teamId: e.target.value,
                     }))}>
-                        <option>{data.team}</option>
+                        <option>{currentUsersData.team}</option>
                         {teamData.map(el=>{
                             return(
                                 <option

@@ -1,9 +1,13 @@
-import { useState } from "react";
+import {useContext, useState} from "react";
 import ValidationChecker from "../../../ValidationChecker";
 
 import "./AddUser.css";
+import {AllData} from "../../Home/Home";
 
-const AddUser = ({teamData}) => {
+const AddUser = () => {
+
+    const {data, setData} = useContext(AllData);
+
   const [addPocket, setAddPocket] = useState({
     firstName: "",
     lastName: "",
@@ -44,7 +48,7 @@ const AddUser = ({teamData}) => {
 
 
   const Add = async () => {
-    const validReg = ValidationChecker(addPocket);
+    const validReg = ValidationChecker(addPocket,"register");
     console.log(validReg.error)
     validReg.error.forEach(el => {
       errorsSetting(el);
@@ -60,7 +64,7 @@ const AddUser = ({teamData}) => {
       })
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
+          setData(prev=>({...prev, usersInfo:data.usersData}));
         });
     }
   };
@@ -201,7 +205,7 @@ const AddUser = ({teamData}) => {
                 teamId: e.target.value,
             }))}>
                 <option disabled selected value>Choose Team</option>
-                {teamData.map(el=>{
+                {data.teamsInfo.map(el=>{
                     return(
                         <option value={el._id}>{el.name}</option>
                     )
