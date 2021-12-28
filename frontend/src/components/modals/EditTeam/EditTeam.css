@@ -1,0 +1,46 @@
+.edit-team {
+  position: relative;
+}
+
+.edit-team-title {
+  color: #028594;
+  font-size: large;
+}
+
+.edit-team-form {
+  width: 300px;
+}
+
+.fields-input {
+  width: 100%;
+  border-bottom: 1px solid #ccc;
+  padding: 6px 20px 6px 6px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 12px;
+  font-weight: 300;
+  color: rgb(0, 0, 0);
+  letter-spacing: 0.1rem;
+  transition: border-color 0.2s ease-in-out;
+}
+
+.forms_button {
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.forms_button-action {
+  background-color: #008594;
+  border-radius: 3px;
+  padding: 5px 10px;
+  font-size: 1rem;
+  font-family: "Montserrat", sans-serif;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.forms_button-action:hover {
+  background-color: #ffcd04;
+}

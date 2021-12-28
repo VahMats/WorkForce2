@@ -27,7 +27,7 @@ const Login = () => {
         setErrorFields("Invalid name");
         break;
       case "username":
-        setErrorFields("Username does not match to our requirmenets");
+        setErrorFields("Invalid username");
         break;
       case "email":
         setErrorFields("Invalid Email");
@@ -35,7 +35,7 @@ const Login = () => {
       case "password":
         setErrorFields("Invalid password");
         break;
-      case "confirmpassword":
+      case "confirmPassword":
         setErrorFields("Passwords are not the same");
         break;
       case " ":
