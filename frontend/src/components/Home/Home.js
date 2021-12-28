@@ -45,7 +45,7 @@ function Home() {
             <main>
                 <div>
                     <Navbar data={data.userInfo} />
-                    <section className="container">
+                    <div className="container">
                         <AllData.Provider value={{data, setData}} >
                             <UserProfile setWhichDashboard={setWhichDashboard} />
 
@@ -59,7 +59,7 @@ function Home() {
                             <UserList visible={whichDashboard === "user" ? "" : "none"} />
                             {data.userInfo.isAdmin ? <TeamList visible={whichDashboard === "team" ? "" : "none"}/> : null}
                         </AllData.Provider>
-                    </section>
+                    </div>
                 </div>
             </main>
         );

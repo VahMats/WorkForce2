@@ -1,9 +1,8 @@
 .container {
   display: flex;
-  /*flex-direction: row;*/
+  flex-direction: row;
   overflow: auto;
-  /*align-items: start;*/
-  justify-content: space-between;
+
 }
 .home-main {
   margin-left: 100px;
