@@ -63,7 +63,7 @@ const UserList = ({ visible }) => {
                 {data.usersInfo.length ? (<section className="users_list">
                     <table>
                         <thead>
-                            <tr className="users_list_info">
+                            <tr className="users_list_table">
                                 {data.userInfo.isAdmin ? <th>id</th> : null}
                                 <th>First Name</th>
                                 <th>Last Name</th>
@@ -77,7 +77,7 @@ const UserList = ({ visible }) => {
                         </thead>
                         <tbody>
                             {data.usersInfo.map((item, index) => (
-                                <tr key={index}>
+                                <tr key={index} className="users_list_info">
                                     {data.userInfo.isAdmin ? <td>{item._id}</td> : null}
                                     <td>{item.firstName}</td>
                                     <td>{item.lastName}</td>

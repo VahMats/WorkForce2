@@ -1,11 +1,22 @@
+.users_list{
+    width: 100%;
+}
+.users_list_table{
+    font-size: 20px;
+}
+
+.users_list_info{
+font-size: 15px;
+}
+
 .new_user button {
   background-color: #028594;
   color: white;
   width: 150px;
   font-size: 20px;
-  float: right;
   margin-top: 15px;
   margin-bottom: 15px;
+  float: right;
 }
 
 .new_user_field button:hover {

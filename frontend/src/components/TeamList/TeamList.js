@@ -83,7 +83,7 @@ const TeamList = ({ visible }) => {
                                             <img
                                                 src={Edit}
                                                 alt="edit"
-                                                onClick={showEditModal(data.teamsInfo[index])}
+                                                onClick={e=>showEditModal(data.teamsInfo[index])}
                                             />
                                             <img
                                                 src={Delete}
