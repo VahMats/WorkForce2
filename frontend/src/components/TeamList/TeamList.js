@@ -58,7 +58,7 @@ const TeamList = ({ visible }) => {
                 <section className="team_list">
                     <table>
                         <thead>
-                            <tr className="team_list_info">
+                            <tr className="team_list_table">
                                 <th>ID</th>
                                 <th>Name</th>
                                 <th>Count of Members</th>
@@ -66,13 +66,13 @@ const TeamList = ({ visible }) => {
                                 <th>Actions</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody className="team_list_info">
                             {data.teamsInfo.map((item, index) => (
                                 <tr key={index}>
-                                    <td>{item._id}</td>
-                                    <td>{item.name}</td>
-                                    <td>{item.count}</td>
-                                    <td>{item.maxCount}</td>
+                                    <td className="team_desc">{item._id}</td>
+                                    <td className="team_desc">{item.name}</td>
+                                    <td className="team_desc">{item.count}</td>
+                                    <td className="team_desc">{item.maxCount}</td>
                                     <td className="image-td">
                                         <>
                                             <img

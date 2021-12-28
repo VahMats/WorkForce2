@@ -1,3 +1,28 @@
+.team_list{
+    width: 100%;
+}
+.team_list_table{
+    font-size: 20px;
+}
+.team_list_info{
+    font-size: 15px;
+}
+.team_list_table th {
+    color: #028594;
+    font-weight: bold;
+    padding: 20px 50px;
+}
+
+.team_desc {
+    text-align: center;
+    padding: 20px 40px;
+}
+
+td img {
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+}
 .new_team button {
   background-color: #028594;
   color: white;
@@ -22,18 +47,4 @@
   color: #028594;
 }
 
-th {
-  color: #028594;
-  font-weight: bold;
-}
 
-td {
-  text-align: center;
-  padding: 20px 20px 20px 20px;
-}
-
-td img {
-  width: 20px;
-  height: 20px;
-  cursor: pointer;
-}

@@ -4,9 +4,24 @@
 .users_list_table{
     font-size: 20px;
 }
-
 .users_list_info{
-font-size: 15px;
+    font-size: 15px;
+}
+
+.users_list_table th {
+    color: #028594;
+    font-weight: bold;
+}
+
+.users_desc {
+    text-align: center;
+    padding: 20px 40px;
+}
+
+.actions_buttons {
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
 }
 
 .new_user button {
@@ -33,18 +48,4 @@ font-size: 15px;
   color: #028594;
 }
 
-th {
-  color: #028594;
-  font-weight: bold;
-}
 
-td {
-  text-align: center;
-  padding: 20px 20px 20px 20px;
-}
-
-td img {
-  width: 20px;
-  height: 20px;
-  cursor: pointer;
-}

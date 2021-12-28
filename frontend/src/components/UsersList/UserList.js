@@ -75,33 +75,33 @@ const UserList = ({ visible }) => {
                                 <th>Actions</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody className="users_list_info">
                             {data.usersInfo.map((item, index) => (
-                                <tr key={index} className="users_list_info">
+                                <tr key={index} >
                                     {data.userInfo.isAdmin ? <td>{item._id}</td> : null}
-                                    <td>{item.firstName}</td>
-                                    <td>{item.lastName}</td>
-                                    <td>{item.username}</td>
-                                    <td>{item.email}</td>
-                                    <td>{item.dateOfBirth}</td>
-                                    <td>{item.gender}</td>
+                                    <td className="users_desc">{item.firstName}</td>
+                                    <td className="users_desc">{item.lastName}</td>
+                                    <td className="users_desc">{item.username}</td>
+                                    <td className="users_desc">{item.email}</td>
+                                    <td className="users_desc">{item.dateOfBirth}</td>
+                                    <td className="users_desc">{item.gender}</td>
                                     {data.userInfo.isAdmin ? <td>{item.team}</td> : ""}
                                     <td className="image-td">
-                                        <img
+                                        <img className="actions_buttons"
                                             src={View}
                                             alt="show"
                                             onClick={showViewModal(data.usersInfo[index])}
                                         />
                                         {data.userInfo.isAdmin ? (
                                             <>
-                                                <img
+                                                <img className="actions_buttons"
                                                     src={Edit}
                                                     alt="edit"
                                                     onClick={e => {
                                                         showEditModal(data.usersInfo[index])
                                                     }}
                                                 />
-                                                <img
+                                                <img className="actions_buttons"
                                                     src={Delete}
                                                     alt="delete"
                                                     onClick={showDelete(item._id)}
