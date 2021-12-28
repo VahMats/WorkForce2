@@ -23,14 +23,15 @@ exports.teamEdit = async (req,res) => {
         countIsValid: false,
         teamsData: [],
     }
+    console.log(req.body)
     const {id, name, maxCount} = req.body;
     const thisTeam = await TeamSchema.findById(id);
-    if (thisTeam[0].count <= maxCount){
+    if (thisTeam.count <= maxCount){
         teamEditingData.countIsValid = true;
         await TeamSchema.findByIdAndUpdate(id, {name, maxCount});
         teamEditingData.teamsData = await TeamsDataFind();
     }
-
+    res.status(200).send(teamEditingData);
 }
 
 exports.teamDelete = async (req,res) => {

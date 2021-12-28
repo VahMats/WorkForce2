@@ -95,6 +95,7 @@ exports.userEdit = async (req,res) => {
         const anotherUsername = await UserSchema.findOne({username}, {id:1});
         if (!anotherEmail || anotherEmail._id.toString() === id){
         userEditingData.newEmailIsUnique = true;
+        let team = "-"
             if (!anotherUsername || anotherUsername._id.toString() === id) {
             userEditingData.newUsernameIsUnique = true;
                 if (teamId) {
@@ -102,7 +103,7 @@ exports.userEdit = async (req,res) => {
                         const newTeam = await TeamSchema.findById(teamId);
                         const newCount = newTeam.count + 1;
                         if (newCount <= newTeam.maxCount) {
-                            let team = newTeam.name;
+                            team = newTeam.name;
                             userEditingData.teamIsFull = false;
                             await TeamSchema.findByIdAndUpdate(teamId, {count: newCount});
                             if (oldUser.teamId){
@@ -111,6 +112,9 @@ exports.userEdit = async (req,res) => {
                                 await TeamSchema.findByIdAndUpdate(oldTeam._id, {count: oldTeamsNewCount})
                             }
                         }
+                    }else {
+                        let teamsName = await TeamSchema.findById(teamId);
+                        team = teamsName.name;
                     }
                 }
 

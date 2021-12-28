@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import "./EditTeam.css";
 
-const EditTeam = ({ data }) => {
+const EditTeam = ({ currentTeamData }) => {
     const [teamEditData, setTeamEditData] = useState({
-        name: "",
-        maxCount: "",
+        id:currentTeamData._id,
+        name: currentTeamData.name,
+        maxCount: currentTeamData.maxCount,
     })
+    console.log(teamEditData)
 
     const [teamError, setTeamError] = useState(false);
     const [teamHasError, setTeamHasError] = useState(true);
@@ -64,7 +66,7 @@ const EditTeam = ({ data }) => {
                 <fieldset className="edit-team-fields">
                     <div className="fields">
                         <input
-                            defaultValue={data.name}
+                            defaultValue={currentTeamData.name}
                             className="fields-input"
                             type="text"
                             placeholder="Team Name"
@@ -72,7 +74,7 @@ const EditTeam = ({ data }) => {
                         />
                         {teamError ? "Please add a team name" : " "}
                         <input
-                            defaultValue={data.maxCount}
+                            defaultValue={currentTeamData.maxCount}
                             className="fields-input"
                             placeholder="Max members' count"
                             type={"number"}

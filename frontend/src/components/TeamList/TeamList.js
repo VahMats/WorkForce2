@@ -12,8 +12,9 @@ import Edit from "../../images/edit.png";
 import "./TeamList.css";
 
 const TeamList = ({ visible }) => {
+
     const {data} = useContext(AllData);
-    console.log(data)
+
     const [viewModalShow, setViewModalShow] = useState(false);
     const [addModalShow, setAddModalShow] = useState(false);
     const [editModalShow, setEditModalShow] = useState(false);
@@ -115,7 +116,7 @@ const TeamList = ({ visible }) => {
             )}
             {editModalShow && (
                 <MainModal show={editModalShow} setShow={setEditModalShow}>
-                    <EditTeam show={editModalShow} setShow={setEditModalShow} data={editingTeamData} />
+                    <EditTeam show={editModalShow} setShow={setEditModalShow} currentTeamData={editingTeamData} />
                 </MainModal>
             )}
 
