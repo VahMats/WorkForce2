@@ -86,7 +86,6 @@ exports.userEdit = async (req,res) => {
     } = req.body;
 
 
-
     const oldUser = await UserSchema.findById(id, {firstName:1, lastName:1, email:1, username:1, dateOfBirth:1, gender:1, teamId:1})
     const validEdit = ValidationChecker(req.body, "edit");
     if (validEdit.isValid) {

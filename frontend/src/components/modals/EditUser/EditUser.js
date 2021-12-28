@@ -9,7 +9,7 @@ const EditUser = ({ currentUsersData }) => {
     const {data, setData} = useContext(AllData)
 
     const [editPocket, setEditPocket] = useState({
-        id:currentUsersData.id,
+        id:currentUsersData._id,
         firstName: currentUsersData.firstName,
         lastName: currentUsersData.lastName,
         email: currentUsersData.email,
