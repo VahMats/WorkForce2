@@ -24,7 +24,6 @@ function Home() {
             }
         }).then(res => res.json()).then(data => {
             setData(data);
-            console.info(data)
             console.log(data)
             setLoading(false)
         })
@@ -54,7 +53,7 @@ function Home() {
                                 </div>
                             </div>
                             <UserList visible={whichDashboard === "user" ? "" : "none"} />
-                            <TeamList visible={whichDashboard === "team" ? "" : "none"} />
+                            {data.userInfo.isAdmin ? <TeamList visible={whichDashboard === "team" ? "" : "none"}/> : null}
                         </AllData.Provider>
                     </section>
                 </div>

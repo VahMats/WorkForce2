@@ -3,17 +3,25 @@ import ValidationChecker from "../../../ValidationChecker";
 
 import "./EditUser.css";
 
-const EditUser = ({ data }) => {
+const EditUser = ({ data, teamData }) => {
+
     const [editPocket, setEditPocket] = useState({
-        firstName: "",
-        lastName: "",
-        email: "",
-        dateOfBirth: "",
-        gender: "",
-        teamId: "",
-        username: "",
+        id:data._id,
+        firstName: data.firstName,
+        lastName: data.lastName,
+        email: data.email,
+        dateOfBirth: data.dateOfBirth,
+        gender: data.gender,
+        teamId: data.teamId,
+        username: data.username,
     });
+
     const [errorFields, setErrorFields] = useState([]);
+
+    if (data.teamId){
+        teamData = teamData.filter(el=> el._id !== data.teamId);
+
+    }
 
     const errorsSetting = (type) => {
         switch (type) {
@@ -36,8 +44,7 @@ const EditUser = ({ data }) => {
 
 
     const Edit = async () => {
-        const validReg = ValidationChecker(editPocket);
-        console.log(validReg.error)
+        const validReg = ValidationChecker(editPocket, "edit");
         validReg.error.forEach(el => {
             errorsSetting(el);
         })
@@ -146,7 +153,7 @@ const EditUser = ({ data }) => {
                                value="male"
                                name="gender"
                                id="radio"
-                               checked={data.gender === "male"}
+                               defaultChecked={data.gender === "male"}
                                onChange={(e) =>
                             setEditPocket((prev) => ({
                                 ...prev,
@@ -158,7 +165,7 @@ const EditUser = ({ data }) => {
                                value="female"
                                name="gender"
                                id="radio"
-                               checked={data.gender === "female"}
+                               defaultChecked={data.gender === "female"}
                                onChange={(e) =>
                             setEditPocket((prev) => ({
                                 ...prev,
@@ -167,22 +174,19 @@ const EditUser = ({ data }) => {
                         }
                             required /> <p>Female</p>
                     </div>
-                    <div className="fields">
-                        <input
-                            type="text"
-                            defaultValue={data.teamId}
-                            className="fields-input"
-                            pattern={"[A-Za-z]+"}
-                            minLength={2}
-                            onChange={(e) =>
-                                setEditPocket((prev) => ({
-                                    ...prev,
-                                    teamId: e.target.value,
-                                }))
-                            }
-                            required
-                        />
-                    </div>
+                    <select onChange={e => setEditPocket((prev) => ({
+                        ...prev,
+                        teamId: e.target.value,
+                    }))}>
+                        <option>{data.team}</option>
+                        {teamData.map(el=>{
+                            return(
+                                <option
+                                    value={el._id}
+                                >{el.name}</option>
+                            )
+                        })}
+                    </select>
                 </fieldset>
                 <div className="forms_button">
                     <input

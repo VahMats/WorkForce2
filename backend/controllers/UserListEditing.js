@@ -70,7 +70,6 @@ exports.userEdit = async (req,res) => {
         isValid: false,
         newEmailIsUnique: false,
         newUsernameIsUnique: false,
-        teamIsChanged: false,
         teamIsFull: true,
         usersData: [],
     }
@@ -94,18 +93,16 @@ exports.userEdit = async (req,res) => {
         userEditingData.isValid = true;
         const anotherEmail = await UserSchema.findOne({email}, {id:1});
         const anotherUsername = await UserSchema.findOne({username}, {id:1});
-        if (!anotherEmail || anotherEmail.id === id){
+        if (!anotherEmail || anotherEmail._id.toString() === id){
         userEditingData.newEmailIsUnique = true;
-            if (!anotherUsername || anotherUsername.id === id) {
+            if (!anotherUsername || anotherUsername._id.toString() === id) {
             userEditingData.newUsernameIsUnique = true;
                 if (teamId) {
-                    let team = "-"
                     if (teamId !== oldUser.teamId) {
-                        userEditingData.teamIsChanged = true;
                         const newTeam = await TeamSchema.findById(teamId);
                         const newCount = newTeam.count + 1;
                         if (newCount <= newTeam.maxCount) {
-                            team = newTeam.name;
+                            let team = newTeam.name;
                             userEditingData.teamIsFull = false;
                             await TeamSchema.findByIdAndUpdate(teamId, {count: newCount});
                             if (oldUser.teamId){
@@ -135,7 +132,11 @@ exports.userDelete = async (req,res) => {
     }
     const {id} = req.body
     const deletingUser = await UserSchema.findById(id);
-    console.log(deletingUser)
+    if (deletingUser.teamId){
+        const teamOfDeletingUser = await TeamSchema.findById(deletingUser.teamId);
+        const changedTeamCount = teamOfDeletingUser.count - 1;
+        await TeamSchema.findByIdAndUpdate(deletingUser.teamId, {count: changedTeamCount})
+    }
     if (Object.values(deletingUser).length !== 0){
         userDeletingData.UserExist = true;
         await UserSchema.findByIdAndUpdate(id,{deleted:1});

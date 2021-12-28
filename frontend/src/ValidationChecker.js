@@ -1,26 +1,26 @@
 const validationFunctions = {
-    email: ({ email }) => emailValidation(email),
-    username: ({ username }) => usernameValidation(username),
-    password: ({ password, confirmPassword }) => passwordValidation(password, confirmPassword),
-    firstName: ({ firstName }) => nameValidation(firstName),
-    lastName: ({ lastName }) => nameValidation(lastName),
+    email: ({email})=> emailValidation(email),
+    username: ({username}) => usernameValidation(username),
+    password: ({password, confirmPassword}) => passwordValidation(password, confirmPassword),
+    firstName: ({firstName}) => nameValidation(firstName),
+    lastName: ({lastName}) => nameValidation(lastName),
 }
 
 export default (data, validationType) => {
     const resultData = {
         fields: {},
         isValid: false,
-        error: '',
+        error: ''
     }
 
-    if (!data) {
+    if(!data) {
         resultData.error = 'Invalid Data.'
         return resultData
     }
 
     const isFieldsValid = contentValidation(data, validationType);
 
-    if (!isFieldsValid.valid) {
+    if(!isFieldsValid.valid) {
         resultData.error = 'Please fill all required fields.'
         resultData.valid = isFieldsValid.valid
         return resultData
@@ -31,13 +31,12 @@ export default (data, validationType) => {
         resultData.fields[type] = validationFunction(data)
     })
 
-    const falseCurrent = Object.keys(resultData.fields).filter(e => !resultData.fields[e].valid)
-    console.log(falseCurrent);
-    resultData.isValid = falseCurrent.length ? false : true;
-    let lastmessege = [];
-    falseCurrent.forEach(elem => { lastmessege.push(elem) });
-    resultData.error = lastmessege;
-    return resultData;
+    const falseCurrent = Object.keys(resultData.fields).filter(e=>!resultData.fields[e].valid)
+    resultData.isValid = falseCurrent.length ? false : true
+    let lastmassege = []
+    falseCurrent.forEach(elem=>{lastmassege.push(`Please fill ${elem} field `) })
+    resultData.error =  lastmassege
+    return resultData
 
 }
 
@@ -45,14 +44,40 @@ function contentValidation(data, type) {
     let isValid = false;
     const requiredRegister = ['email', 'username', 'password', 'firstName', 'lastName'];
     const requiredLogin = ['username', 'password'];
+    const requiredEdit = ['email', 'username', 'firstName', 'lastName'];
 
-    const fieldData = type === 'login' ? requiredLogin : requiredRegister
+    let fieldData = ''
+
+    switch (type) {
+        case 'login':
+            fieldData = requiredLogin;
+            break
+        case 'register':
+            fieldData = requiredRegister;
+            break
+        case 'edit':
+            fieldData = requiredEdit;
+            break
+    }
+    // const fieldData = type === 'login' ? requiredLogin : requiredRegister
 
     const fields = Object.keys(data)
-
+    console.log(fields)
     const filtered = fieldData.filter(elem => fields.includes(elem))
 
-    isValid = type === "login" ? filtered.length === requiredLogin.length : filtered.length === requiredRegister.length
+    switch (type) {
+        case 'login':
+            isValid = filtered.length === requiredLogin.length;
+            break;
+        case 'register':
+            isValid = filtered.length === requiredRegister.length;
+            break;
+        case 'edit':
+            isValid = filtered.length === requiredEdit.length;
+            break;
+    }
+
+    // isValid = type === "login" ? filtered.length === requiredLogin.length : filtered.length === requiredRegister.length
 
 
     return {
@@ -117,7 +142,7 @@ function passwordValidation(password, confirmPassword) {
         }
     }
 
-    if (sampleForPassword.test(password)) {
+    if (sampleForPassword.test(password))  {
         return {
             valid: true,
             error: ''

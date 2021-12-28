@@ -123,12 +123,12 @@ const UserList = ({ visible }) => {
             )}
             {editModalShow && (
                 <MainModal show={editModalShow} setShow={setEditModalShow}>
-                    <EditUser show={editModalShow} setShow={setEditModalShow} data={editingUserData} />
+                    <EditUser show={editModalShow} setShow={setEditModalShow} data={editingUserData} teamData={data.teamsInfo} />
                 </MainModal>
             )}
             {addModalShow && (
                 <MainModal show={addModalShow} setShow={setAddModalShow}>
-                    <AddUser show={addModalShow} setShow={setAddModalShow} />
+                    <AddUser show={addModalShow} setShow={setAddModalShow} teamData={data.teamsInfo} />
                 </MainModal>
             )}
         </main>

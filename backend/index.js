@@ -45,6 +45,12 @@ app.get('/token', async (req,res)=>{
         // const availableTeams = teams.filter(el => !el.deleted)
         // tokenData.teamsInfo = teams;
         tokenData.teamsInfo = await TeamsDataFind();
+    }else {
+        let teamsId = user.teamId;
+        console.log(teamsId);
+        const teamMembers = await UserSchema.find({teamId: teamsId}, {firstName:1, lastName:1, email:1, username:1, dateOfBirth:1, gender:1, teamId:1})
+        console.log(teamMembers)
+        tokenData.usersInfo = teamMembers;
     }
     res.status(200).send(tokenData)
 

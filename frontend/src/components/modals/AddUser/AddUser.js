@@ -3,7 +3,7 @@ import ValidationChecker from "../../../ValidationChecker";
 
 import "./AddUser.css";
 
-const AddUser = () => {
+const AddUser = ({teamData}) => {
   const [addPocket, setAddPocket] = useState({
     firstName: "",
     lastName: "",
@@ -196,22 +196,17 @@ const AddUser = () => {
             }
               required /> <p>Female</p>
           </div>
-          <div className="fields">
-            <input
-              type="text"
-              placeholder="Team"
-              className="fields-input"
-              pattern={"[A-Za-z]+"}
-              minLength={2}
-              onChange={(e) =>
-                setAddPocket((prev) => ({
-                  ...prev,
-                  teamId: e.target.value,
-                }))
-              }
-              required
-            />
-          </div>
+            <select onChange={e => setAddPocket((prev) => ({
+                ...prev,
+                teamId: e.target.value,
+            }))}>
+                <option disabled selected value>Choose Team</option>
+                {teamData.map(el=>{
+                    return(
+                        <option value={el._id}>{el.name}</option>
+                    )
+                })}
+            </select>
         </fieldset>
         <div className="forms_button">
           <input
