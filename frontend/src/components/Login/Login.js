@@ -71,7 +71,7 @@ const Login = () => {
   };
 
   const Signup = async () => {
-    const validReg = ValidationChecker(regPocket);
+    const validReg = ValidationChecker(regPocket, "register");
     console.log(validReg.error)
     validReg.error.forEach(el => {
       errorsSetting(el);
@@ -85,8 +85,14 @@ const Login = () => {
         .then((res) => res.json())
         .then((data) => {
           console.log(data);
+          if (!data.usernameIsUnique){
+            alert("username is already used")
+          }else if (!data.emailIsUnique){
+            alert("email is already used")
+          }else {
+            setMainClass("bounceRight")
+          }
         });
-      setMainClass("bounceRight")
     }
   };
 
