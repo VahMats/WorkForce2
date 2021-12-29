@@ -64,7 +64,7 @@ const EditUser = ({ currentUsersData }) => {
             })
                 .then((res) => res.json())
                 .then((data) => {
-                    setData(prev=>({...prev, usersInfo:data.usersData}));
+                    setData(prev=>({...prev, usersInfo:data.usersData, teamsInfo:data.teamsData}));
                 });
         }
     };

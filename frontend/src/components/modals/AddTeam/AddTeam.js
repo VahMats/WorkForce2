@@ -1,8 +1,11 @@
 import React, { useContext, useState } from "react";
 import "./AddTeam.css";
-
+import {AllData} from "../../Home/Home";
 
 const AddTeam = () => {
+
+    const { data, setData } = useContext(AllData);
+
     const [teamAddData, setTeamAddData] = useState({
         name: "",
         maxCount: "",
@@ -35,7 +38,6 @@ const AddTeam = () => {
             e.target.value === ""
         ) {
             setMembersError(true);
-            setMembersError(true);
         } else {
             setMembersError(false);
             setMembersHasError(false);
@@ -51,7 +53,9 @@ const AddTeam = () => {
                     "x-access-token": localStorage.token,
                 },
                 body: JSON.stringify(teamAddData),
-            }).then(res => res.json()).then(data => console.log(data))
+            }).then(res => res.json()).then(data => {
+                setData(prev => ({...prev, teamsInfo: data.teamsData}))
+            })
         } catch (e) {
             console.error(e);
         }

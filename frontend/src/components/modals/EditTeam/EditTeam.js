@@ -1,7 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect, useContext} from "react";
 import "./EditTeam.css";
+import {AllData} from "../../Home/Home";
 
 const EditTeam = ({ currentTeamData }) => {
+
+    const { setData } = useContext(AllData)
+
     const [teamEditData, setTeamEditData] = useState({
         id:currentTeamData._id,
         name: currentTeamData.name,
@@ -52,7 +56,7 @@ const EditTeam = ({ currentTeamData }) => {
                     "x-access-token": localStorage.token,
                 },
                 body: JSON.stringify(teamEditData),
-            }).then(res => res.json()).then(data => console.log(data))
+            }).then(res => res.json()).then(data => setData(prev=>({...prev, teamsInfo:data.teamsData})))
         } catch (e) {
             console.error(e);
         }

@@ -13,7 +13,7 @@ import "./TeamList.css";
 
 const TeamList = ({ visible }) => {
 
-    const {data} = useContext(AllData);
+    const {data, setData} = useContext(AllData);
 
     const [viewModalShow, setViewModalShow] = useState(false);
     const [addModalShow, setAddModalShow] = useState(false);
@@ -23,7 +23,6 @@ const TeamList = ({ visible }) => {
     const [editingTeamData, setEditingTeamData] = useState({})
 
     const showModal = (teamData) => () => {
-        console.log("ban")
         setViewModalShow(true)
         setViewingTeamData(teamData);
     };
@@ -44,9 +43,10 @@ const TeamList = ({ visible }) => {
             body: JSON.stringify({
                 id: id,
             }),
-        })
-            .then(res => res.json())
-            .then(data => console.log(data))
+        }).then(res =>res.json()).then(data => {
+                console.log(data)
+                setData(prev => ({...prev, usersInfo:data.usersData, teamsInfo: data.teamsData}))
+            })
 
     };
     return (
@@ -91,7 +91,7 @@ const TeamList = ({ visible }) => {
                                             <img
                                                 src={Delete}
                                                 alt="delete"
-                                                onClick={e=>{showDelete(item._id)}}
+                                                onClick={showDelete(item._id)}
                                             />
                                         </>
                                     </td>

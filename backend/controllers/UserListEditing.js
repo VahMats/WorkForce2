@@ -2,15 +2,16 @@ const UserSchema = require('../Schema/UserSchema');
 const TeamSchema = require('../Schema/TeamSchema');
 const ValidationChecker = require("../ValidationChecker");
 const bcrypt = require("bcrypt");
-const {UsersDataFind} = require('../responseGenerator');
+const {UsersDataFind, TeamsDataFind} = require('../responseGenerator');
 const mongoose = require("mongoose")
 
-exports.userAdd = async (req,res) => {
+exports.userAdd = async (req, res) => {
     const userAddData = {
         isValid: false,
         usernameIsUnique: false,
         emailIsUnique: false,
         usersData: [],
+        teamsData: [],
     };
     const validReg = ValidationChecker(req.body, "register");
     if (validReg.isValid) {
@@ -26,18 +27,18 @@ exports.userAdd = async (req,res) => {
             password,
             teamId
         } = req.body;
-        const oldUserUsername = await UserSchema.find({ username });
+        const oldUserUsername = await UserSchema.find({username});
         if (oldUserUsername.length === 0) {
             userAddData.usernameIsUnique = true;
-            const oldUserEmail = await UserSchema.find({ email });
+            const oldUserEmail = await UserSchema.find({email});
             if (oldUserEmail.length === 0) {
                 userAddData.emailIsUnique = true;
                 let team = "-"
 
-                if (teamId){
+                if (teamId) {
                     const addedTeam = await TeamSchema.findById(teamId);
                     const addedCount = addedTeam.count + 1;
-                    await TeamSchema.findOneAndUpdate(teamId, {count:addedCount})
+                    await TeamSchema.findOneAndUpdate(teamId, {count: addedCount})
                     team = addedTeam.name;
                 }
 
@@ -59,19 +60,21 @@ exports.userAdd = async (req,res) => {
                 await newUser.save();
 
                 userAddData.usersData = await UsersDataFind();
+                userAddData.teamsData = await TeamsDataFind();
             }
         }
     }
     res.status(200).send(userAddData);
 }
 
-exports.userEdit = async (req,res) => {
+exports.userEdit = async (req, res) => {
     const userEditingData = {
         isValid: false,
         newEmailIsUnique: false,
         newUsernameIsUnique: false,
         teamIsFull: true,
         usersData: [],
+        teamsData: [],
     }
 
     const {
@@ -86,17 +89,25 @@ exports.userEdit = async (req,res) => {
     } = req.body;
 
 
-    const oldUser = await UserSchema.findById(id, {firstName:1, lastName:1, email:1, username:1, dateOfBirth:1, gender:1, teamId:1})
+    const oldUser = await UserSchema.findById(id, {
+        firstName: 1,
+        lastName: 1,
+        email: 1,
+        username: 1,
+        dateOfBirth: 1,
+        gender: 1,
+        teamId: 1
+    })
     const validEdit = ValidationChecker(req.body, "edit");
     if (validEdit.isValid) {
         userEditingData.isValid = true;
-        const anotherEmail = await UserSchema.findOne({email}, {id:1});
-        const anotherUsername = await UserSchema.findOne({username}, {id:1});
-        if (!anotherEmail || anotherEmail._id.toString() === id){
-        userEditingData.newEmailIsUnique = true;
-        let team = "-"
+        const anotherEmail = await UserSchema.findOne({email}, {id: 1});
+        const anotherUsername = await UserSchema.findOne({username}, {id: 1});
+        if (!anotherEmail || anotherEmail._id.toString() === id) {
+            userEditingData.newEmailIsUnique = true;
+            let team = "-"
             if (!anotherUsername || anotherUsername._id.toString() === id) {
-            userEditingData.newUsernameIsUnique = true;
+                userEditingData.newUsernameIsUnique = true;
                 if (teamId) {
                     if (teamId !== oldUser.teamId) {
                         const newTeam = await TeamSchema.findById(teamId);
@@ -105,21 +116,31 @@ exports.userEdit = async (req,res) => {
                             team = newTeam.name;
                             userEditingData.teamIsFull = false;
                             await TeamSchema.findByIdAndUpdate(teamId, {count: newCount});
-                            if (oldUser.teamId){
+                            if (oldUser.teamId) {
                                 const oldTeam = await TeamSchema.findById(oldUser.teamId);
                                 const oldTeamsNewCount = oldTeam.count - 1;
                                 await TeamSchema.findByIdAndUpdate(oldTeam._id, {count: oldTeamsNewCount})
                             }
                         }
-                    }else {
+                    } else {
                         let teamsName = await TeamSchema.findById(teamId);
                         team = teamsName.name;
                     }
                 }
 
-                await UserSchema.findByIdAndUpdate(id,{firstName, lastName, email, dateOfBirth, gender, username, team, teamId})
+                await UserSchema.findByIdAndUpdate(id, {
+                    firstName,
+                    lastName,
+                    email,
+                    dateOfBirth,
+                    gender,
+                    username,
+                    team,
+                    teamId
+                })
 
                 userEditingData.usersData = await UsersDataFind();
+                userEditingData.teamsData = await TeamsDataFind();
             }
 
         }
@@ -128,22 +149,22 @@ exports.userEdit = async (req,res) => {
 
 }
 
-exports.userDelete = async (req,res) => {
+exports.userDelete = async (req, res) => {
     const userDeletingData = {
         UserExist: false,
         usersData: [],
+        teamsData: [],
     }
     const {id} = req.body
     const deletingUser = await UserSchema.findById(id);
-    if (deletingUser.teamId){
+    console.log(deletingUser)
+    if (deletingUser.teamId && deletingUser.teamId !== "0") {
         const teamOfDeletingUser = await TeamSchema.findById(deletingUser.teamId);
         const changedTeamCount = teamOfDeletingUser.count - 1;
         await TeamSchema.findByIdAndUpdate(deletingUser.teamId, {count: changedTeamCount})
     }
-    if (Object.values(deletingUser).length !== 0){
-        userDeletingData.UserExist = true;
-        await UserSchema.findByIdAndUpdate(id,{deleted:1});
-        userDeletingData.usersData = await UsersDataFind();
-    };
-    res.send(userDeletingData);
+    await UserSchema.findByIdAndUpdate(id, {deleted: 1});
+    userDeletingData.usersData = await UsersDataFind();
+    userDeletingData.teamsData = await TeamsDataFind();
+    res.status(200).send(userDeletingData);
 }

@@ -49,7 +49,6 @@ const AddUser = () => {
 
   const Add = async () => {
     const validReg = ValidationChecker(addPocket,"register");
-    console.log(validReg.error)
     validReg.error.forEach(el => {
       errorsSetting(el);
     })
@@ -64,7 +63,7 @@ const AddUser = () => {
       })
         .then((res) => res.json())
         .then((data) => {
-          setData(prev=>({...prev, usersInfo:data.usersData}));
+          setData(prev=>({...prev, usersInfo:data.usersData, teamsInfo:data.teamsData}));
         });
     }
   };

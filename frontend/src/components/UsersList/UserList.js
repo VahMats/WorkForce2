@@ -44,7 +44,7 @@ const UserList = ({ visible }) => {
             }),
         })
             .then(res => res.json())
-            .then(data => setData(prev=>({...prev, usersInfo: data.usersData})))
+            .then(data => setData(prev=>({...prev, usersInfo: data.usersData, teamsInfo:data.teamsData})))
 
     };
 

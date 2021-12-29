@@ -1,7 +1,7 @@
 const TeamSchema = require('../Schema/TeamSchema');
 const UserSchema = require('../Schema/UserSchema')
 const mongoose = require('mongoose')
-const {TeamsDataFind} = require('../responseGenerator')
+const {TeamsDataFind, UsersDataFind} = require('../responseGenerator')
 
 exports.teamAdd = async (req,res) => {
     const teamAddData = {
@@ -15,6 +15,8 @@ exports.teamAdd = async (req,res) => {
     await newTeam.save();
 
     teamAddData.teamsData = await TeamsDataFind();
+    console.log(teamAddData)
+    res.status(200).send(teamAddData);
 
 }
 
@@ -36,6 +38,7 @@ exports.teamEdit = async (req,res) => {
 
 exports.teamDelete = async (req,res) => {
     const teamDeletingData = {
+        usersData:[],
         teamsData:[],
     }
     const {id} = req.body;
@@ -43,8 +46,13 @@ exports.teamDelete = async (req,res) => {
 
     await TeamSchema.findByIdAndUpdate(id, {deleted:1});
 
-    await UserSchema.find({teamId: id});
+    for (let i = 0; i < deletingTeam.count; i++) {
+        await UserSchema.findOneAndUpdate({teamId:id}, {teamId:0, team:"-"})
+    }
 
-
+    teamDeletingData.usersData = await UsersDataFind();
+    teamDeletingData.teamsData = await TeamsDataFind();
+    console.log(teamDeletingData)
+    res.status(200).send(teamDeletingData);
 
 }
