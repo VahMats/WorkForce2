@@ -1,12 +1,12 @@
-import {useContext, useState} from "react";
+import { useContext, useState } from "react";
 import ValidationChecker from "../../../ValidationChecker";
 
 import "./AddUser.css";
-import {AllData} from "../../Home/Home";
+import { AllData } from "../../Home/Home";
 
-const AddUser = () => {
+const AddUser = ({ setShow }) => {
 
-    const {data, setData} = useContext(AllData);
+  const { data, setData } = useContext(AllData);
 
   const [addPocket, setAddPocket] = useState({
     firstName: "",
@@ -48,7 +48,7 @@ const AddUser = () => {
 
 
   const Add = async () => {
-    const validReg = ValidationChecker(addPocket,"register");
+    const validReg = ValidationChecker(addPocket, "register");
     validReg.error.forEach(el => {
       errorsSetting(el);
     })
@@ -63,7 +63,7 @@ const AddUser = () => {
       })
         .then((res) => res.json())
         .then((data) => {
-          setData(prev=>({...prev, usersInfo:data.usersData, teamsInfo:data.teamsData}));
+          setData(prev => ({ ...prev, usersInfo: data.usersData, teamsInfo: data.teamsData }));
         });
     }
   };
@@ -199,24 +199,24 @@ const AddUser = () => {
             }
               required /> <p>Female</p>
           </div>
-            <select onChange={e => setAddPocket((prev) => ({
-                ...prev,
-                teamId: e.target.value,
-            }))}>
-                <option disabled selected value>Choose Team</option>
-                {data.teamsInfo.map(el=>{
-                    return(
-                        <option value={el._id}>{el.name}</option>
-                    )
-                })}
-            </select>
+          <select onChange={e => setAddPocket((prev) => ({
+            ...prev,
+            teamId: e.target.value,
+          }))}>
+            <option disabled selected value>Choose Team</option>
+            {data.teamsInfo.map(el => {
+              return (
+                <option value={el._id}>{el.name}</option>
+              )
+            })}
+          </select>
         </fieldset>
         <div className="forms_button">
           <input
             type="button"
             defaultValue="Submit"
             className="forms_button-action"
-            onClick={Add}
+            onClick={e => { Add(); setShow(false) }}
           />
         </div>
       </form>

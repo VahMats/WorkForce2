@@ -1,15 +1,15 @@
-import {useContext, useState} from "react";
+import { useContext, useState } from "react";
 import ValidationChecker from "../../../ValidationChecker";
-import {AllData} from "../../Home/Home"
+import { AllData } from "../../Home/Home"
 
 import "./EditUser.css";
 
-const EditUser = ({ currentUsersData }) => {
+const EditUser = ({ currentUsersData, setShow }) => {
 
-    const {data, setData} = useContext(AllData)
+    const { data, setData } = useContext(AllData)
 
     const [editPocket, setEditPocket] = useState({
-        id:currentUsersData._id,
+        id: currentUsersData._id,
         firstName: currentUsersData.firstName,
         lastName: currentUsersData.lastName,
         email: currentUsersData.email,
@@ -23,8 +23,8 @@ const EditUser = ({ currentUsersData }) => {
 
     let teamData = data.teamsInfo;
 
-    if (currentUsersData.teamId){
-        teamData = teamData.filter(el=> el._id !== data.teamId);
+    if (currentUsersData.teamId) {
+        teamData = teamData.filter(el => el._id !== data.teamId);
 
     }
 
@@ -64,7 +64,7 @@ const EditUser = ({ currentUsersData }) => {
             })
                 .then((res) => res.json())
                 .then((data) => {
-                    setData(prev=>({...prev, usersInfo:data.usersData, teamsInfo:data.teamsData}));
+                    setData(prev => ({ ...prev, usersInfo: data.usersData, teamsInfo: data.teamsData }));
                 });
         }
     };
@@ -155,28 +155,28 @@ const EditUser = ({ currentUsersData }) => {
                     <div className="radio_buttons">
                         <p>Gender</p>
                         <input type="radio"
-                               value="male"
-                               name="gender"
-                               id="radio"
-                               defaultChecked={currentUsersData.gender === "male"}
-                               onChange={(e) =>
-                            setEditPocket((prev) => ({
-                                ...prev,
-                                gender: e.target.value,
-                            }))
-                        }
+                            value="male"
+                            name="gender"
+                            id="radio"
+                            defaultChecked={currentUsersData.gender === "male"}
+                            onChange={(e) =>
+                                setEditPocket((prev) => ({
+                                    ...prev,
+                                    gender: e.target.value,
+                                }))
+                            }
                             required /> <p>Male</p>
                         <input type="radio"
-                               value="female"
-                               name="gender"
-                               id="radio"
-                               defaultChecked={currentUsersData.gender === "female"}
-                               onChange={(e) =>
-                            setEditPocket((prev) => ({
-                                ...prev,
-                                gender: e.target.value,
-                            }))
-                        }
+                            value="female"
+                            name="gender"
+                            id="radio"
+                            defaultChecked={currentUsersData.gender === "female"}
+                            onChange={(e) =>
+                                setEditPocket((prev) => ({
+                                    ...prev,
+                                    gender: e.target.value,
+                                }))
+                            }
                             required /> <p>Female</p>
                     </div>
                     <select onChange={e => setEditPocket((prev) => ({
@@ -184,8 +184,8 @@ const EditUser = ({ currentUsersData }) => {
                         teamId: e.target.value,
                     }))}>
                         <option>{currentUsersData.team}</option>
-                        {teamData.map(el=>{
-                            return(
+                        {teamData.map(el => {
+                            return (
                                 <option
                                     value={el._id}
                                 >{el.name}</option>
@@ -198,7 +198,7 @@ const EditUser = ({ currentUsersData }) => {
                         type="button"
                         defaultValue="Save"
                         className="forms_button-action"
-                        onClick={Edit}
+                        onClick={e => { Edit(); setShow(false) }}
                     />
                 </div>
             </form>

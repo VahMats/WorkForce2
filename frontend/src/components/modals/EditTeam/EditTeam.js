@@ -1,13 +1,13 @@
-import React, {useState, useEffect, useContext} from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./EditTeam.css";
-import {AllData} from "../../Home/Home";
+import { AllData } from "../../Home/Home";
 
-const EditTeam = ({ currentTeamData }) => {
+const EditTeam = ({ currentTeamData, setShow }) => {
 
     const { setData } = useContext(AllData)
 
     const [teamEditData, setTeamEditData] = useState({
-        id:currentTeamData._id,
+        id: currentTeamData._id,
         name: currentTeamData.name,
         maxCount: currentTeamData.maxCount,
     })
@@ -56,7 +56,7 @@ const EditTeam = ({ currentTeamData }) => {
                     "x-access-token": localStorage.token,
                 },
                 body: JSON.stringify(teamEditData),
-            }).then(res => res.json()).then(data => setData(prev=>({...prev, teamsInfo:data.teamsData})))
+            }).then(res => res.json()).then(data => setData(prev => ({ ...prev, teamsInfo: data.teamsData })))
         } catch (e) {
             console.error(e);
         }
@@ -93,7 +93,7 @@ const EditTeam = ({ currentTeamData }) => {
                         defaultValue="Submit"
                         className="forms_button-action"
                         onClick={e => {
-                            Edit();
+                            Edit(); setShow(false)
                         }}
                     />
                 </div>

@@ -1,8 +1,8 @@
 import React, { useContext, useState } from "react";
 import "./AddTeam.css";
-import {AllData} from "../../Home/Home";
+import { AllData } from "../../Home/Home";
 
-const AddTeam = () => {
+const AddTeam = ({ setShow }) => {
 
     const { data, setData } = useContext(AllData);
 
@@ -54,7 +54,7 @@ const AddTeam = () => {
                 },
                 body: JSON.stringify(teamAddData),
             }).then(res => res.json()).then(data => {
-                setData(prev => ({...prev, teamsInfo: data.teamsData}))
+                setData(prev => ({ ...prev, teamsInfo: data.teamsData }))
             })
         } catch (e) {
             console.error(e);
@@ -90,7 +90,7 @@ const AddTeam = () => {
                         defaultValue="Submit"
                         className="forms_button-action"
                         onClick={e => {
-                            addTeam();
+                            addTeam(); setShow(false)
                         }}
                     />
                 </div>
