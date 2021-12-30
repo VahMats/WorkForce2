@@ -36,20 +36,14 @@ app.get('/token', async (req,res)=>{
     const user = await UserSchema.findById(id, {firstName:1, lastName:1, email:1, username:1, dateOfBirth:1, gender:1, team:1, teamId:1, isAdmin:1});
     tokenData.userInfo = user
     if (user.isAdmin){
-        // const users = await UserSchema.find({}, {firstName:1, lastName:1, email:1, username:1, dateOfBirth:1, gender:1, team:1, teamId:1, deleted:1});
-        // const availableUsers = users.filter(el => !el.deleted)
-        // tokenData.usersInfo = availableUsers;
         const allUsersData = await UsersDataFind();
         tokenData.usersInfo = allUsersData.filter(el => el.id !== id);
-        // const teams = await TeamSchema.find();
-        // const availableTeams = teams.filter(el => !el.deleted)
-        // tokenData.teamsInfo = teams;
         tokenData.teamsInfo = await TeamsDataFind();
-    }else {
+    }else if(user.teamId){
         let teamsId = user.teamId;
-        console.log(teamsId);
-        const teamMembers = await UserSchema.find({teamId: teamsId}, {firstName:1, lastName:1, email:1, username:1, dateOfBirth:1, gender:1, teamId:1})
-        tokenData.usersInfo = teamMembers;
+        const teamMembers = await UserSchema.find({teamId: teamsId}, {firstName:1, lastName:1, email:1, username:1, dateOfBirth:1, gender:1, teamId:1, deleted:1,})
+        const notDeletedTeamMembers = teamMembers.filter(el=> !el.deleted)
+        tokenData.usersInfo = notDeletedTeamMembers;
     }
     res.status(200).send(tokenData)
 

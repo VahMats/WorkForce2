@@ -10,6 +10,8 @@ function UserProfile({setWhichDashboard}) {
 
     const { data } = useContext(AllData)
 
+    let teamName = data.userInfo.team === "-" ? "Your Team" : data.userInfo.team
+
     return (
         <>
             <nav className="user-main">
@@ -26,7 +28,7 @@ function UserProfile({setWhichDashboard}) {
                         </ul>
                     </div>
                     <NavLink activeClassName = "used-link" to='/userlist' >
-                        <li onClick={e=>{setWhichDashboard("user")}}>{data.userInfo.isAdmin ? "Users List" : data.userInfo.team}</li>
+                        <li onClick={e=>{setWhichDashboard("user")}}>{data.userInfo.isAdmin ? "Users List" : teamName}</li>
                     </NavLink>
                     {data.userInfo.isAdmin ?<NavLink activeClassName= "used-link" to='/teamlist' >
                         <li onClick={e=>{setWhichDashboard("team")}}>Team List</li>

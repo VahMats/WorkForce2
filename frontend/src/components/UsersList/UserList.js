@@ -48,6 +48,7 @@ const UserList = ({ visible }) => {
 
     };
 
+    console.log(Object.keys(data.usersInfo).length)
 
 
     return (
@@ -60,7 +61,7 @@ const UserList = ({ visible }) => {
                         </section>
                     </div>
                 ) : null}
-                {data.usersInfo.length ? (<section className="users_list">
+                {Object.keys(data.usersInfo).length === 0 ? <h1 className={"no-users"}>{data.userInfo.isAdmin ? "No users yet ..." : "You are not in team yet"}</h1> : (<section className="users_list">
                     <table>
                         <thead>
                             <tr className="users_list_table">
@@ -113,8 +114,7 @@ const UserList = ({ visible }) => {
                             ))}
                         </tbody>
                     </table>
-                </section>) :
-                    <h1 className={"no-users"}>{data.userInfo.isAdmin ? "No users yet ..." : "You are not in team yet"}</h1>}
+                </section>)}
             </div>
             {viewModalShow && (
                 <MainModal show={viewModalShow} setShow={setViewModalShow}>
