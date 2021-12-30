@@ -48,7 +48,7 @@ td img {
   color: #028594;
 }
 
-@media screen and (max-width: 2560px) {
+/* @media screen and (m-width: 2560px) {
   .team_list {
     width: 100%;
     display: flex;
@@ -61,4 +61,4 @@ td img {
   .team_list_info {
     font-size: 10px;
   }
-}
+} */

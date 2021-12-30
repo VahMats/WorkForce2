@@ -23,24 +23,21 @@ const Login = () => {
 
   const errorsSetting = (type) => {
     switch (type) {
-      case "text":
-        setErrorFields("Invalid name");
+      case "firstName":
+        alert("Invalid First name")
         break;
       case "username":
-        setErrorFields("Invalid username");
+        alert("Invalid Username")
         break;
       case "email":
-        setErrorFields("Invalid Email");
+        alert("Invalid email")
         break;
       case "password":
-        setErrorFields("Invalid password");
+        alert("Invalid password")
         break;
       case "confirmPassword":
         setErrorFields("Passwords are not the same");
         break;
-      case " ":
-        setErrorFields("Please fill in all the fields");
-        break
       default:
         setErrorFields("Please fill in all the fields")
     }
@@ -85,11 +82,11 @@ const Login = () => {
         .then((res) => res.json())
         .then((data) => {
           console.log(data);
-          if (!data.usernameIsUnique){
+          if (!data.usernameIsUnique) {
             alert("username is already used")
-          }else if (!data.emailIsUnique){
+          } else if (!data.emailIsUnique) {
             alert("email is already used")
-          }else {
+          } else {
             setMainClass("bounceRight")
           }
         });
@@ -181,8 +178,7 @@ const Login = () => {
           </div>
           <div className="user_forms-signup">
             <h2 className="forms_title">Sign up, the rest will follow!</h2>
-            <form className="forms_form" onSubmit={errorsSetting}>
-              <p className="error"> {errorFields} </p>
+            <form className="forms_form">
               <fieldset className="forms_fieldset">
                 <div className="forms_field">
                   <input

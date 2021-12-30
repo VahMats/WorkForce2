@@ -51,7 +51,7 @@
   color: #028594;
 }
 
-@media screen and (max-width: 2560px) {
+/* @media screen and (max-width: 2560px) {
   .users_list {
     width: 100%;
     display: flex;
@@ -64,4 +64,4 @@
   .users_list_info {
     font-size: 10px;
   }
-}
+} */
