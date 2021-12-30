@@ -23,8 +23,11 @@ const Login = () => {
 
   const errorsSetting = (type) => {
     switch (type) {
-      case "text":
-        setErrorFields("Invalid name");
+      case "firstName":
+        setErrorFields("Invalid firstName");
+        break;
+      case "lastName":
+        setErrorFields("Invalid lastName");
         break;
       case "username":
         setErrorFields("Invalid username");
@@ -38,11 +41,15 @@ const Login = () => {
       case "confirmPassword":
         setErrorFields("Passwords are not the same");
         break;
+      case "dateOfBirth":
+        setErrorFields("Invalid date of birth");
+        break;
+      case "gender":
+        setErrorFields("Invalid gender");
+        break;
       case " ":
         setErrorFields("Please fill in all the fields");
         break
-      default:
-        setErrorFields("Please fill in all the fields")
     }
   }
 
@@ -270,12 +277,16 @@ const Login = () => {
                     className="forms_field-input"
                     minLength={6}
                     maxLength={20}
-                    onChange={(e) =>
-                      setRegPocket((prev) => ({
-                        ...prev,
-                        confirmPassword: e.target.value,
-                      }))
-                    }
+                    onChange={(e) =>{
+                      if (regPocket.password !== e.target.value){
+                        errorsSetting("confirmPassword");
+                      } else {
+                        setRegPocket((prev) => ({
+                          ...prev,
+                          confirmPassword: e.target.value,
+                        }))
+                      }
+                    }}
                     required
                   />
                 </div>

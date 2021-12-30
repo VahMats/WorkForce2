@@ -21,31 +21,37 @@ const AddUser = ({ setShow }) => {
   });
   const [errorFields, setErrorFields] = useState([]);
 
-  const errorsSetting = (type) => {
-    switch (type) {
-      case "text":
-        setErrorFields("Invalid name");
-        break;
-      case "username":
-        setErrorFields("Username does not match to our requirmenets");
-        break;
-      case "email":
-        setErrorFields("Invalid Email");
-        break;
-      case "password":
-        setErrorFields("Invalid password");
-        break;
-      case "confirmpassword":
-        setErrorFields("Passwords are not the same");
-        break;
-      case " ":
-        setErrorFields("Please fill in all the fields");
-        break
-      default:
-        setErrorFields("Please fill in all the fields")
+    const errorsSetting = (type) => {
+        switch (type) {
+            case "firstName":
+                setErrorFields("Invalid firstName");
+                break;
+            case "lastName":
+                setErrorFields("Invalid lastName");
+                break;
+            case "username":
+                setErrorFields("Invalid username");
+                break;
+            case "email":
+                setErrorFields("Invalid Email");
+                break;
+            case "password":
+                setErrorFields("Invalid password");
+                break;
+            case "confirmPassword":
+                setErrorFields("Passwords are not the same");
+                break;
+            case "dateOfBirth":
+                setErrorFields("Invalid date of birth");
+                break;
+            case "gender":
+                setErrorFields("Invalid gender");
+                break;
+            case " ":
+                setErrorFields("Please fill in all the fields");
+                break
+        }
     }
-  }
-
 
   const Add = async () => {
     const validReg = ValidationChecker(addPocket, "register");
