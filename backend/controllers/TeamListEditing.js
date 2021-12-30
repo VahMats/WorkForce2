@@ -47,12 +47,11 @@ exports.teamDelete = async (req,res) => {
     await TeamSchema.findByIdAndUpdate(id, {deleted:1});
 
     for (let i = 0; i < deletingTeam.count; i++) {
-        await UserSchema.findOneAndUpdate({teamId:id}, {teamId:0, team:"-"})
+        await UserSchema.findOneAndUpdate({teamId:id}, {teamId:null, team:"-"})
     }
 
     teamDeletingData.usersData = await UsersDataFind();
     teamDeletingData.teamsData = await TeamsDataFind();
-    console.log(teamDeletingData)
     res.status(200).send(teamDeletingData);
 
 }
