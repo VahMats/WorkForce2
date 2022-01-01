@@ -30,7 +30,7 @@ const Login = () => {
         setErrorFields("Invalid lastName");
         break;
       case "username":
-        alert("Invalid Username")
+        alert("Invalid username")
         break;
       case "email":
         alert("Invalid email")
@@ -188,7 +188,8 @@ const Login = () => {
           </div>
           <div className="user_forms-signup">
             <h2 className="forms_title">Sign up, the rest will follow!</h2>
-            <form className="forms_form">
+            <form className="forms_form" onSubmit={errorsSetting}>
+              <p className="error"> {errorFields} </p>
               <fieldset className="forms_fieldset">
                 <div className="forms_field">
                   <input
