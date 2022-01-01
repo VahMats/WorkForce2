@@ -24,19 +24,19 @@ const Login = () => {
   const errorsSetting = (type) => {
     switch (type) {
       case "firstName":
-        setErrorFields("Invalid firstName");
+        setErrorFields("Invalid first name");
         break;
       case "lastName":
-        setErrorFields("Invalid lastName");
+        setErrorFields("Invalid last name");
         break;
       case "username":
-        alert("Invalid username")
+        setErrorFields("Invalid username")
         break;
       case "email":
-        alert("Invalid email")
+        setErrorFields("Invalid email")
         break;
       case "password":
-        alert("Invalid password")
+        setErrorFields("Invalid password")
         break;
       case "confirmPassword":
         setErrorFields("Passwords are not the same");
