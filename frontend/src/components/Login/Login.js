@@ -24,14 +24,10 @@ const Login = () => {
   const errorsSetting = (type) => {
     switch (type) {
       case "firstName":
-<<<<<<< HEAD
-        alert("Invalid First name")
-=======
         setErrorFields("Invalid firstName");
         break;
       case "lastName":
         setErrorFields("Invalid lastName");
->>>>>>> eee294411d79678235f627aed2e8caa26934d780
         break;
       case "username":
         alert("Invalid Username")
@@ -45,10 +41,6 @@ const Login = () => {
       case "confirmPassword":
         setErrorFields("Passwords are not the same");
         break;
-<<<<<<< HEAD
-      default:
-        setErrorFields("Please fill in all the fields")
-=======
       case "dateOfBirth":
         setErrorFields("Invalid date of birth");
         break;
@@ -58,7 +50,6 @@ const Login = () => {
       case " ":
         setErrorFields("Please fill in all the fields");
         break
->>>>>>> eee294411d79678235f627aed2e8caa26934d780
     }
   }
 
@@ -285,8 +276,8 @@ const Login = () => {
                     className="forms_field-input"
                     minLength={6}
                     maxLength={20}
-                    onChange={(e) =>{
-                      if (regPocket.password !== e.target.value){
+                    onChange={(e) => {
+                      if (regPocket.password !== e.target.value) {
                         errorsSetting("confirmPassword");
                       } else {
                         setRegPocket((prev) => ({
