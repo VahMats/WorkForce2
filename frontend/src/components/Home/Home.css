@@ -1,19 +1,22 @@
 .container {
+  width: 100%;
   display: flex;
   flex-direction: row;
   overflow: auto;
-
 }
 .home-main {
-  margin-left: 100px;
   margin-top: 100px;
+  margin-left: 50px;
   display: inline-flex;
   align-items: baseline;
 }
 
+.home-main h1 {
+  width: 300px;
+}
 .home-news {
   margin-left: 100px;
-  width: 800px;
+  width: 600px;
 }
 
 .home-news h3 {
@@ -27,7 +30,7 @@
 
 .home-news-table {
   border-style: ridge;
-  width: 800px;
+  width: 600px;
   height: 100px;
   text-align: center;
 }

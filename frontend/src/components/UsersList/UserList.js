@@ -44,7 +44,7 @@ const UserList = ({ visible }) => {
             }),
         })
             .then(res => res.json())
-            .then(data => setData(prev=>({...prev, usersInfo: data.usersData, teamsInfo:data.teamsData})))
+            .then(data => setData(prev => ({ ...prev, usersInfo: data.usersData, teamsInfo: data.teamsData })))
 
     };
 
@@ -80,12 +80,12 @@ const UserList = ({ visible }) => {
                             {data.usersInfo.map((item, index) => (
                                 <tr key={index} >
                                     {data.userInfo.isAdmin ? <td>{item._id}</td> : null}
-                                    <td className="users_desc">{item.firstName}</td>
-                                    <td className="users_desc">{item.lastName}</td>
-                                    <td className="users_desc">{item.username}</td>
-                                    <td className="users_desc">{item.email}</td>
-                                    <td className="users_desc">{item.dateOfBirth}</td>
-                                    <td className="users_desc">{item.gender}</td>
+                                    <td>{item.firstName}</td>
+                                    <td>{item.lastName}</td>
+                                    <td>{item.username}</td>
+                                    <td>{item.email}</td>
+                                    <td>{item.dateOfBirth}</td>
+                                    <td>{item.gender}</td>
                                     {data.userInfo.isAdmin ? <td>{item.team}</td> : ""}
                                     <td className="image-td">
                                         <img className="actions_buttons"

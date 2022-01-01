@@ -1,30 +1,26 @@
-.user-main {
+.user_main {
   height: calc(100vh - 70px);
   background-color: #fafafa;
-  width: 250px;
   border-color: #fafafa;
-  display: flex;
-  flex-direction: column;
   box-shadow: 0px 0px 14px 0px;
 }
 
-.user-main-profile {
+.user_main-profile {
   margin-top: 50px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.user-main-profile img {
+.user_main-profile img {
   width: 200px;
   height: 200px;
 }
 
-.user-main-info {
+.user_main-info {
   align-self: flex-start;
-  padding-left: 10%;
 }
-.user-main-info ul li {
+.user_main-info ul li {
   font-family: "Georgia", Serif;
   color: #000000;
   list-style: none;
@@ -46,11 +42,11 @@ a {
 a:hover {
   color: #008594;
 }
-.used-link{
-   color: #ffcd04;
+.used_link {
+  color: #ffcd04;
 }
 
-@media screen and (max-width: 600px) {
+/* @media screen and (max-width: 600px) {
   .user-main {
     width: 100%;
     height: 100px;
@@ -64,4 +60,4 @@ a:hover {
     justify-content: baseline;
     margin-top: -50px;
   }
-}
+} */
