@@ -1,9 +1,12 @@
 const validationFunctions = {
     email: ({email})=> emailValidation(email),
     username: ({username}) => usernameValidation(username),
-    password: ({password, confirmPassword}) => passwordValidation(password, confirmPassword),
+    password: ({password}) => passwordValidation(password),
+    confirmPassword: ({password, confirmPassword}) => confirmPasswordValidation(password, confirmPassword),
     firstName: ({firstName}) => nameValidation(firstName),
     lastName: ({lastName}) => nameValidation(lastName),
+    gender: ({gender}) => genderValidation(gender),
+    dateOfBirth: ({dateOfBirth}) => dateOfBirthValidation(dateOfBirth),
 }
 
 export default (data, validationType) => {
@@ -32,19 +35,19 @@ export default (data, validationType) => {
     })
 
     const falseCurrent = Object.keys(resultData.fields).filter(e=>!resultData.fields[e].valid)
-    resultData.isValid = falseCurrent.length ? false : true
-    let lastmassege = []
-    falseCurrent.forEach(elem=>{lastmassege.push(`Please fill ${elem} field `) })
-    resultData.error =  lastmassege
+    resultData.isValid = falseCurrent.length ? false : true;
+    let lastMessege = []
+    falseCurrent.forEach(elem=>{lastMessege.push(elem)})
+    resultData.error =  lastMessege
     return resultData
 
 }
 
 function contentValidation(data, type) {
     let isValid = false;
-    const requiredRegister = ['email', 'username', 'password', 'firstName', 'lastName'];
+    const requiredRegister = ['gender', 'dateOfBirth', 'confirmPassword', 'password', 'email', 'username', 'lastName', 'firstName'];
     const requiredLogin = ['username', 'password'];
-    const requiredEdit = ['email', 'username', 'firstName', 'lastName'];
+    const requiredEdit = ['gender', 'dateOfBirth', 'email', 'username', 'lastName', 'firstName'];
 
     let fieldData = ''
 
@@ -95,7 +98,7 @@ function nameValidation(name) {
     }
     else return {
         valid: false,
-        error: 'incorrect entered data'
+        error: 'name'
     }
 }
 
@@ -109,7 +112,7 @@ function emailValidation(email) {
     }
     else return {
         valid: false,
-        error: 'incorrect email'
+        error: 'email'
     }
 }
 
@@ -122,25 +125,51 @@ function usernameValidation(username) {
     }
     else return {
         valid: false,
-        error: 'incorrect entered data'
+        error: 'username'
     }
 }
 
-function passwordValidation(password, confirmPassword) {
-    const sampleForPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/
-
-    if (confirmPassword) {
-        if (sampleForPassword.test(password) && confirmPassword === password) {
-            return {
-                valid: true,
-                error: ''
-            }
-        }
-        else return {
-            valid: false,
-            error: 'incorrect password'
+function genderValidation(gender) {
+    if (gender.length !== 0){
+        return {
+            valid: true,
+            error: ''
         }
     }
+    else return {
+        valid: false,
+        error: 'gender'
+    }
+}
+
+function dateOfBirthValidation(dateOfBirth) {
+    if (dateOfBirth.length !== 0){
+        return {
+            valid: true,
+            error: ''
+        }
+    }
+    else return {
+        valid: false,
+        error: 'dateOfBirth'
+    }
+}
+
+function passwordValidation(password) {
+    const sampleForPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/
+
+    // if (confirmPassword) {
+    //     if (sampleForPassword.test(password) && confirmPassword === password) {
+    //         return {
+    //             valid: true,
+    //             error: ''
+    //         }
+    //     }
+    //     else return {
+    //         valid: false,
+    //         error: 'password'
+    //     }
+    // }
 
     if (sampleForPassword.test(password))  {
         return {
@@ -151,6 +180,20 @@ function passwordValidation(password, confirmPassword) {
 
     else return {
         valid: false,
-        error: 'incorrect password'
+        error: 'password'
+    }
+}
+
+function confirmPasswordValidation (password, confirmPassword){
+    const sampleForPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/
+    if (sampleForPassword.test(password) && confirmPassword === password) {
+        return {
+            valid: true,
+            error: ''
+        }
+    }
+    else return {
+        valid: false,
+        error: 'confirmPassword'
     }
 }
