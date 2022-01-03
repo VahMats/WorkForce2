@@ -1,8 +1,11 @@
+.main {
+    display: flex;
+    flex-direction: column;
+}
 .team_list {
-  width: 100%;
-  min-height: 600px;
-  margin-left: 20px;
-  height: 500px;
+    width: 82vw;
+  height: auto;
+  margin-left: 50px;
   background-color: #ebebeb;
   display: flex;
   box-shadow: 5px 5px 15px 3px #777575;
@@ -30,12 +33,16 @@ td img {
   height: 25px;
   cursor: pointer;
 }
+.new_team {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 20px;
+}
 .new_team button {
   background-color: #028594;
   color: white;
   width: 150px;
   font-size: 20px;
-  float: right;
   margin-top: 15px;
   margin-bottom: 15px;
 }

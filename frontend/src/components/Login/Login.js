@@ -24,19 +24,19 @@ const Login = () => {
   const errorsSetting = (type) => {
     switch (type) {
       case "firstName":
-        setErrorFields("Invalid first name");
+        setErrorFields("Invalid firstName");
         break;
       case "lastName":
-        setErrorFields("Invalid last name");
+        setErrorFields("Invalid lastName");
         break;
       case "username":
-        setErrorFields("Invalid username")
+        setErrorFields("Invalid username");
         break;
       case "email":
-        setErrorFields("Invalid email")
+        setErrorFields("Invalid Email");
         break;
       case "password":
-        setErrorFields("Invalid password")
+        setErrorFields("Invalid password");
         break;
       case "confirmPassword":
         setErrorFields("Passwords are not the same");
@@ -92,11 +92,11 @@ const Login = () => {
         .then((res) => res.json())
         .then((data) => {
           console.log(data);
-          if (!data.usernameIsUnique) {
+          if (!data.usernameIsUnique){
             alert("username is already used")
-          } else if (!data.emailIsUnique) {
+          }else if (!data.emailIsUnique){
             alert("email is already used")
-          } else {
+          }else {
             setMainClass("bounceRight")
           }
         });
@@ -277,8 +277,8 @@ const Login = () => {
                     className="forms_field-input"
                     minLength={6}
                     maxLength={20}
-                    onChange={(e) => {
-                      if (regPocket.password !== e.target.value) {
+                    onChange={(e) =>{
+                      if (regPocket.password !== e.target.value){
                         errorsSetting("confirmPassword");
                       } else {
                         setRegPocket((prev) => ({

@@ -51,7 +51,7 @@ const TeamList = ({ visible }) => {
     };
     return (
         <main style={{ display: visible }}>
-            <div>
+            <div className='main'>
                 <div className="new_team">
                     <section className="new_team_field">
                         <button onClick={e => { setAddModalShow(true) }}>Add a new team</button>

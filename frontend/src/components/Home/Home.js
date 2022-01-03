@@ -43,7 +43,7 @@ function Home() {
     else {
         return (
             <main>
-                <div>
+                <div className='asd'>
                     <Navbar data={data.userInfo} />
                     <div className="container">
                         <AllData.Provider value={{ data, setData }} >
