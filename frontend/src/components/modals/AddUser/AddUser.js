@@ -70,6 +70,7 @@ const AddUser = ({ setShow }) => {
         .then((res) => res.json())
         .then((data) => {
           setData(prev => ({ ...prev, usersInfo: data.usersData, teamsInfo: data.teamsData }));
+            setShow(false);
         });
     }
   };
@@ -222,7 +223,7 @@ const AddUser = ({ setShow }) => {
             type="button"
             defaultValue="Submit"
             className="forms_button-action"
-            onClick={e => { Add(); setShow(false) }}
+            onClick={e => { Add()}}
           />
         </div>
       </form>
