@@ -69,6 +69,11 @@ const Login = () => {
         .then((res) => res.json())
         .then((data) => {
           console.log(data);
+          if (!data.userIsValid) {
+            setErrorFields("User does not exist")
+          } else if (!data.passwordIsCorrect) {
+            setErrorFields("Password is incorrect")
+          }
           if (data.data.length !== 0) {
             localStorage.setItem("token", data.token);
             window.location.reload();
@@ -92,11 +97,11 @@ const Login = () => {
         .then((res) => res.json())
         .then((data) => {
           console.log(data);
-          if (!data.usernameIsUnique){
-            alert("username is already used")
-          }else if (!data.emailIsUnique){
-            alert("email is already used")
-          }else {
+          if (!data.usernameIsUnique) {
+            setErrorFields("Username is already used")
+          } else if (!data.emailIsUnique) {
+            setErrorFields("Email is already used")
+          } else {
             setMainClass("bounceRight")
           }
         });
@@ -277,8 +282,8 @@ const Login = () => {
                     className="forms_field-input"
                     minLength={6}
                     maxLength={20}
-                    onChange={(e) =>{
-                      if (regPocket.password !== e.target.value){
+                    onChange={(e) => {
+                      if (regPocket.password !== e.target.value) {
                         errorsSetting("confirmPassword");
                       } else {
                         setRegPocket((prev) => ({

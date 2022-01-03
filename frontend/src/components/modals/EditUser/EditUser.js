@@ -30,20 +30,27 @@ const EditUser = ({ currentUsersData, setShow }) => {
 
     const errorsSetting = (type) => {
         switch (type) {
-            case "text":
-                setErrorFields("Invalid name");
+            case "firstName":
+                setErrorFields("Invalid first name");
+                break;
+            case "lastName":
+                setErrorFields("Invalid last name");
                 break;
             case "username":
-                setErrorFields("Username does not match to our requirmenets");
+                setErrorFields("Invalid username");
                 break;
             case "email":
-                setErrorFields("Invalid Email");
+                setErrorFields("Invalid email");
                 break;
-            case " ":
+            case "dateOfBirth":
+                setErrorFields("Invalid date of birth");
+                break;
+            case "gender":
+                setErrorFields("Invalid gender");
+                break;
+            default:
                 setErrorFields("Please fill in all the fields");
                 break
-            default:
-                setErrorFields("Please fill in all the fields")
         }
     }
 
@@ -64,7 +71,14 @@ const EditUser = ({ currentUsersData, setShow }) => {
             })
                 .then((res) => res.json())
                 .then((data) => {
-                    setData(prev => ({ ...prev, usersInfo: data.usersData, teamsInfo: data.teamsData }));
+                    if (!data.newUsernameIsUnique && data.newEmailIsUnique) {
+                        setErrorFields("New username is already used")
+                    } else if (!data.newEmailIsUnique) {
+                        setErrorFields("New Email is already used")
+                    } else {
+                        setData(prev => ({ ...prev, usersInfo: data.usersData, teamsInfo: data.teamsData }));
+                        setShow(false);
+                    }
                 });
         }
     };
@@ -198,7 +212,7 @@ const EditUser = ({ currentUsersData, setShow }) => {
                         type="button"
                         defaultValue="Save"
                         className="forms_button-action"
-                        onClick={e => { Edit(); setShow(false) }}
+                        onClick={e => { Edit() }}
                     />
                 </div>
             </form>

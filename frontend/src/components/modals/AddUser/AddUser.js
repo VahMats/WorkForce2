@@ -21,37 +21,37 @@ const AddUser = ({ setShow }) => {
   });
   const [errorFields, setErrorFields] = useState([]);
 
-    const errorsSetting = (type) => {
-        switch (type) {
-            case "firstName":
-                setErrorFields("Invalid firstName");
-                break;
-            case "lastName":
-                setErrorFields("Invalid lastName");
-                break;
-            case "username":
-                setErrorFields("Invalid username");
-                break;
-            case "email":
-                setErrorFields("Invalid Email");
-                break;
-            case "password":
-                setErrorFields("Invalid password");
-                break;
-            case "confirmPassword":
-                setErrorFields("Passwords are not the same");
-                break;
-            case "dateOfBirth":
-                setErrorFields("Invalid date of birth");
-                break;
-            case "gender":
-                setErrorFields("Invalid gender");
-                break;
-            case " ":
-                setErrorFields("Please fill in all the fields");
-                break
-        }
+  const errorsSetting = (type) => {
+    switch (type) {
+      case "firstName":
+        setErrorFields("Invalid first name");
+        break;
+      case "lastName":
+        setErrorFields("Invalid last name");
+        break;
+      case "username":
+        setErrorFields("Invalid username");
+        break;
+      case "email":
+        setErrorFields("Invalid email");
+        break;
+      case "password":
+        setErrorFields("Invalid password");
+        break;
+      case "confirmPassword":
+        setErrorFields("Passwords are not the same");
+        break;
+      case "dateOfBirth":
+        setErrorFields("Invalid date of birth");
+        break;
+      case "gender":
+        setErrorFields("Invalid gender");
+        break;
+      default:
+        setErrorFields("Please fill in all the fields");
+        break
     }
+  }
 
   const Add = async () => {
     const validReg = ValidationChecker(addPocket, "register");
@@ -69,8 +69,14 @@ const AddUser = ({ setShow }) => {
       })
         .then((res) => res.json())
         .then((data) => {
-          setData(prev => ({ ...prev, usersInfo: data.usersData, teamsInfo: data.teamsData }));
+          if (!data.usernameIsUnique) {
+            setErrorFields("Username is already used")
+          } else if (!data.emailIsUnique) {
+            setErrorFields("Email is already used")
+          } else {
+            setData(prev => ({ ...prev, usersInfo: data.usersData, teamsInfo: data.teamsData }));
             setShow(false);
+          }
         });
     }
   };
@@ -223,7 +229,7 @@ const AddUser = ({ setShow }) => {
             type="button"
             defaultValue="Submit"
             className="forms_button-action"
-            onClick={e => { Add()}}
+            onClick={e => { Add() }}
           />
         </div>
       </form>
