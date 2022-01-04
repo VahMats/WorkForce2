@@ -1,9 +1,7 @@
 import './App.css';
 import {Route, BrowserRouter as Router, Switch, Redirect} from "react-router-dom";
 import Home from "./components/Home/Home";
-import Navbar from "./components/Navbar/Navbar";
 import Login from "./components/Login/Login"
-import UserList from "./components/UsersList/UserList";
 
 function App() {
   return (

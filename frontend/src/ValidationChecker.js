@@ -9,7 +9,7 @@ const validationFunctions = {
     dateOfBirth: ({dateOfBirth}) => dateOfBirthValidation(dateOfBirth),
 }
 
-export default (data, validationType) => {
+const ValidationChecker = (data, validationType) => {
     const resultData = {
         fields: {},
         isValid: false,
@@ -46,7 +46,7 @@ export default (data, validationType) => {
 function contentValidation(data, type) {
     let isValid = false;
     const requiredRegister = ['gender', 'dateOfBirth', 'confirmPassword', 'password', 'email', 'username', 'lastName', 'firstName'];
-    const requiredLogin = ['username', 'password'];
+    const requiredLogin = [ 'password', 'username'];
     const requiredEdit = ['gender', 'dateOfBirth', 'email', 'username', 'lastName', 'firstName'];
 
     let fieldData = ''
@@ -61,11 +61,11 @@ function contentValidation(data, type) {
         case 'edit':
             fieldData = requiredEdit;
             break
+        default:
+            break
     }
-    // const fieldData = type === 'login' ? requiredLogin : requiredRegister
 
     const fields = Object.keys(data)
-    console.log(fields)
     const filtered = fieldData.filter(elem => fields.includes(elem))
 
     switch (type) {
@@ -78,10 +78,9 @@ function contentValidation(data, type) {
         case 'edit':
             isValid = filtered.length === requiredEdit.length;
             break;
+        default:
+            break;
     }
-
-    // isValid = type === "login" ? filtered.length === requiredLogin.length : filtered.length === requiredRegister.length
-
 
     return {
         valid: isValid,
@@ -158,19 +157,6 @@ function dateOfBirthValidation(dateOfBirth) {
 function passwordValidation(password) {
     const sampleForPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/
 
-    // if (confirmPassword) {
-    //     if (sampleForPassword.test(password) && confirmPassword === password) {
-    //         return {
-    //             valid: true,
-    //             error: ''
-    //         }
-    //     }
-    //     else return {
-    //         valid: false,
-    //         error: 'password'
-    //     }
-    // }
-
     if (sampleForPassword.test(password))  {
         return {
             valid: true,
@@ -197,3 +183,5 @@ function confirmPasswordValidation (password, confirmPassword){
         error: 'confirmPassword'
     }
 }
+
+export default ValidationChecker;

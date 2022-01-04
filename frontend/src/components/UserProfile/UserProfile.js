@@ -1,5 +1,5 @@
-import React, { useContext, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import React, { useContext } from "react";
+import { NavLink } from "react-router-dom";
 import ManIcon from "../../images/manicon.png";
 import WomanIcon from "../../images/womanicon.png";
 import { AllData } from '../Home/Home'

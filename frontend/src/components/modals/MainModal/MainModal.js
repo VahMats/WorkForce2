@@ -2,7 +2,7 @@ import React from "react";
 import Close from "../../../images/close.png";
 import "./MainModal.css"
 
-export default ({ show, setShow, children }) => {
+const MainModal = ({ show, setShow, children }) => {
     return (
         <section className={show ? "modal" : "modal-close"}>
             <div className="modal-wrapper">
@@ -22,3 +22,5 @@ export default ({ show, setShow, children }) => {
         </section>
     );
 }
+
+export default MainModal;

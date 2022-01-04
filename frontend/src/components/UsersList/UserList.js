@@ -48,9 +48,6 @@ const UserList = ({ visible }) => {
 
     };
 
-    console.log(Object.keys(data.usersInfo).length)
-
-
     return (
         <main style={{ display: visible }}>
             <div>

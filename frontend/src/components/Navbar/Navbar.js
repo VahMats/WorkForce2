@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from "react";
+import React from "react";
 import Logo from "../../images/logo.svg";
 import ManIcon from "../../images/manicon.png";
 import WomanIcon from "../../images/womanicon.png";
@@ -38,7 +38,7 @@ const Navbar = ({data}) => {
                          src={data.gender === "male" ? ManIcon : WomanIcon}
                     />
                     <div>
-                        <ArrowDropDownIcon onClick={handleMenu}></ArrowDropDownIcon>
+                        <ArrowDropDownIcon onClick={handleMenu} />
                         <Menu
                             id="menu-appbar"
                             anchorEl={anchorEl}

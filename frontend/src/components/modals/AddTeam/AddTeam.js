@@ -4,7 +4,7 @@ import { AllData } from "../../Home/Home";
 
 const AddTeam = ({ setShow }) => {
 
-    const { data, setData } = useContext(AllData);
+    const { setData } = useContext(AllData);
 
     const [teamAddData, setTeamAddData] = useState({
         name: "",
@@ -12,20 +12,14 @@ const AddTeam = ({ setShow }) => {
     })
 
     const [teamError, setTeamError] = useState(false);
-    const [teamHasError, setTeamHasError] = useState(true);
-
-
     const [membersError, setMembersError] = useState(false);
-    const [membersHasError, setMembersHasError] = useState(true);
 
     const teamChange = (e) => {
         setTeamAddData(prev => ({ ...prev, name: e.target.value }));
         if (e.target.value.length === 0) {
             setTeamError(true);
-            setTeamHasError(true);
         } else {
             setTeamError(false);
-            setTeamHasError(false);
         }
     };
 
@@ -40,7 +34,6 @@ const AddTeam = ({ setShow }) => {
             setMembersError(true);
         } else {
             setMembersError(false);
-            setMembersHasError(false);
         }
     };
 

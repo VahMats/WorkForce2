@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import MainModal from "../modals/MainModal/MainModal";
 import ViewTeam from "../modals/ViewTeam/ViewTeam";
 import EditTeam from "../modals/EditTeam/EditTeam";

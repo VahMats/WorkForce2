@@ -47,7 +47,7 @@ const Login = () => {
       case "gender":
         setErrorFields("Invalid gender");
         break;
-      case " ":
+      default:
         setErrorFields("Please fill in all the fields");
         break
     }

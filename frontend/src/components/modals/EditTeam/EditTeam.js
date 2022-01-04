@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import "./EditTeam.css";
 import { AllData } from "../../Home/Home";
 
@@ -14,20 +14,14 @@ const EditTeam = ({ currentTeamData, setShow }) => {
     console.log(teamEditData)
 
     const [teamError, setTeamError] = useState(false);
-    const [teamHasError, setTeamHasError] = useState(true);
-
-
     const [membersError, setMembersError] = useState(false);
-    const [membersHasError, setMembersHasError] = useState(true);
 
     const teamChange = (e) => {
         setTeamEditData(prev => ({ ...prev, name: e.target.value }));
         if (e.target.value.length === 0) {
             setTeamError(true);
-            setTeamHasError(true);
         } else {
             setTeamError(false);
-            setTeamHasError(false);
         }
     };
 
@@ -40,10 +34,8 @@ const EditTeam = ({ currentTeamData, setShow }) => {
             e.target.value === ""
         ) {
             setMembersError(true);
-            setMembersError(true);
         } else {
             setMembersError(false);
-            setMembersHasError(false);
         }
     };
 
