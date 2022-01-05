@@ -6,6 +6,7 @@ import EditUser from "../modals/EditUser/EditUser";
 import View from "../../images/view.png";
 import Edit from "../../images/edit.png";
 import Delete from "../../images/delete.png";
+import Birthday from "../../images/birthday.png";
 import { AllData } from "../Home/Home";
 
 import "./UserList.css";
@@ -48,6 +49,12 @@ const UserList = ({ visible }) => {
 
     };
 
+    let date = new Date();
+    let dateMonth = date.getMonth() + 1;
+    let dateDay = date.getDate();
+    console.log(data.userInfo.dateOfBirth.split('-'))
+
+    console.log(dateMonth, dateDay);
     return (
         <main style={{ display: visible }}>
             <div>
@@ -77,7 +84,8 @@ const UserList = ({ visible }) => {
                             {data.usersInfo.map((item, index) => (
                                 <tr key={index} >
                                     {data.userInfo.isAdmin ? <td>{item._id}</td> : null}
-                                    <td>{item.firstName}</td>
+                                    <td>{dateMonth < item.dateOfBirth.split('-')[1] && item.dateOfBirth.split('-')[1] <= dateMonth + 1 && dateDay >= item.dateOfBirth.split('-')[2] ? <img alt="crown" src={Birthday} /> : ""}
+                                        {item.firstName}</td>
                                     <td>{item.lastName}</td>
                                     <td>{item.username}</td>
                                     <td>{item.email}</td>
