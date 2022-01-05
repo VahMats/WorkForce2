@@ -32,9 +32,18 @@ main {
 .users_list_info td {
   padding: 20px 20px;
 }
-.users_list_info td img{
+.users_list_info td img {
   width: 20px;
   height: 20px;
+}
+
+.imageTd {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.imageTd img {
+  margin: 0px 0px 5px 0px;
 }
 .actions_buttons {
   width: 25px;

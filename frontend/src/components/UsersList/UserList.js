@@ -95,7 +95,7 @@ const UserList = ({ visible }) => {
                             {data.usersInfo.map((item, index) => (
                                 <tr key={index} >
                                     {data.userInfo.isAdmin ? <td>{item._id}</td> : null}
-                                    <td>{item.firstName}
+                                    <td className="imageTd">{item.firstName}
                                         {isBirthday(parseInt(item.dateOfBirth.slice(5, 7)), parseInt(item.dateOfBirth.slice(8, 10))) ? <img alt="Birthday" src={Birthday} /> : ""}</td>
                                     <td>{item.lastName}</td>
                                     <td>{item.username}</td>
