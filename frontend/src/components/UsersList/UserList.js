@@ -84,8 +84,8 @@ const UserList = ({ visible }) => {
                             {data.usersInfo.map((item, index) => (
                                 <tr key={index} >
                                     {data.userInfo.isAdmin ? <td>{item._id}</td> : null}
-                                    <td>{item.firstName}
-                                        {dateMonth <= item.dateOfBirth.split('-')[1] && item.dateOfBirth.split('-')[1] <= dateMonth + 1 && item.dateOfBirth.split('-')[2] >= dateDay ? <img alt="Birthday" src={Birthday} /> : ""}</td>
+                                    <td className="imageTd">{dateMonth <= item.dateOfBirth.split('-')[1] && item.dateOfBirth.split('-')[1] <= dateMonth + 1 && item.dateOfBirth.split('-')[2] >= dateDay ? <img alt="Birthday" src={Birthday} /> : ""}
+                                    {item.firstName}</td>
                                     <td>{item.lastName}</td>
                                     <td>{item.username}</td>
                                     <td>{item.email}</td>

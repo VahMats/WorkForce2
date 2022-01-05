@@ -33,6 +33,15 @@ main {
   padding: 15px 20px;
 }
 
+.imageTd{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.imageTd img{
+    margin: 0px 0px 5px 0px;
+
+}
 .actions_buttons {
   width: 25px;
   height: 25px;
