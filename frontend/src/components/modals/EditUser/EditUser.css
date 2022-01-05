@@ -4,7 +4,6 @@
 
 .edit-user-title {
   color: #028594;
-  font-size: large;
 }
 
 .edit-user-form {
@@ -76,4 +75,9 @@
 
 .forms_button-action:hover {
   background-color: #ffcd04;
+}
+@media screen and (max-width: 768px) {
+  .edit-user {
+    font-size: 9px;
+  }
 }

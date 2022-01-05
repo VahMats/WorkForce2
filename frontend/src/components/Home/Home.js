@@ -50,7 +50,7 @@ function Home() {
                             <UserProfile setWhichDashboard={setWhichDashboard} />
 
                             <div className="home-main" style={{ display: whichDashboard === "welcome" ? "" : "none" }}>
-                                <h1>Welcome home, {data.userInfo.firstName}.</h1>
+                                <h1>Welcome home, {data.userInfo.firstName}</h1>
                                 <div className="home-news">
                                     <h3>What's happening at the company</h3>
                                     <div className="home-news-table"> You don't have any news at this moment...</div>

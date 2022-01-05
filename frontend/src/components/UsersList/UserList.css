@@ -7,18 +7,18 @@ main {
 }
 
 .users_list {
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  flex-wrap: wrap;
   width: 82vw;
   min-height: 600px;
   margin-left: 50px;
   height: 500px;
   background-color: #ebebeb;
-  display: flex;
   box-shadow: 5px 5px 15px 3px #777575;
   padding: 20px 20px;
   border-radius: 20px;
-  flex-direction: column;
-  overflow: auto;
-  flex-wrap: wrap;
 }
 
 .users_list_table th {
@@ -77,4 +77,9 @@ main {
   justify-content: center;
   text-align: center;
   color: #028594;
+}
+@media screen and (max-width: 768px) {
+  .users_list_info td {
+    padding: 0px 8px;
+  }
 }

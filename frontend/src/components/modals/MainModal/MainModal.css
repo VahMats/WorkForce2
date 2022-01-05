@@ -28,3 +28,19 @@
   height: 40px;
   float: right;
 }
+
+@media screen and (max-width: 768px) {
+  .modal-wrapper {
+    position: fixed;
+    padding: 20px;
+    background-color: #fbfeff;
+    width: 350px;
+    height: 350px;
+    border-radius: 4px;
+  }
+  .close-button img {
+    width: 30px;
+    height: 30px;
+    float: right;
+  }
+}

@@ -28,7 +28,7 @@ function UserProfile({ setWhichDashboard }) {
                         </ul>
                     </div>
                     <NavLink activeClassName="used_link" to='/userlist' >
-                        <li onClick={e => { setWhichDashboard("user") }}>{data.userInfo.isAdmin ? "Users List" : teamName}</li>
+                        <li onClick={e => { setWhichDashboard("user") }}>{data.userInfo.isAdmin ? "People" : teamName}</li>
                     </NavLink>
                     {data.userInfo.isAdmin ? <NavLink activeClassName="used_link" to='/teamlist' >
                         <li onClick={e => { setWhichDashboard("team") }}>Team List</li>

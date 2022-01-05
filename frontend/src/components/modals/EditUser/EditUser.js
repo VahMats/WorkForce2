@@ -85,7 +85,7 @@ const EditUser = ({ currentUsersData, setShow }) => {
 
     return (
         <div className="edit-user">
-            <h2 className="edit-user-title">Change users's personal information</h2>
+            <h2 className="edit-user-title">Change user's personal information</h2>
             <form className="edit-user-form" onSubmit={errorsSetting}>
                 <p className="error"> {errorFields} </p>
                 <fieldset className="edit-user-fields">
