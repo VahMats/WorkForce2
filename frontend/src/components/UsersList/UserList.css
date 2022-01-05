@@ -30,9 +30,12 @@ main {
   text-align: center;
 }
 .users_list_info td {
-  padding: 15px 20px;
+  padding: 20px 20px;
 }
-
+.users_list_info td img{
+  width: 20px;
+  height: 20px;
+}
 .actions_buttons {
   width: 25px;
   height: 25px;

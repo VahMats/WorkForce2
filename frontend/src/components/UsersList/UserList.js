@@ -49,12 +49,23 @@ const UserList = ({ visible }) => {
 
     };
 
-    let date = new Date();
-    let dateMonth = date.getMonth() + 1;
-    let dateDay = date.getDate();
-    console.log(data.userInfo.dateOfBirth.split('-'))
+    const isBirthday = (month, day) => {
+        const date = new Date();
 
-    console.log(dateMonth, dateDay);
+        const thisMonth = date.getMonth() + 1;
+
+        const thisDay = date.getDate();
+
+        if (thisMonth === month && day >= thisDay) {
+            return true;
+        }
+        if (((thisMonth <= month && month <= thisMonth + 1) || (thisMonth === 12 && month === 1)) && thisDay >= day) {
+            return true;
+        }
+        return false;
+    }
+
+
     return (
         <main style={{ display: visible }}>
             <div>
@@ -85,7 +96,7 @@ const UserList = ({ visible }) => {
                                 <tr key={index} >
                                     {data.userInfo.isAdmin ? <td>{item._id}</td> : null}
                                     <td>{item.firstName}
-                                        {dateMonth <= item.dateOfBirth.split('-')[1] && item.dateOfBirth.split('-')[1] <= dateMonth + 1 && item.dateOfBirth.split('-')[2] >= dateDay ? <img alt="Birthday" src={Birthday} /> : ""}</td>
+                                        {isBirthday(parseInt(item.dateOfBirth.slice(5, 7)), parseInt(item.dateOfBirth.slice(8, 10))) ? <img alt="Birthday" src={Birthday} /> : ""}</td>
                                     <td>{item.lastName}</td>
                                     <td>{item.username}</td>
                                     <td>{item.email}</td>
