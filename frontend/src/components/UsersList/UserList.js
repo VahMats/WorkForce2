@@ -28,9 +28,9 @@ const UserList = ({ visible }) => {
     let dateDay = date.getDate();
 
     const BirthdayIsNear = (month, day) => {
-        if(month - dateMonth === 1 && 30 - dateDay  + day <=30) return true;
+        if (month - dateMonth === 1 && 30 - dateDay + day <= 30) return true;
 
-        if(month === dateMonth && day >= dateDay) return true;
+        if (month === dateMonth && day >= dateDay) return true;
 
         return false
 
@@ -91,9 +91,9 @@ const UserList = ({ visible }) => {
                             {data.usersInfo.map((item, index) => (
                                 <tr key={index} >
                                     {data.userInfo.isAdmin ? <td>{item._id}</td> : null}
-                                    <td>
-                                    {BirthdayIsNear(Number(item.dateOfBirth.split('-')[1]), Number(item.dateOfBirth.split('-')[2])) ? <img alt="crown" src={Birthday} />  : ""}
+                                    <td className="imageTd">
                                         {item.firstName}
+                                        {BirthdayIsNear(Number(item.dateOfBirth.split('-')[1]), Number(item.dateOfBirth.split('-')[2])) ? <img alt="crown" src={Birthday} /> : ""}
                                     </td>
                                     <td>{item.lastName}</td>
                                     <td>{item.username}</td>
@@ -113,7 +113,7 @@ const UserList = ({ visible }) => {
                                             <>
                                                 <img className="actions_buttons"
                                                     src={Edit}
-                                                    alt="edit"Crown
+                                                    alt="edit" Crown
                                                     onClick={e => {
                                                         showEditModal(data.usersInfo[index])
                                                     }}
