@@ -6,6 +6,7 @@ import EditUser from "../modals/EditUser/EditUser";
 import View from "../../images/view.png";
 import Edit from "../../images/edit.png";
 import Delete from "../../images/delete.png";
+import Birthday from '../../images/birthday.png';
 import { AllData } from "../Home/Home";
 
 import "./UserList.css";
@@ -21,6 +22,13 @@ const UserList = ({ visible }) => {
 
     const [viewingUserData, setViewingUserData] = useState({})
     const [editingUserData, setEditingUserData] = useState({})
+
+    let date = new Date();
+    let dateMonth = date.getMonth() + 1;
+    let dateDay = date.getDate();
+    console.log(data.userInfo.dateOfBirth.split('-'))
+
+    console.log(dateMonth, dateDay);
 
     const showViewModal = (userData) => () => {
         setViewModalShow(!viewModalShow)
@@ -77,11 +85,16 @@ const UserList = ({ visible }) => {
                             {data.usersInfo.map((item, index) => (
                                 <tr key={index} >
                                     {data.userInfo.isAdmin ? <td>{item._id}</td> : null}
-                                    <td>{item.firstName}</td>
+                                    <td>
+                                        {((Number(item.dateOfBirth.split('-')[1]) - dateMonth === 1 && 30 - dateDay  + Number(item.dateOfBirth.split('-')[2]) <=30) || (Number(item.dateOfBirth.split('-')[1]) === dateMonth && Number(item.dateOfBirth.split('-')[2]) >= dateDay)) ? <img alt="crown" src={Birthday} />  : ""}
+                                        {item.firstName}
+                                    </td>
                                     <td>{item.lastName}</td>
                                     <td>{item.username}</td>
                                     <td>{item.email}</td>
-                                    <td>{item.dateOfBirth}</td>
+                                    <td>{
+                                        item.dateOfBirth
+                                    }</td>
                                     <td>{item.gender}</td>
                                     {data.userInfo.isAdmin ? <td>{item.team}</td> : ""}
                                     <td className="image-td">
@@ -94,7 +107,7 @@ const UserList = ({ visible }) => {
                                             <>
                                                 <img className="actions_buttons"
                                                     src={Edit}
-                                                    alt="edit"
+                                                    alt="edit"Crown
                                                     onClick={e => {
                                                         showEditModal(data.usersInfo[index])
                                                     }}
