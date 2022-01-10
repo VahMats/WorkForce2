@@ -27,4 +27,11 @@
 .user-info p {
   color: #06393f;
 }
-
+@media screen and (max-width: 768px) {
+  .viewuser {
+    position: relative;
+    font-size: small;
+    display: flex;
+    flex-direction: row;
+  }
+}

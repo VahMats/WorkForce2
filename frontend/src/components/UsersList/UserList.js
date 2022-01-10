@@ -6,7 +6,11 @@ import EditUser from "../modals/EditUser/EditUser";
 import View from "../../images/view.png";
 import Edit from "../../images/edit.png";
 import Delete from "../../images/delete.png";
+<<<<<<< HEAD
 import Birthday from '../../images/birthday.png';
+=======
+import Birthday from "../../images/birthday.png";
+>>>>>>> 0cb3b73622a7f8d6b368b638c194f1d7ae0cb9d3
 import { AllData } from "../Home/Home";
 
 import "./UserList.css";
@@ -56,6 +60,23 @@ const UserList = ({ visible }) => {
 
     };
 
+    const isBirthday = (month, day) => {
+        const date = new Date();
+
+        const thisMonth = date.getMonth() + 1;
+
+        const thisDay = date.getDate();
+
+        if (thisMonth === month && day >= thisDay) {
+            return true;
+        }
+        if (((thisMonth <= month && month <= thisMonth + 1) || (thisMonth === 12 && month === 1)) && thisDay >= day) {
+            return true;
+        }
+        return false;
+    }
+
+
     return (
         <main style={{ display: visible }}>
             <div>
@@ -85,10 +106,15 @@ const UserList = ({ visible }) => {
                             {data.usersInfo.map((item, index) => (
                                 <tr key={index} >
                                     {data.userInfo.isAdmin ? <td>{item._id}</td> : null}
+<<<<<<< HEAD
                                     <td>
-                                        {((Number(item.dateOfBirth.split('-')[1]) - dateMonth === 1 && 30 - dateDay  + Number(item.dateOfBirth.split('-')[2]) <=30) || (Number(item.dateOfBirth.split('-')[1]) === dateMonth && Number(item.dateOfBirth.split('-')[2]) >= dateDay)) ? <img alt="crown" src={Birthday} />  : ""}
+                                    {((Number(item.dateOfBirth.split('-')[1]) - dateMonth === 1 && 30 - dateDay  + Number(item.dateOfBirth.split('-')[2]) <=30) || (Number(item.dateOfBirth.split('-')[1]) === dateMonth && Number(item.dateOfBirth.split('-')[2]) >= dateDay)) ? <img alt="crown" src={Birthday} />  : ""}
                                         {item.firstName}
                                     </td>
+=======
+                                    <td className="imageTd">{item.firstName}
+                                        {isBirthday(parseInt(item.dateOfBirth.slice(5, 7)), parseInt(item.dateOfBirth.slice(8, 10))) ? <img alt="Birthday" src={Birthday} /> : ""}</td>
+>>>>>>> 0cb3b73622a7f8d6b368b638c194f1d7ae0cb9d3
                                     <td>{item.lastName}</td>
                                     <td>{item.username}</td>
                                     <td>{item.email}</td>
